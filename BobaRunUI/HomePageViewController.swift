@@ -68,14 +68,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func addNewGroup(sender: AnyObject) {
         let newGroupViewController = NewGroupViewController()
-        var newGroupNavigationController = UINavigationController(rootViewController: newGroupViewController)
-        newGroupNavigationController.navigationItem.backBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "dismissNewGroup")
-        self.navigationController?.presentViewController(newGroupNavigationController, animated: true, completion: { () -> Void in
-        })
-    }
-    
-    func dismissNewGroup(sender: AnyObject) {
-        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.pushViewController(newGroupViewController, animated: true)
     }
 }
 
