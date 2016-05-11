@@ -18,7 +18,7 @@ class NewGroupViewController: UIViewController {
         navigationItem.title = "New Group"
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navBar?.titleTextAttributes = titleDict as [NSObject : AnyObject]
+        navBar?.titleTextAttributes = titleDict as! [String : AnyObject]
     }
 
 

@@ -21,7 +21,7 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
     }
 
     required  init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 
     func configureView() {
@@ -83,7 +83,7 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
                 if cell.detailTextLabel!.text == nil {
                     cell.detailTextLabel!.text = topping
                 } else {
-                    cell.detailTextLabel!.text!.extend(", " + topping)
+                    cell.detailTextLabel!.text! = cell.detailTextLabel!.text! + ", " + topping
                 }
             }
             break

@@ -65,7 +65,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         navigationItem.title = "BobaRun"
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = titleDict as [NSObject : AnyObject]
+        nav?.titleTextAttributes = titleDict as! [String : AnyObject]
     }
     
     override func didReceiveMemoryWarning() {
@@ -216,7 +216,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func selectedSubmitButton(sender: UIButton!) {
         var order = Order()
-        if let tableSelections = tableView.indexPathsForSelectedRows() {
+        let tableSelections = tableView.indexPathsForSelectedRows!
             for indexPath in tableSelections {
                 if indexPath.section == OrderSection.TeaType.rawValue {
                     let selectedCell = tableView.cellForRowAtIndexPath(indexPath as! NSIndexPath)
@@ -225,7 +225,6 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
                     let selectedCell = tableView.cellForRowAtIndexPath(indexPath as! NSIndexPath)
                     order.toppings.append(selectedCell!.textLabel!.text!)
                 }
-            }
         }
         order.sugarLevel = selectedSugarLevel!.titleLabel!.text!
         order.iceLevel = selectedIceLevel!.titleLabel!.text!

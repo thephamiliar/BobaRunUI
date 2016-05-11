@@ -23,7 +23,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationItem.rightBarButtonItem = addButton
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = titleDict as [NSObject : AnyObject]
+        nav?.titleTextAttributes = titleDict as! [String : AnyObject]
         
         // TODO: populate groups from Backend
         var testGroup = Group()

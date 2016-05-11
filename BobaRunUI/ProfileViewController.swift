@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         navigationItem.title = "Profile"
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = titleDict as [NSObject : AnyObject]
+        nav?.titleTextAttributes = titleDict as! [String : AnyObject]
         
         // TODO: populate groups from Backend
         user = User()
