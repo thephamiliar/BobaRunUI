@@ -1,0 +1,466 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F0AEC361CDAB6B700A2F79C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC351CDAB6B700A2F79C /* AppDelegate.swift */; };
+		2F0AEC381CDAB6B700A2F79C /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */; };
+		2F0AEC3A1CDAB6B700A2F79C /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC391CDAB6B700A2F79C /* FriendsViewController.swift */; };
+		2F0AEC3D1CDAB6B700A2F79C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0AEC3B1CDAB6B700A2F79C /* Main.storyboard */; };
+		2F0AEC421CDAB6B700A2F79C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0AEC401CDAB6B700A2F79C /* LaunchScreen.xib */; };
+		2F0AEC4E1CDAB6B700A2F79C /* BobaRunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC4D1CDAB6B700A2F79C /* BobaRunUITests.swift */; };
+		2F0AEC581CDAB7B200A2F79C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC571CDAB7B200A2F79C /* ProfileViewController.swift */; };
+		2F0AEC5A1CDABE2800A2F79C /* GroupObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC591CDABE2800A2F79C /* GroupObject.swift */; };
+		2F0AEC5C1CDAC22500A2F79C /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC5B1CDAC22500A2F79C /* NewGroupViewController.swift */; };
+		2F0AEC621CDAC30800A2F79C /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC5D1CDAC30800A2F79C /* Order.swift */; };
+		2F0AEC631CDAC30800A2F79C /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC5E1CDAC30800A2F79C /* OrderConfirmationViewController.swift */; };
+		2F0AEC641CDAC30800A2F79C /* OrderFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC5F1CDAC30800A2F79C /* OrderFormViewController.swift */; };
+		2F0AEC651CDAC30800A2F79C /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC601CDAC30800A2F79C /* OrderViewController.swift */; };
+		2F0AEC661CDAC30800A2F79C /* PercentageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC611CDAC30800A2F79C /* PercentageButton.swift */; };
+		2F0AEC681CDAC63300A2F79C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0AEC671CDAC63300A2F79C /* Images.xcassets */; };
+		2F0AEC6A1CE2C92100A2F79C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC691CE2C92100A2F79C /* User.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2F0AEC481CDAB6B700A2F79C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F0AEC281CDAB6B700A2F79C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F0AEC2F1CDAB6B700A2F79C;
+			remoteInfo = BobaRunUI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2F0AEC301CDAB6B700A2F79C /* BobaRunUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BobaRunUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F0AEC341CDAB6B700A2F79C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F0AEC351CDAB6B700A2F79C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		2F0AEC391CDAB6B700A2F79C /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		2F0AEC3C1CDAB6B700A2F79C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2F0AEC411CDAB6B700A2F79C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		2F0AEC471CDAB6B700A2F79C /* BobaRunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BobaRunUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F0AEC4C1CDAB6B700A2F79C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F0AEC4D1CDAB6B700A2F79C /* BobaRunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BobaRunUITests.swift; sourceTree = "<group>"; };
+		2F0AEC571CDAB7B200A2F79C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		2F0AEC591CDABE2800A2F79C /* GroupObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupObject.swift; sourceTree = "<group>"; };
+		2F0AEC5B1CDAC22500A2F79C /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
+		2F0AEC5D1CDAC30800A2F79C /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Order.swift; path = ../../BobaRun/BobaRun/Order.swift; sourceTree = "<group>"; };
+		2F0AEC5E1CDAC30800A2F79C /* OrderConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrderConfirmationViewController.swift; path = ../../BobaRun/BobaRun/OrderConfirmationViewController.swift; sourceTree = "<group>"; };
+		2F0AEC5F1CDAC30800A2F79C /* OrderFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrderFormViewController.swift; path = ../../BobaRun/BobaRun/OrderFormViewController.swift; sourceTree = "<group>"; };
+		2F0AEC601CDAC30800A2F79C /* OrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrderViewController.swift; path = ../../BobaRun/BobaRun/OrderViewController.swift; sourceTree = "<group>"; };
+		2F0AEC611CDAC30800A2F79C /* PercentageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PercentageButton.swift; path = ../../BobaRun/BobaRun/PercentageButton.swift; sourceTree = "<group>"; };
+		2F0AEC671CDAC63300A2F79C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../../BobaRun/BobaRun/Images.xcassets; sourceTree = "<group>"; };
+		2F0AEC691CE2C92100A2F79C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2F0AEC2D1CDAB6B700A2F79C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F0AEC441CDAB6B700A2F79C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F0AEC271CDAB6B700A2F79C = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC321CDAB6B700A2F79C /* BobaRunUI */,
+				2F0AEC4A1CDAB6B700A2F79C /* BobaRunUITests */,
+				2F0AEC311CDAB6B700A2F79C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2F0AEC311CDAB6B700A2F79C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC301CDAB6B700A2F79C /* BobaRunUI.app */,
+				2F0AEC471CDAB6B700A2F79C /* BobaRunUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2F0AEC321CDAB6B700A2F79C /* BobaRunUI */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC351CDAB6B700A2F79C /* AppDelegate.swift */,
+				2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */,
+				2F0AEC5B1CDAC22500A2F79C /* NewGroupViewController.swift */,
+				2F0AEC5D1CDAC30800A2F79C /* Order.swift */,
+				2F0AEC5E1CDAC30800A2F79C /* OrderConfirmationViewController.swift */,
+				2F0AEC5F1CDAC30800A2F79C /* OrderFormViewController.swift */,
+				2F0AEC601CDAC30800A2F79C /* OrderViewController.swift */,
+				2F0AEC611CDAC30800A2F79C /* PercentageButton.swift */,
+				2F0AEC591CDABE2800A2F79C /* GroupObject.swift */,
+				2F0AEC391CDAB6B700A2F79C /* FriendsViewController.swift */,
+				2F0AEC691CE2C92100A2F79C /* User.swift */,
+				2F0AEC571CDAB7B200A2F79C /* ProfileViewController.swift */,
+				2F0AEC3B1CDAB6B700A2F79C /* Main.storyboard */,
+				2F0AEC401CDAB6B700A2F79C /* LaunchScreen.xib */,
+				2F0AEC671CDAC63300A2F79C /* Images.xcassets */,
+				2F0AEC331CDAB6B700A2F79C /* Supporting Files */,
+			);
+			path = BobaRunUI;
+			sourceTree = "<group>";
+		};
+		2F0AEC331CDAB6B700A2F79C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC341CDAB6B700A2F79C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2F0AEC4A1CDAB6B700A2F79C /* BobaRunUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC4D1CDAB6B700A2F79C /* BobaRunUITests.swift */,
+				2F0AEC4B1CDAB6B700A2F79C /* Supporting Files */,
+			);
+			path = BobaRunUITests;
+			sourceTree = "<group>";
+		};
+		2F0AEC4B1CDAB6B700A2F79C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC4C1CDAB6B700A2F79C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2F0AEC2F1CDAB6B700A2F79C /* BobaRunUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F0AEC511CDAB6B700A2F79C /* Build configuration list for PBXNativeTarget "BobaRunUI" */;
+			buildPhases = (
+				2F0AEC2C1CDAB6B700A2F79C /* Sources */,
+				2F0AEC2D1CDAB6B700A2F79C /* Frameworks */,
+				2F0AEC2E1CDAB6B700A2F79C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BobaRunUI;
+			productName = BobaRunUI;
+			productReference = 2F0AEC301CDAB6B700A2F79C /* BobaRunUI.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2F0AEC461CDAB6B700A2F79C /* BobaRunUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F0AEC541CDAB6B700A2F79C /* Build configuration list for PBXNativeTarget "BobaRunUITests" */;
+			buildPhases = (
+				2F0AEC431CDAB6B700A2F79C /* Sources */,
+				2F0AEC441CDAB6B700A2F79C /* Frameworks */,
+				2F0AEC451CDAB6B700A2F79C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F0AEC491CDAB6B700A2F79C /* PBXTargetDependency */,
+			);
+			name = BobaRunUITests;
+			productName = BobaRunUITests;
+			productReference = 2F0AEC471CDAB6B700A2F79C /* BobaRunUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2F0AEC281CDAB6B700A2F79C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Jessica Pham";
+				TargetAttributes = {
+					2F0AEC2F1CDAB6B700A2F79C = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					2F0AEC461CDAB6B700A2F79C = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 2F0AEC2F1CDAB6B700A2F79C;
+					};
+				};
+			};
+			buildConfigurationList = 2F0AEC2B1CDAB6B700A2F79C /* Build configuration list for PBXProject "BobaRunUI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2F0AEC271CDAB6B700A2F79C;
+			productRefGroup = 2F0AEC311CDAB6B700A2F79C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2F0AEC2F1CDAB6B700A2F79C /* BobaRunUI */,
+				2F0AEC461CDAB6B700A2F79C /* BobaRunUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F0AEC2E1CDAB6B700A2F79C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F0AEC681CDAC63300A2F79C /* Images.xcassets in Resources */,
+				2F0AEC3D1CDAB6B700A2F79C /* Main.storyboard in Resources */,
+				2F0AEC421CDAB6B700A2F79C /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F0AEC451CDAB6B700A2F79C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2F0AEC2C1CDAB6B700A2F79C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F0AEC3A1CDAB6B700A2F79C /* FriendsViewController.swift in Sources */,
+				2F0AEC651CDAC30800A2F79C /* OrderViewController.swift in Sources */,
+				2F0AEC641CDAC30800A2F79C /* OrderFormViewController.swift in Sources */,
+				2F0AEC6A1CE2C92100A2F79C /* User.swift in Sources */,
+				2F0AEC5C1CDAC22500A2F79C /* NewGroupViewController.swift in Sources */,
+				2F0AEC361CDAB6B700A2F79C /* AppDelegate.swift in Sources */,
+				2F0AEC5A1CDABE2800A2F79C /* GroupObject.swift in Sources */,
+				2F0AEC631CDAC30800A2F79C /* OrderConfirmationViewController.swift in Sources */,
+				2F0AEC661CDAC30800A2F79C /* PercentageButton.swift in Sources */,
+				2F0AEC581CDAB7B200A2F79C /* ProfileViewController.swift in Sources */,
+				2F0AEC381CDAB6B700A2F79C /* HomePageViewController.swift in Sources */,
+				2F0AEC621CDAC30800A2F79C /* Order.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F0AEC431CDAB6B700A2F79C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F0AEC4E1CDAB6B700A2F79C /* BobaRunUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2F0AEC491CDAB6B700A2F79C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F0AEC2F1CDAB6B700A2F79C /* BobaRunUI */;
+			targetProxy = 2F0AEC481CDAB6B700A2F79C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2F0AEC3B1CDAB6B700A2F79C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F0AEC3C1CDAB6B700A2F79C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2F0AEC401CDAB6B700A2F79C /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F0AEC411CDAB6B700A2F79C /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2F0AEC4F1CDAB6B700A2F79C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2F0AEC501CDAB6B700A2F79C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2F0AEC521CDAB6B700A2F79C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BobaRunUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2F0AEC531CDAB6B700A2F79C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BobaRunUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		2F0AEC551CDAB6B700A2F79C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BobaRunUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BobaRunUI.app/BobaRunUI";
+			};
+			name = Debug;
+		};
+		2F0AEC561CDAB6B700A2F79C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BobaRunUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BobaRunUI.app/BobaRunUI";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F0AEC2B1CDAB6B700A2F79C /* Build configuration list for PBXProject "BobaRunUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F0AEC4F1CDAB6B700A2F79C /* Debug */,
+				2F0AEC501CDAB6B700A2F79C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F0AEC511CDAB6B700A2F79C /* Build configuration list for PBXNativeTarget "BobaRunUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F0AEC521CDAB6B700A2F79C /* Debug */,
+				2F0AEC531CDAB6B700A2F79C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2F0AEC541CDAB6B700A2F79C /* Build configuration list for PBXNativeTarget "BobaRunUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F0AEC551CDAB6B700A2F79C /* Debug */,
+				2F0AEC561CDAB6B700A2F79C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2F0AEC281CDAB6B700A2F79C /* Project object */;
+}
