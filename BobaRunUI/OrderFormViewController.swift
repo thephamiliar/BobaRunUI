@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 // TODO: confirm required fields before going to confirmation page
 // TODO: editable table row for toppings
 
@@ -18,8 +19,11 @@ enum OrderSection : Int {
 }
 
 class OrderFormViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var menuItems: NSArray!
-    var toppingItems: [String] = ["Boba", "Pudding", "Grass Jelly"]
+    var menuItems: [String] = []
+    var menuPrices: [String] = []
+    var menu = [String:[Drink]]()
+    var toppingItems: [String] = []
+    var toppingPrices: [String] = []
     var selectedType : NSIndexPath?
     var selectedSugarLevel : UIButton?
     var selectedIceLevel : UIButton?
@@ -32,31 +36,74 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var tableView : UITableView!
     
+    override func viewWillAppear(animated: Bool) {
+            }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        menuItems = ["Jasmine Milk Tea", "Peach Green Tea", "Rose Milk Tea"] // TODO: get menuItems from WebAPI
+        BobaRunAPI.bobaRunSharedInstance.getMenuWithYelpID("CoCo Westwood") { (json: JSON) in
+            print ("getting menu")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("No menu available.")
+                }
+                else {
+                    print ("populating menu")
+                    if let results = json["result"].array {
+                        for entry in results {
+                            if let category = entry["category"].string {
+                                if (self.menu[category] != nil) {
+                                    self.menu[category]!.append(Drink(json: entry))
+                                }
+                                else {
+                                    var temp = [Drink]()
+                                    temp.append(Drink(json: entry))
+                                    self.menu[category] = temp
+                                }
+                                
+                                if (category != "Toppings") {
+                                    let drink_temp = Drink(json: entry)
+                                    self.menuItems.append(drink_temp.name!)
+                                    self.menuPrices.append("$" + String(drink_temp.price!))
+                                }
+                                
+                            }
+                        }
+                        let temp = self.menu["Toppings"]
+                        for drink in temp! {
+                            self.toppingItems.append(drink.name!)
+                            self.toppingPrices.append("$" + String(drink.price!))
+                        }
+                        
+                        self.tableView = UITableView()
+                        let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-self.footerHeight)
+                        self.tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
+                        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.formViewCellReuseIdentifier)
+                        self.tableView.allowsMultipleSelection = true
+                        self.tableView.delegate = self
+                        self.tableView.dataSource = self
+                        self.view.addSubview(self.tableView)
+                        
+                        var footerView: UIView = UIView(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width, self.footerHeight))
+                        footerView.backgroundColor = UIColor(red: 248/255, green: 241/255, blue: 243/255, alpha: 1)
+                        self.view.addSubview(footerView)
+                        
+                        let submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, self.submitButtonHeight))
+                        submitButton.center = footerView.center
+                        submitButton.setTitle("Submit", forState: UIControlState.Normal)
+                        submitButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
+                        submitButton.addTarget(self, action: "selectedSubmitButton:", forControlEvents: .TouchUpInside)
+                        submitButton.layer.cornerRadius = 5
+                        self.view.addSubview(submitButton)
+                        
+                    }
+                }
+            }
+        }
+
         
-        tableView = UITableView()
-        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
-        tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: formViewCellReuseIdentifier)
-        tableView.allowsMultipleSelection = true
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.view.addSubview(tableView)
-        
-        var footerView: UIView = UIView(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width, footerHeight))
-        footerView.backgroundColor = UIColor(red: 248/255, green: 241/255, blue: 243/255, alpha: 1)
-        self.view.addSubview(footerView)
-        
-        var submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
-        submitButton.center = footerView.center
-        submitButton.setTitle("Submit", forState: UIControlState.Normal)
-        submitButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
-        submitButton.addTarget(self, action: "selectedSubmitButton:", forControlEvents: .TouchUpInside)
-        submitButton.layer.cornerRadius = 5
-        self.view.addSubview(submitButton)
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -123,11 +170,12 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(formViewCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: formViewCellReuseIdentifier)
         
         switch (indexPath.section) {
         case OrderSection.TeaType.rawValue:
             cell.textLabel?.text = menuItems[indexPath.row] as? String
+            cell.detailTextLabel?.text = menuPrices[indexPath.row] as? String
             break
         case OrderSection.SugarLevel.rawValue:
             generatePercentageButtons(OrderSection.SugarLevel, cell: cell)
@@ -138,6 +186,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         case OrderSection.Toppings.rawValue:
             if (indexPath.row < toppingItems.count) {
                 cell.textLabel?.text = toppingItems[indexPath.row]
+                cell.detailTextLabel?.text = toppingPrices[indexPath.row]
             } else {
                 cell.textLabel?.text = "Other"
             }
@@ -228,6 +277,8 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         order.sugarLevel = selectedSugarLevel!.titleLabel!.text!
         order.iceLevel = selectedIceLevel!.titleLabel!.text!
+        
+        // TODO: Send order to database (roomid, member, drink)
         
         let confirmationViewController = OrderConfirmationViewController(order: order)
         self.navigationController?.pushViewController(confirmationViewController, animated: true)
