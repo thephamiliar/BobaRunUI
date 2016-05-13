@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         user = User()
         user.firstName = "Jessica"
         user.lastName = "Pham"
-        user.userName = "jmpham613"
+        user.username = "jmpham613"
         user.email = "jessicaminhuyen@yahoo.com"
         user.image = UIImage(named: "faithfulness")!
         
@@ -62,11 +62,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if (section == 0) {
             view.frame = CGRectMake(0, 0, self.view.frame.width, CGFloat(200))
             var imageView = UIImageView(image: user.image)
-            imageView.frame = CGRectMake((self.view.frame.size.width/2) - (user.image.size.width/2), 50, user.image.size.width, user.image.size.height)
+            imageView.frame = CGRectMake((self.view.frame.size.width/2) - (user.image!.size.width/2), 50, user.image!.size.width, user.image!.size.height)
             view.addSubview(imageView)
             
             var nameLabel = UILabel(frame: CGRectMake(0, imageView.frame.maxY, self.view.frame.width, 40))
-            nameLabel.text = user.firstName + " " + user.lastName;
+            nameLabel.text = user.firstName! + " " + user.lastName!;
             nameLabel.textAlignment = NSTextAlignment.Center
             view.addSubview(nameLabel)
         }
@@ -84,7 +84,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
                 cell.textLabel!.text = "Username"
-                cell.detailTextLabel!.text = user.userName
+                cell.detailTextLabel!.text = user.username
                 cell.imageView!.image = user.image
             } else {
                 cell.textLabel!.text = "Email"

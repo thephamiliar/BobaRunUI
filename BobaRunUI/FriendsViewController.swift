@@ -27,7 +27,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         var testFriend = User()
         testFriend.firstName = "Jessica"
         testFriend.lastName = "Pham"
-        testFriend.userName = "jmpham613"
+        testFriend.username = "jmpham613"
         testFriend.image = UIImage(named: "faithfulness")!
         friends = [testFriend]
         
@@ -54,7 +54,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(friendViewCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel!.text = friends[indexPath.row].firstName + " " + friends[indexPath.row].lastName
+        cell.textLabel!.text = friends[indexPath.row].firstName! + " " + friends[indexPath.row].lastName!
         cell.imageView!.image = friends[indexPath.row].image
         cell.imageView!.layer.cornerRadius = 25;
         cell.imageView!.layer.masksToBounds = true;

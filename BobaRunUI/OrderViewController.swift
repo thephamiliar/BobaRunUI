@@ -53,8 +53,8 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .Value1, reuseIdentifier: orderViewCellReuseIdentifier)
         
-        cell.textLabel!.text = orders[indexPath.row].user.userName
-//        cell.detailTextLabel!.text = orders[indexPath.row].groupTimeStamp
+        cell.textLabel!.text = orders[indexPath.row].user.username
+        //        cell.detailTextLabel!.text = orders[indexPath.row].groupTimeStamp
         
         cell.selectionStyle = .None
         return cell
@@ -70,4 +70,3 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.navigationController?.pushViewController(orderFormViewController, animated: true)
     }
 }
-
