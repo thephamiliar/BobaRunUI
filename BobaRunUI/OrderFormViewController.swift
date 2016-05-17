@@ -112,7 +112,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
             numRows = 1
             break
         case OrderSection.Toppings.rawValue:
-            numRows = toppingItems.count+1
+            numRows = toppingItems.count
             break
         default:
             numRows = 0
@@ -136,11 +136,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
             generatePercentageButtons(OrderSection.IceLevel, cell: cell)
             break
         case OrderSection.Toppings.rawValue:
-            if (indexPath.row < toppingItems.count) {
-                cell.textLabel?.text = toppingItems[indexPath.row]
-            } else {
-                cell.textLabel?.text = "Other"
-            }
+            cell.textLabel?.text = toppingItems[indexPath.row]
             break
         default:
             cell.textLabel?.text = "Other"
