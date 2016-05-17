@@ -28,6 +28,8 @@
 		2F95C1531CEAD1ED00C27911 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */; };
 		2F95C1551CEAD25500C27911 /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1541CEAD25500C27911 /* GroupCollectionViewCell.swift */; };
 		2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */; };
+		2F95C1591CEBD4A200C27911 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1581CEBD4A200C27911 /* LoginViewController.swift */; };
+		2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		2F95C1541CEAD25500C27911 /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
+		2F95C1581CEBD4A200C27911 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 			children = (
 				2F0AEC351CDAB6B700A2F79C /* AppDelegate.swift */,
 				2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */,
+				2F95C1581CEBD4A200C27911 /* LoginViewController.swift */,
+				2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */,
 				2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */,
 				2F0AEC5B1CDAC22500A2F79C /* NewRoomViewController.swift */,
 				2F0AEC6B1CE3F47000A2F79C /* Order.swift */,
@@ -259,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F95C1591CEBD4A200C27911 /* LoginViewController.swift in Sources */,
 				2F0AEC741CE3F47000A2F79C /* PercentageButton.swift in Sources */,
 				2F0AEC3A1CDAB6B700A2F79C /* FriendsViewController.swift in Sources */,
 				2F0AEC6A1CE2C92100A2F79C /* User.swift in Sources */,
@@ -266,6 +273,7 @@
 				2F0AEC5C1CDAC22500A2F79C /* NewRoomViewController.swift in Sources */,
 				2F95C14F1CEAC3F000C27911 /* GroupsViewController.swift in Sources */,
 				2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */,
+				2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */,
 				2F0AEC361CDAB6B700A2F79C /* AppDelegate.swift in Sources */,
 				2F95C1511CEACB5C00C27911 /* Group.swift in Sources */,
 				2F0AEC721CE3F47000A2F79C /* OrderFormViewController.swift in Sources */,

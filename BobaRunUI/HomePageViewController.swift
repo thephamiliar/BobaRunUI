@@ -41,6 +41,19 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         self.view.addSubview(tableView)
         
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+        if (isLoggedIn != 1) {
+            self.performSegueWithIdentifier("goto_login", sender: self)
+        } else {
+            // TODO: any user specific details here
+            // self.usernameLabel.text = prefs.valueForKey("USERNAME") as NSString
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
