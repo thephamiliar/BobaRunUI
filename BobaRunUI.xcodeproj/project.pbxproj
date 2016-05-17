@@ -14,8 +14,8 @@
 		2F0AEC421CDAB6B700A2F79C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0AEC401CDAB6B700A2F79C /* LaunchScreen.xib */; };
 		2F0AEC4E1CDAB6B700A2F79C /* BobaRunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC4D1CDAB6B700A2F79C /* BobaRunUITests.swift */; };
 		2F0AEC581CDAB7B200A2F79C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC571CDAB7B200A2F79C /* ProfileViewController.swift */; };
-		2F0AEC5A1CDABE2800A2F79C /* GroupObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC591CDABE2800A2F79C /* GroupObject.swift */; };
-		2F0AEC5C1CDAC22500A2F79C /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC5B1CDAC22500A2F79C /* NewGroupViewController.swift */; };
+		2F0AEC5A1CDABE2800A2F79C /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC591CDABE2800A2F79C /* Room.swift */; };
+		2F0AEC5C1CDAC22500A2F79C /* NewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC5B1CDAC22500A2F79C /* NewRoomViewController.swift */; };
 		2F0AEC6A1CE2C92100A2F79C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC691CE2C92100A2F79C /* User.swift */; };
 		2F0AEC701CE3F47000A2F79C /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC6B1CE3F47000A2F79C /* Order.swift */; };
 		2F0AEC711CE3F47000A2F79C /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC6C1CE3F47000A2F79C /* OrderConfirmationViewController.swift */; };
@@ -23,6 +23,11 @@
 		2F0AEC731CE3F47000A2F79C /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */; };
 		2F0AEC741CE3F47000A2F79C /* PercentageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */; };
 		2F0AEC761CE3F48100A2F79C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0AEC751CE3F48100A2F79C /* Images.xcassets */; };
+		2F95C14F1CEAC3F000C27911 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */; };
+		2F95C1511CEACB5C00C27911 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1501CEACB5C00C27911 /* Group.swift */; };
+		2F95C1531CEAD1ED00C27911 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */; };
+		2F95C1551CEAD25500C27911 /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1541CEAD25500C27911 /* GroupCollectionViewCell.swift */; };
+		2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +52,8 @@
 		2F0AEC4C1CDAB6B700A2F79C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F0AEC4D1CDAB6B700A2F79C /* BobaRunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BobaRunUITests.swift; sourceTree = "<group>"; };
 		2F0AEC571CDAB7B200A2F79C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		2F0AEC591CDABE2800A2F79C /* GroupObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupObject.swift; sourceTree = "<group>"; };
-		2F0AEC5B1CDAC22500A2F79C /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
+		2F0AEC591CDABE2800A2F79C /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		2F0AEC5B1CDAC22500A2F79C /* NewRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRoomViewController.swift; sourceTree = "<group>"; };
 		2F0AEC691CE2C92100A2F79C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2F0AEC6B1CE3F47000A2F79C /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		2F0AEC6C1CE3F47000A2F79C /* OrderConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +61,11 @@
 		2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentageButton.swift; sourceTree = "<group>"; };
 		2F0AEC751CE3F48100A2F79C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
+		2F95C1501CEACB5C00C27911 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		2F95C1541CEAD25500C27911 /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,17 +109,22 @@
 			children = (
 				2F0AEC351CDAB6B700A2F79C /* AppDelegate.swift */,
 				2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */,
-				2F0AEC5B1CDAC22500A2F79C /* NewGroupViewController.swift */,
+				2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */,
+				2F0AEC5B1CDAC22500A2F79C /* NewRoomViewController.swift */,
 				2F0AEC6B1CE3F47000A2F79C /* Order.swift */,
 				2F0AEC6C1CE3F47000A2F79C /* OrderConfirmationViewController.swift */,
 				2F0AEC6D1CE3F47000A2F79C /* OrderFormViewController.swift */,
 				2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */,
 				2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */,
 				2F0AEC751CE3F48100A2F79C /* Images.xcassets */,
-				2F0AEC591CDABE2800A2F79C /* GroupObject.swift */,
+				2F0AEC591CDABE2800A2F79C /* Room.swift */,
 				2F0AEC391CDAB6B700A2F79C /* FriendsViewController.swift */,
 				2F0AEC691CE2C92100A2F79C /* User.swift */,
 				2F0AEC571CDAB7B200A2F79C /* ProfileViewController.swift */,
+				2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */,
+				2F95C1541CEAD25500C27911 /* GroupCollectionViewCell.swift */,
+				2F95C1501CEACB5C00C27911 /* Group.swift */,
+				2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */,
 				2F0AEC3B1CDAB6B700A2F79C /* Main.storyboard */,
 				2F0AEC401CDAB6B700A2F79C /* LaunchScreen.xib */,
 				2F0AEC331CDAB6B700A2F79C /* Supporting Files */,
@@ -186,7 +201,9 @@
 		2F0AEC281CDAB6B700A2F79C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftMigration = 0730;
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Jessica Pham";
 				TargetAttributes = {
 					2F0AEC2F1CDAB6B700A2F79C = {
@@ -246,11 +263,16 @@
 				2F0AEC3A1CDAB6B700A2F79C /* FriendsViewController.swift in Sources */,
 				2F0AEC6A1CE2C92100A2F79C /* User.swift in Sources */,
 				2F0AEC711CE3F47000A2F79C /* OrderConfirmationViewController.swift in Sources */,
-				2F0AEC5C1CDAC22500A2F79C /* NewGroupViewController.swift in Sources */,
+				2F0AEC5C1CDAC22500A2F79C /* NewRoomViewController.swift in Sources */,
+				2F95C14F1CEAC3F000C27911 /* GroupsViewController.swift in Sources */,
+				2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */,
 				2F0AEC361CDAB6B700A2F79C /* AppDelegate.swift in Sources */,
+				2F95C1511CEACB5C00C27911 /* Group.swift in Sources */,
 				2F0AEC721CE3F47000A2F79C /* OrderFormViewController.swift in Sources */,
-				2F0AEC5A1CDABE2800A2F79C /* GroupObject.swift in Sources */,
+				2F95C1531CEAD1ED00C27911 /* GroupViewController.swift in Sources */,
+				2F0AEC5A1CDABE2800A2F79C /* Room.swift in Sources */,
 				2F0AEC581CDAB7B200A2F79C /* ProfileViewController.swift in Sources */,
+				2F95C1551CEAD25500C27911 /* GroupCollectionViewCell.swift in Sources */,
 				2F0AEC701CE3F47000A2F79C /* Order.swift in Sources */,
 				2F0AEC381CDAB6B700A2F79C /* HomePageViewController.swift in Sources */,
 				2F0AEC731CE3F47000A2F79C /* OrderViewController.swift in Sources */,
@@ -316,6 +338,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -384,6 +407,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BobaRunUI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "BobaRun.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -394,6 +418,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BobaRunUI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "BobaRun.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -412,6 +437,7 @@
 				);
 				INFOPLIST_FILE = BobaRunUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "BobaRun.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BobaRunUI.app/BobaRunUI";
 			};
@@ -427,6 +453,7 @@
 				);
 				INFOPLIST_FILE = BobaRunUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "BobaRun.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BobaRunUI.app/BobaRunUI";
 			};
@@ -451,6 +478,7 @@
 				2F0AEC531CDAB6B700A2F79C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2F0AEC541CDAB6B700A2F79C /* Build configuration list for PBXNativeTarget "BobaRunUITests" */ = {
 			isa = XCConfigurationList;
@@ -459,6 +487,7 @@
 				2F0AEC561CDAB6B700A2F79C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

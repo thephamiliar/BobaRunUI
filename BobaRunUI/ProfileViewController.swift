@@ -16,14 +16,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var nav = self.navigationController?.navigationBar
+        let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         navigationItem.title = "Profile"
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = titleDict as! [String : AnyObject]
+        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
-        // TODO: populate groups from Backend
+        // TODO: populate user from backend
         user = User()
         user.firstName = "Jessica"
         user.lastName = "Pham"
@@ -56,16 +56,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var view = UIView()
+        let view = UIView()
         view.backgroundColor = UIColor(red: 239/250, green: 239/250, blue: 244/250, alpha: 1)
 
         if (section == 0) {
             view.frame = CGRectMake(0, 0, self.view.frame.width, CGFloat(200))
-            var imageView = UIImageView(image: user.image)
+            let imageView = UIImageView(image: user.image)
             imageView.frame = CGRectMake((self.view.frame.size.width/2) - (user.image.size.width/2), 50, user.image.size.width, user.image.size.height)
             view.addSubview(imageView)
             
-            var nameLabel = UILabel(frame: CGRectMake(0, imageView.frame.maxY, self.view.frame.width, 40))
+            let nameLabel = UILabel(frame: CGRectMake(0, imageView.frame.maxY, self.view.frame.width, 40))
             nameLabel.text = user.firstName + " " + user.lastName;
             nameLabel.textAlignment = NSTextAlignment.Center
             view.addSubview(nameLabel)

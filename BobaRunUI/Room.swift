@@ -1,5 +1,5 @@
 //
-//  GroupObject.swift
+//  Room.swift
 //  BobaRunUI
 //
 //  Created by Hoa Pham on 5/4/16.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct Group {
-    var groupID: String = ""
-    var groupName: String = ""
-    var groupTimeStamp: String = ""
+struct Room {
+    var roomID: String = ""
+    var roomName: String = ""
+    var roomTimeStamp: String = ""
 }

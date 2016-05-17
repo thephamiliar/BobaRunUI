@@ -10,26 +10,26 @@ import UIKit
 
 class HomePageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tableView : UITableView!
-    var groups : [Group]!
+    var rooms : [Room]!
     let homePageViewCellReuseIdentifier = "homePageViewCellReuseIdentifier"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var nav = self.navigationController?.navigationBar
+        let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
-        navigationItem.title = "Groups"
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addNewGroup:")
+        navigationItem.title = "Rooms"
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(HomePageViewController.addNewRoom(_:)))
         self.navigationItem.rightBarButtonItem = addButton
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = titleDict as! [String : AnyObject]
+        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
         // TODO: populate groups from Backend
-        var testGroup = Group()
-        testGroup.groupName = "CSM117 :D"
-        testGroup.groupTimeStamp = "05/04/16"
-        groups = [testGroup]
+        var testGroup = Room()
+        testGroup.roomName = "CSM117 :D"
+        testGroup.roomTimeStamp = "05/04/16"
+        rooms = [testGroup]
         
         tableView = UITableView()
 //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
@@ -48,14 +48,14 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groups.count
+        return rooms.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .Value1, reuseIdentifier: homePageViewCellReuseIdentifier)
         
-        cell.textLabel!.text = groups[indexPath.row].groupName
-        cell.detailTextLabel!.text = groups[indexPath.row].groupTimeStamp
+        cell.textLabel!.text = rooms[indexPath.row].roomName
+        cell.detailTextLabel!.text = rooms[indexPath.row].roomTimeStamp
         
         cell.selectionStyle = .None
         return cell
@@ -66,9 +66,9 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationController?.pushViewController(orderViewController, animated: true)
     }
 
-    func addNewGroup(sender: AnyObject) {
-        let newGroupViewController = NewGroupViewController()
-        self.navigationController?.pushViewController(newGroupViewController, animated: true)
+    func addNewRoom(sender: AnyObject) {
+        let newRoomViewController = NewRoomViewController()
+        self.navigationController?.pushViewController(newRoomViewController, animated: true)
     }
 }
 

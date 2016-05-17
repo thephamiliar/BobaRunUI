@@ -38,7 +38,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         menuItems = ["Jasmine Milk Tea", "Peach Green Tea", "Rose Milk Tea"] // TODO: get menuItems from WebAPI
         
         tableView = UITableView()
-        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
+        let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
         tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: formViewCellReuseIdentifier)
         tableView.allowsMultipleSelection = true
@@ -46,26 +46,26 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         self.view.addSubview(tableView)
         
-        var footerView: UIView = UIView(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width, footerHeight))
+        let footerView: UIView = UIView(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width, footerHeight))
         footerView.backgroundColor = UIColor(red: 248/255, green: 241/255, blue: 243/255, alpha: 1)
         self.view.addSubview(footerView)
         
-        var submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
+        let submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
         submitButton.center = footerView.center
         submitButton.setTitle("Submit", forState: UIControlState.Normal)
         submitButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
-        submitButton.addTarget(self, action: "selectedSubmitButton:", forControlEvents: .TouchUpInside)
+        submitButton.addTarget(self, action: #selector(OrderFormViewController.selectedSubmitButton(_:)), forControlEvents: .TouchUpInside)
         submitButton.layer.cornerRadius = 5
         self.view.addSubview(submitButton)
     }
     
     override func viewDidAppear(animated: Bool) {
-        var nav = self.navigationController?.navigationBar
+        let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         navigationItem.title = "BobaRun"
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = titleDict as! [String : AnyObject]
+        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
     }
     
     override func didReceiveMemoryWarning() {
@@ -123,7 +123,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(formViewCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(formViewCellReuseIdentifier, forIndexPath: indexPath) 
         
         switch (indexPath.section) {
         case OrderSection.TeaType.rawValue:
@@ -155,10 +155,10 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         var currXPos = CGFloat(0)
         
         while buttonNum <= 100 {
-            var button: PercentageButton = PercentageButton(frame: CGRectMake(currXPos + buttonPadding, cell.bounds.minY+5, buttonWidth, buttonHeight))
+            let button: PercentageButton = PercentageButton(frame: CGRectMake(currXPos + buttonPadding, cell.bounds.minY+5, buttonWidth, buttonHeight))
             button.setTitle(String(buttonNum) + "%", forState: UIControlState.Normal)
             button.tag = section.rawValue
-            button.addTarget(self, action: "selectedButton:", forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(OrderFormViewController.selectedButton(_:)), forControlEvents: .TouchUpInside)
             cell.contentView.addSubview(button)
             
             buttonNum += 25
@@ -219,10 +219,10 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         let tableSelections = tableView.indexPathsForSelectedRows!
             for indexPath in tableSelections {
                 if indexPath.section == OrderSection.TeaType.rawValue {
-                    let selectedCell = tableView.cellForRowAtIndexPath(indexPath as! NSIndexPath)
+                    let selectedCell = tableView.cellForRowAtIndexPath(indexPath )
                     order.teaType = selectedCell!.textLabel!.text!
                 } else if indexPath.section == OrderSection.Toppings.rawValue {
-                    let selectedCell = tableView.cellForRowAtIndexPath(indexPath as! NSIndexPath)
+                    let selectedCell = tableView.cellForRowAtIndexPath(indexPath )
                     order.toppings.append(selectedCell!.textLabel!.text!)
                 }
         }

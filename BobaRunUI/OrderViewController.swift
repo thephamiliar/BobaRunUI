@@ -18,16 +18,16 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.hidesBottomBarWhenPushed = true
-        var nav = self.navigationController?.navigationBar
+        let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         navigationItem.title = "Orders"
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addNewOrder:")
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(OrderViewController.addNewOrder(_:)))
         self.navigationItem.rightBarButtonItem = addButton
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = titleDict as! [String : AnyObject]
+        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
-        // TODO: populate groups from Backend
+        // TODO: populate orders from Backend
         orders = []
         
         tableView = UITableView()
