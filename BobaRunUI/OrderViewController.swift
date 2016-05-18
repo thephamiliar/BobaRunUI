@@ -28,12 +28,23 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
         // TODO: populate orders from Backend
-        orders = []
+        var order1 = Order()
+        order1.iceLevel = "50%"
+        order1.toppings = ["Boba", "Pudding"]
+        order1.sugarLevel = "50%"
+        order1.teaType = "Milk Tea"
+        let testFriend = User()
+        testFriend.firstName = "Jessica"
+        testFriend.lastName = "Pham"
+        testFriend.userName = "jmpham613"
+        testFriend.image = UIImage(named: "faithfulness")!
+        order1.user = testFriend
+        orders = [order1]
         
         tableView = UITableView()
         //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
         tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: orderViewCellReuseIdentifier)
+        tableView.registerClass(OrderViewTableViewCell.self, forCellReuseIdentifier: orderViewCellReuseIdentifier)
         tableView.allowsMultipleSelection = true
         tableView.delegate = self
         tableView.dataSource = self
@@ -46,23 +57,41 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(100)
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orders.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Value1, reuseIdentifier: orderViewCellReuseIdentifier)
+        let order = orders[indexPath.row]
         
-        cell.textLabel!.text = orders[indexPath.row].user.userName
-//        cell.detailTextLabel!.text = orders[indexPath.row].groupTimeStamp
+        let cell = tableView.dequeueReusableCellWithIdentifier(orderViewCellReuseIdentifier) as! OrderViewTableViewCell
+        cell.userLabel.text = order.user.userName
+        cell.priceLabel.text = "$3.25" // TODO : add price to orders
+        cell.teaTypeLabel.text = "Tea Type: " + order.teaType
+        cell.sugarLevelLabel.text = "Sugar Level: " + order.sugarLevel
+        cell.iceLevelLabel.text = "Ice Level: " + order.iceLevel
         
-        cell.selectionStyle = .None
+        if (order.toppings.count > 0) {
+            var toppingsText = "Toppings: " + order.toppings[0]
+            var index = 1
+            while (index < order.toppings.count) {
+                toppingsText = toppingsText + ", " + order.toppings[index]
+                index += 1
+            }
+            cell.toppingsLabel.text = toppingsText
+        }
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let orderViewController = OrderViewController()
-        self.navigationController?.pushViewController(orderViewController, animated: true)
+        let order = orders[indexPath.row]
+        let confirmationViewController = OrderConfirmationViewController(order: order)
+        self.navigationController?.pushViewController(confirmationViewController, animated: true)
     }
     
     func addNewOrder(sender: AnyObject) {

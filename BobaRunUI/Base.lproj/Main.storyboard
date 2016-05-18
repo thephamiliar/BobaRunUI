@@ -20,7 +20,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQP-3X-sPo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="437" y="1155"/>
+            <point key="canvasLocation" x="363" y="1067"/>
         </scene>
         <!--Friends-->
         <scene sceneID="0hJ-xJ-Tds">
@@ -278,7 +278,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CO4-HA-bjR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1184" y="287"/>
+            <point key="canvasLocation" x="1204" y="371"/>
         </scene>
         <!--Groups View Controller-->
         <scene sceneID="RgZ-w3-mcM">

@@ -30,6 +30,7 @@
 		2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */; };
 		2F95C1591CEBD4A200C27911 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1581CEBD4A200C27911 /* LoginViewController.swift */; };
 		2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */; };
+		2F95C15D1CEC0B4200C27911 /* OrderViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C15C1CEC0B4200C27911 /* OrderViewTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
 		2F95C1581CEBD4A200C27911 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		2F95C15C1CEC0B4200C27911 /* OrderViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				2F0AEC6C1CE3F47000A2F79C /* OrderConfirmationViewController.swift */,
 				2F0AEC6D1CE3F47000A2F79C /* OrderFormViewController.swift */,
 				2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */,
+				2F95C15C1CEC0B4200C27911 /* OrderViewTableViewCell.swift */,
 				2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */,
 				2F0AEC751CE3F48100A2F79C /* Images.xcassets */,
 				2F0AEC591CDABE2800A2F79C /* Room.swift */,
@@ -274,6 +277,7 @@
 				2F95C14F1CEAC3F000C27911 /* GroupsViewController.swift in Sources */,
 				2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */,
 				2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */,
+				2F95C15D1CEC0B4200C27911 /* OrderViewTableViewCell.swift in Sources */,
 				2F0AEC361CDAB6B700A2F79C /* AppDelegate.swift in Sources */,
 				2F95C1511CEACB5C00C27911 /* Group.swift in Sources */,
 				2F0AEC721CE3F47000A2F79C /* OrderFormViewController.swift in Sources */,
