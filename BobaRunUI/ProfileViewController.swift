@@ -10,11 +10,9 @@ import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableView : UITableView!
-    var user : User!
+    var user = User()
     let userViewCellReuseIdentifier = "userViewCellReuseIdentifier"
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
         // Do any additional setup after loading the view, typically from a nib.
         var nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
@@ -23,13 +21,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         nav?.titleTextAttributes = titleDict as! [String : AnyObject]
         
-        // TODO: populate groups from Backend
-        user = User()
-        user.firstName = "Jessica"
-        user.lastName = "Pham"
-        user.username = "jmpham613"
-        user.email = "jessicaminhuyen@yahoo.com"
-        user.image = UIImage(named: "faithfulness")!
         
         tableView = UITableView()
         //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
@@ -38,7 +29,41 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.allowsMultipleSelection = true
         tableView.delegate = self
         tableView.dataSource = self
+        BobaRunAPI.bobaRunSharedInstance.getUser("HappyLou") { (json: JSON) in
+            print ("getting user info")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could get user info")
+                }
+                else {
+                    if let results = json["result"].array {
+                        for entry in results {
+                            self.user = (User(json: entry))
+                            self.user.image = UIImage(named: "faithfulness")!
+                        }
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.view.frame = CGRectMake(0, 0, self.view.frame.width, CGFloat(200))
+                            var imageView = UIImageView(image: self.user.image)
+                            imageView.frame = CGRectMake((self.view.frame.size.width/2) - (self.user.image!.size.width/2), 50, self.user.image!.size.width, self.user.image!.size.height)
+                            self.view.addSubview(imageView)
+                            
+                            var nameLabel = UILabel(frame: CGRectMake(0, imageView.frame.maxY, self.view.frame.width, 40))
+                            nameLabel.text = self.user.firstName! + " " + self.user.lastName!;
+                            nameLabel.textAlignment = NSTextAlignment.Center
+                            self.view.addSubview(nameLabel)
+                            
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+            }
+        }
         self.view.addSubview(tableView)
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
     }
     
@@ -60,15 +85,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         view.backgroundColor = UIColor(red: 239/250, green: 239/250, blue: 244/250, alpha: 1)
 
         if (section == 0) {
-            view.frame = CGRectMake(0, 0, self.view.frame.width, CGFloat(200))
-            var imageView = UIImageView(image: user.image)
-            imageView.frame = CGRectMake((self.view.frame.size.width/2) - (user.image!.size.width/2), 50, user.image!.size.width, user.image!.size.height)
-            view.addSubview(imageView)
-            
-            var nameLabel = UILabel(frame: CGRectMake(0, imageView.frame.maxY, self.view.frame.width, 40))
-            nameLabel.text = user.firstName! + " " + user.lastName!;
-            nameLabel.textAlignment = NSTextAlignment.Center
-            view.addSubview(nameLabel)
+
         }
         
         return view
