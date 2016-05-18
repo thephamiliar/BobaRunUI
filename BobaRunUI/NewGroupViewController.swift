@@ -9,7 +9,7 @@
 import UIKit
 
 class NewGroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var friendsList: [User]!
+    var friendsList = [User]()
     let friendViewCellReuseIdentifier = "friendViewCellReuseIdentifier"
     let buttonHeight = CGFloat(35)
     let buttonWidth = CGFloat(50)
@@ -21,7 +21,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        friendsList = [User()]// TODO: get friends from WebAPI
+        friendsList = []// TODO: get friends from WebAPI
         
         tableView = UITableView()
         let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
@@ -67,7 +67,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(friendViewCellReuseIdentifier, forIndexPath: indexPath)
         
-        cell.textLabel!.text = friendsList[indexPath.row].firstName + " " + friendsList[indexPath.row].lastName
+        cell.textLabel!.text = friendsList[indexPath.row].firstName! + " " + friendsList[indexPath.row].lastName!
         cell.imageView!.image = friendsList[indexPath.row].image
         cell.imageView!.layer.cornerRadius = 25;
         cell.imageView!.layer.masksToBounds = true;
