@@ -10,35 +10,55 @@ import UIKit
 
 class FriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tableView : UITableView!
-    var friends : [User]!
+    var friends = [User]()
     let friendViewCellReuseIdentifier = "friendViewCellReuseIdentifier"
+    
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.view.addSubview(self.tableView)
+        
+        BobaRunAPI.bobaRunSharedInstance.getFriends("HappyLou") { (json: JSON) in
+            print ("getting friends")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not retrieve friends")
+                }
+                else {
+                    if let results = json["result"].array {
+                        for entry in results {
+                            self.friends.append(User(json: entry))
+                        }
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+            }
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         var nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
-        navigationItem.title = "Friends"
+        self.navigationItem.title = "Friends"
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         nav?.titleTextAttributes = titleDict as! [String : AnyObject]
+        // Do any additional setup after loading the view, typically from a nib.
         
         // TODO: populate groups from Backend
-        var testFriend = User()
-        testFriend.firstName = "Jessica"
-        testFriend.lastName = "Pham"
-        testFriend.username = "jmpham613"
-        testFriend.image = UIImage(named: "faithfulness")!
-        friends = [testFriend]
         
-        tableView = UITableView()
+        self.tableView = UITableView()
         //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
-        tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: friendViewCellReuseIdentifier)
-        tableView.allowsMultipleSelection = true
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.view.addSubview(tableView)
+        self.tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.friendViewCellReuseIdentifier)
+        self.tableView.allowsMultipleSelection = true
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.view.addSubview(self.tableView)
         
     }
     
@@ -54,7 +74,8 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(friendViewCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel!.text = friends[indexPath.row].firstName! + " " + friends[indexPath.row].lastName!
+        // cell.textLabel!.text = friends[indexPath.row].firstName! + " " + friends[indexPath.row].lastName!
+        cell.textLabel!.text = friends[indexPath.row].username
         cell.imageView!.image = friends[indexPath.row].image
         cell.imageView!.layer.cornerRadius = 25;
         cell.imageView!.layer.masksToBounds = true;

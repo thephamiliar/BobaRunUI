@@ -37,11 +37,27 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     var tableView : UITableView!
     
     override func viewWillAppear(animated: Bool) {
-            }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
+        self.tableView = UITableView()
+        let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-self.footerHeight)
+        self.tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.formViewCellReuseIdentifier)
+        self.tableView.allowsMultipleSelection = true
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.view.addSubview(self.tableView)
+        
+        var footerView: UIView = UIView(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width, self.footerHeight))
+        footerView.backgroundColor = UIColor(red: 248/255, green: 241/255, blue: 243/255, alpha: 1)
+        self.view.addSubview(footerView)
+        
+        let submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, self.submitButtonHeight))
+        submitButton.center = footerView.center
+        submitButton.setTitle("Submit", forState: UIControlState.Normal)
+        submitButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
+        submitButton.addTarget(self, action: "selectedSubmitButton:", forControlEvents: .TouchUpInside)
+        submitButton.layer.cornerRadius = 5
+        self.view.addSubview(submitButton)
         BobaRunAPI.bobaRunSharedInstance.getMenuWithYelpID("CoCo Westwood") { (json: JSON) in
             print ("getting menu")
             if let creation_error = json["error"].string {
@@ -75,35 +91,19 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
                             self.toppingItems.append(drink.name!)
                             self.toppingPrices.append("$" + String(drink.price!))
                         }
-                        
-                        self.tableView = UITableView()
-                        let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-self.footerHeight)
-                        self.tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
-                        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.formViewCellReuseIdentifier)
-                        self.tableView.allowsMultipleSelection = true
-                        self.tableView.delegate = self
-                        self.tableView.dataSource = self
-                        self.view.addSubview(self.tableView)
-                        
-                        var footerView: UIView = UIView(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width, self.footerHeight))
-                        footerView.backgroundColor = UIColor(red: 248/255, green: 241/255, blue: 243/255, alpha: 1)
-                        self.view.addSubview(footerView)
-                        
-                        let submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, self.submitButtonHeight))
-                        submitButton.center = footerView.center
-                        submitButton.setTitle("Submit", forState: UIControlState.Normal)
-                        submitButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
-                        submitButton.addTarget(self, action: "selectedSubmitButton:", forControlEvents: .TouchUpInside)
-                        submitButton.layer.cornerRadius = 5
-                        self.view.addSubview(submitButton)
-                        
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.tableView.reloadData()
+                        })
+
                     }
                 }
             }
         }
-
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-
     }
     
     override func viewDidAppear(animated: Bool) {
