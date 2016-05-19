@@ -9,6 +9,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    var user = User()
 
     @IBOutlet weak var usernameText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
@@ -38,21 +39,34 @@ class LoginViewController: UIViewController {
             alertView.show()
         } else {
             // TODO: authenticate with backend
-//            BobaRunAPI.bobaRunSharedInstance.loginUser(username as String, password: password as String) { (json: JSON) in
-//                if let creation_error = json["error"].string {
-//                    if creation_error == "true" {
-//                        print ("could get user info")
-//                    }
-//                    else {
-//                        if let results = json["result"].array {
-//                            for entry in results {
-//                                self.user = (User(json: entry))
-//                                self.user.image = UIImage(named: "faithfulness")!
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+            BobaRunAPI.bobaRunSharedInstance.loginUser(username as String, password: password as String) { (json: JSON) in
+                if let creation_error = json["error"].string {
+                    if creation_error == "true" {
+                        dispatch_async(dispatch_get_main_queue(),{
+                        let alertView:UIAlertView = UIAlertView()
+                        alertView.title = "Sign in Failed!"
+                        alertView.message = "Please enter Username and Password"
+                        alertView.delegate = self
+                        alertView.addButtonWithTitle("OK")
+                        alertView.show()
+                        })
+                    }
+                    else {
+                        if let results = json["result"].array {
+                            for entry in results {
+                                self.user = (User(json:entry))
+                                self.user.image = UIImage(named: "faithfulness")!
+                                var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                                prefs.setObject(self.user.username, forKey: "USERNAME")
+                                prefs.setInteger(1, forKey: "ISLOGGEDIN")
+                                prefs.synchronize()
+                                
+                                self.dismissViewControllerAnimated(true, completion: nil)
+                            }
+                        }
+                    }
+                }
+            }
             
 //            var post:NSString = "username=\(username)&password=\(password)"
 //            
@@ -102,13 +116,9 @@ class LoginViewController: UIViewController {
 //                    if(success == 1)
 //                    {
 //                        NSLog("Login SUCCESS");
-//                        
-                        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-                        prefs.setObject(username, forKey: "USERNAME")
-                        prefs.setInteger(1, forKey: "ISLOGGEDIN")
-                        prefs.synchronize()
+//
                         
-                        self.dismissViewControllerAnimated(true, completion: nil)
+
 //                    } else {
 //                        var error_msg:NSString
 //                        
