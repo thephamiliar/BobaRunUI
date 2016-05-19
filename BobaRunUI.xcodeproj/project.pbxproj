@@ -30,7 +30,6 @@
 		2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */; };
 		2F95C1591CEBD4A200C27911 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1581CEBD4A200C27911 /* LoginViewController.swift */; };
 		2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */; };
-		838CDA721CE3FBAF000EBE71 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 838CDA711CE3FBAF000EBE71 /* Pods */; };
 		838CDA761CE58571000EBE71 /* BobaRunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838CDA751CE58571000EBE71 /* BobaRunAPI.swift */; };
 		838CDA781CE585A1000EBE71 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */; };
 		8398B8751CED3A2000C028EE /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8398B8741CED3A2000C028EE /* Drink.swift */; };
@@ -43,6 +42,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2F0AEC2F1CDAB6B700A2F79C;
 			remoteInfo = BobaRunUI;
+		};
+		8398B9341CED413500C028EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8398B8E21CED413500C028EE /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D78B846ACBA0CF38988E861301D09F55;
+			remoteInfo = AFNetworking;
+		};
+		8398B9361CED413500C028EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8398B8E21CED413500C028EE /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 82C898F4516314EB8E2C75E8921CC95A;
+			remoteInfo = BDBOAuth1Manager;
+		};
+		8398B9381CED413500C028EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8398B8E21CED413500C028EE /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C855E584EDA68EFC9BD09BB0E0B4AA39;
+			remoteInfo = Pods;
+		};
+		8398B93A1CED413500C028EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8398B8E21CED413500C028EE /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E803ECCC72CD38DC08C734DF6C96D96;
+			remoteInfo = SwiftyJSON;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -74,10 +101,10 @@
 		2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
 		2F95C1581CEBD4A200C27911 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		838CDA711CE3FBAF000EBE71 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Pods; path = "../ios_yelp_swift-master/Pods"; sourceTree = "<group>"; };
 		838CDA751CE58571000EBE71 /* BobaRunAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BobaRunAPI.swift; sourceTree = "<group>"; };
 		838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		8398B8741CED3A2000C028EE /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
+		8398B8E21CED413500C028EE /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +128,11 @@
 		2F0AEC271CDAB6B700A2F79C = {
 			isa = PBXGroup;
 			children = (
+				8398B8E21CED413500C028EE /* Pods.xcodeproj */,
 				838CDA6C1CE3F874000EBE71 /* BobaRunBackend */,
 				2F0AEC321CDAB6B700A2F79C /* BobaRunUI */,
 				2F0AEC4A1CDAB6B700A2F79C /* BobaRunUITests */,
 				2F0AEC311CDAB6B700A2F79C /* Products */,
-				838CDA711CE3FBAF000EBE71 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -184,6 +211,17 @@
 			path = BobaRunUI;
 			sourceTree = "<group>";
 		};
+		8398B8E31CED413500C028EE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8398B9351CED413500C028EE /* AFNetworking.framework */,
+				8398B9371CED413500C028EE /* BDBOAuth1Manager.framework */,
+				8398B9391CED413500C028EE /* Pods.framework */,
+				8398B93B1CED413500C028EE /* SwiftyJSON.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -253,6 +291,12 @@
 			mainGroup = 2F0AEC271CDAB6B700A2F79C;
 			productRefGroup = 2F0AEC311CDAB6B700A2F79C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8398B8E31CED413500C028EE /* Products */;
+					ProjectRef = 8398B8E21CED413500C028EE /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2F0AEC2F1CDAB6B700A2F79C /* BobaRunUI */,
@@ -261,6 +305,37 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		8398B9351CED413500C028EE /* AFNetworking.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AFNetworking.framework;
+			remoteRef = 8398B9341CED413500C028EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8398B9371CED413500C028EE /* BDBOAuth1Manager.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BDBOAuth1Manager.framework;
+			remoteRef = 8398B9361CED413500C028EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8398B9391CED413500C028EE /* Pods.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods.framework;
+			remoteRef = 8398B9381CED413500C028EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8398B93B1CED413500C028EE /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 8398B93A1CED413500C028EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		2F0AEC2E1CDAB6B700A2F79C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -268,7 +343,6 @@
 			files = (
 				2F0AEC761CE3F48100A2F79C /* Images.xcassets in Resources */,
 				2F0AEC3D1CDAB6B700A2F79C /* Main.storyboard in Resources */,
-				838CDA721CE3FBAF000EBE71 /* Pods in Resources */,
 				2F0AEC421CDAB6B700A2F79C /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
