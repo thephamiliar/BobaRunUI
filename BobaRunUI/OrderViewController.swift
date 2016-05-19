@@ -36,7 +36,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         let testFriend = User()
         testFriend.firstName = "Jessica"
         testFriend.lastName = "Pham"
-        testFriend.userName = "jmpham613"
+        testFriend.username = "jmpham613"
         testFriend.image = UIImage(named: "faithfulness")!
         order1.user = testFriend
         orders = [order1]
