@@ -69,7 +69,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         let order = orders[indexPath.row]
         
         let cell = tableView.dequeueReusableCellWithIdentifier(orderViewCellReuseIdentifier) as! OrderViewTableViewCell
-        cell.userLabel.text = order.user.userName
+        cell.userLabel.text = order.user.username
         cell.priceLabel.text = "$3.25" // TODO : add price to orders
         cell.teaTypeLabel.text = "Tea Type: " + order.teaType
         cell.sugarLevelLabel.text = "Sugar Level: " + order.sugarLevel
@@ -99,4 +99,3 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.navigationController?.pushViewController(orderFormViewController, animated: true)
     }
 }
-

@@ -29,22 +29,22 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         let testFriend = User()
         testFriend.firstName = "Jessica"
         testFriend.lastName = "Pham"
-        testFriend.userName = "jmpham613"
+        testFriend.username = "jmpham613"
         testFriend.image = UIImage(named: "faithfulness")!
         let testFriend2 = User()
         testFriend2.firstName = "Joanna"
         testFriend2.lastName = "Chen"
-        testFriend2.userName = "jchen94"
+        testFriend2.username = "jchen94"
         testFriend2.image = UIImage(named: "faithfulness")!
         let testFriend3 = User()
         testFriend3.firstName = "Nick"
         testFriend3.lastName = "Yu"
-        testFriend3.userName = "nyu"
+        testFriend3.username = "nyu"
         testFriend3.image = UIImage(named: "faithfulness")!
         let testFriend4 = User()
         testFriend4.firstName = "Louis"
         testFriend4.lastName = "Truong"
-        testFriend4.userName = "ltroung"
+        testFriend4.username = "ltroung"
         testFriend4.image = UIImage(named: "faithfulness")!
         var testGroup = Group()
         testGroup.groupName = "CSM117 :D"
@@ -88,7 +88,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         if (users.count > 1) {
             var index = 1
             while (index < 8 && index < users.count) {
-                cell.groupMembers!.text = cell.groupMembers!.text! + ", " + (users[index].firstName as String)
+                cell.groupMembers!.text = cell.groupMembers!.text! + ", " + (users[index].firstName! as String)
                 index += 1
             }
         }
