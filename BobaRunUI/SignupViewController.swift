@@ -93,45 +93,25 @@ class SignupViewController: UIViewController {
 //                    
 //                    if(success == 1)
 //                    {
+            BobaRunAPI.bobaRunSharedInstance.createUser(username as String, password: password as String) { (json: JSON) in
+                if let creation_error = json["error"].string {
+                    if creation_error == "true" {
+                        dispatch_async(dispatch_get_main_queue(),{
+                            let alertView:UIAlertView = UIAlertView()
+                            alertView.title = "Sign up failed"
+                            alertView.message = "Username is taken."
+                            alertView.delegate = self
+                            alertView.addButtonWithTitle("OK")
+                            alertView.show()
+                        })
+                    }
+                    else {
                         NSLog("Sign Up SUCCESS");
                         self.dismissViewControllerAnimated(true, completion: nil)
-//                    } else {
-//                        var error_msg:NSString
-//                        
-//                        if jsonData["error_message"] as? NSString != nil {
-//                            error_msg = jsonData["error_message"] as NSString
-//                        } else {
-//                            error_msg = "Unknown Error"
-//                        }
-//                        var alertView:UIAlertView = UIAlertView()
-//                        alertView.title = "Sign Up Failed!"
-//                        alertView.message = error_msg
-//                        alertView.delegate = self
-//                        alertView.addButtonWithTitle("OK")
-//                        alertView.show()
-//                        
-//                    }
-//                    
-//                } else {
-//                    var alertView:UIAlertView = UIAlertView()
-//                    alertView.title = "Sign Up Failed!"
-//                    alertView.message = "Connection Failed"
-//                    alertView.delegate = self
-//                    alertView.addButtonWithTitle("OK")
-//                    alertView.show()
-//                }
-//            }  else {
-//                var alertView:UIAlertView = UIAlertView()
-//                alertView.title = "Sign in Failed!"
-//                alertView.message = "Connection Failure"
-//                if let error = reponseError {
-//                    alertView.message = (error.localizedDescription)
-//                }
-//                alertView.delegate = self
-//                alertView.addButtonWithTitle("OK")
-//                alertView.show()
-//            }
+                    }
+                }
         }
+    }
     }
 
     @IBAction func goToLogin(sender: UIButton) {

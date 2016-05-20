@@ -12,6 +12,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     var tableView : UITableView!
     var rooms : [Room]!
     let homePageViewCellReuseIdentifier = "homePageViewCellReuseIdentifier"
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

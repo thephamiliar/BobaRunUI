@@ -14,8 +14,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     let userViewCellReuseIdentifier = "userViewCellReuseIdentifier"
     override func viewWillAppear(animated: Bool) {
         // Do any additional setup after loading the view, typically from a nib.
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
 
-        BobaRunAPI.bobaRunSharedInstance.getUser("HappyLou") { (json: JSON) in
+        BobaRunAPI.bobaRunSharedInstance.getUser(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
             print ("getting user info")
             if let creation_error = json["error"].string {
                 if creation_error == "true" {

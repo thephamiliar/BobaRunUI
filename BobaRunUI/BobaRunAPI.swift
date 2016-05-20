@@ -67,6 +67,16 @@ class BobaRunAPI: NSObject {
         createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
+    func createUser(username: String, password: String, onCompletion: (JSON) -> Void) {
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)user/create")!)
+        request.HTTPMethod = "POST"
+        let postString = "username=" + username + "&password=" + password
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+    
     func loginUser(username: String, password: String, onCompletion: (JSON) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)login")!)
         request.HTTPMethod = "POST"
@@ -155,9 +165,38 @@ class BobaRunAPI: NSObject {
         createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
+    // =============
+    // GROUP CALLS
+    // =============
+    func getGroup(username: String, onCompletion: (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)group/show/username")!)
+        request.HTTPMethod = "POST"
+        let postString = "owner_username=" + username
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
     
+    func createGroup(username: String, onCompletion: (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)group/create")!)
+        request.HTTPMethod = "POST"
+        let postString = "owner_username=" + username
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
     
-    
+    func createNewGroupMember(g_id: String, username: String, onCompletion: (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)group_member/create")!)
+        request.HTTPMethod = "POST"
+        let postString = "g_id=" + g_id + "&username=" + username
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+
+
+
     // =============
     // MENU CALLS
     // =============

@@ -14,11 +14,9 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     let friendViewCellReuseIdentifier = "friendViewCellReuseIdentifier"
     
     override func viewWillAppear(animated: Bool) {
-//        self.tableView.dataSource = self
-//        self.tableView.delegate = self
-//        self.view.addSubview(self.tableView)
-        
-        BobaRunAPI.bobaRunSharedInstance.getFriends("HappyLou") { (json: JSON) in
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+
+        BobaRunAPI.bobaRunSharedInstance.getFriends(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
             print ("getting friends")
             if let creation_error = json["error"].string {
                 if creation_error == "true" {
