@@ -151,7 +151,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
         // TODO: send new room to backend?
         // TODO: push notifications
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
 
 

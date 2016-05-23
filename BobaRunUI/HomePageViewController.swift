@@ -80,7 +80,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func addNewRoom(sender: AnyObject) {
-        let newRoomViewController = NewRoomViewController()
+        let newRoomViewController = ShopViewController()
         self.navigationController?.pushViewController(newRoomViewController, animated: true)
     }
 }
