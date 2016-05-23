@@ -38,6 +38,22 @@ class LoginViewController: UIViewController {
             alertView.show()
         } else {
             // TODO: authenticate with backend
+//            BobaRunAPI.bobaRunSharedInstance.loginUser(username as String, password: password as String) { (json: JSON) in
+//                if let creation_error = json["error"].string {
+//                    if creation_error == "true" {
+//                        print ("could get user info")
+//                    }
+//                    else {
+//                        if let results = json["result"].array {
+//                            for entry in results {
+//                                self.user = (User(json: entry))
+//                                self.user.image = UIImage(named: "faithfulness")!
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+            
 //            var post:NSString = "username=\(username)&password=\(password)"
 //            
 //            NSLog("PostData: %@",post);
