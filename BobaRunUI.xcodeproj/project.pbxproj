@@ -154,33 +154,17 @@
 		2F0AEC321CDAB6B700A2F79C /* BobaRunUI */ = {
 			isa = PBXGroup;
 			children = (
+				2F5866101CF5762D00D66A66 /* Profile */,
+				2F58660F1CF5762100D66A66 /* Friends */,
+				2F58660E1CF5761800D66A66 /* Groups */,
+				2F58660D1CF5760700D66A66 /* Rooms */,
 				2F0AEC351CDAB6B700A2F79C /* AppDelegate.swift */,
-				2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */,
 				2F95C1581CEBD4A200C27911 /* LoginViewController.swift */,
 				2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */,
-				2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */,
-				2F0AEC5B1CDAC22500A2F79C /* NewRoomViewController.swift */,
-				2F0AEC6B1CE3F47000A2F79C /* Order.swift */,
-				2F0AEC6C1CE3F47000A2F79C /* OrderConfirmationViewController.swift */,
-				2F58660B1CF56B3900D66A66 /* PayOrderViewController.swift */,
-				2F0AEC6D1CE3F47000A2F79C /* OrderFormViewController.swift */,
-				2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */,
-				2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */,
-				2F95C15C1CEC0B4200C27911 /* OrderViewTableViewCell.swift */,
-				2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */,
 				2F0AEC751CE3F48100A2F79C /* Images.xcassets */,
-				2F0AEC591CDABE2800A2F79C /* Room.swift */,
-				2F0AEC391CDAB6B700A2F79C /* FriendsViewController.swift */,
-				2F0AEC691CE2C92100A2F79C /* User.swift */,
-				2F0AEC571CDAB7B200A2F79C /* ProfileViewController.swift */,
-				2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */,
-				2F95C1541CEAD25500C27911 /* GroupCollectionViewCell.swift */,
-				2F95C1501CEACB5C00C27911 /* Group.swift */,
-				2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */,
 				2F0AEC3B1CDAB6B700A2F79C /* Main.storyboard */,
 				2F0AEC401CDAB6B700A2F79C /* LaunchScreen.xib */,
 				2F0AEC331CDAB6B700A2F79C /* Supporting Files */,
-				8398B8741CED3A2000C028EE /* Drink.swift */,
 			);
 			path = BobaRunUI;
 			sourceTree = "<group>";
@@ -208,6 +192,62 @@
 				2F0AEC4C1CDAB6B700A2F79C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2F58660D1CF5760700D66A66 /* Rooms */ = {
+			isa = PBXGroup;
+			children = (
+				2F5866111CF5766900D66A66 /* Orders */,
+				2F0AEC5B1CDAC22500A2F79C /* NewRoomViewController.swift */,
+				2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */,
+				2F0AEC591CDABE2800A2F79C /* Room.swift */,
+				2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */,
+			);
+			name = Rooms;
+			sourceTree = "<group>";
+		};
+		2F58660E1CF5761800D66A66 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */,
+				2F95C1501CEACB5C00C27911 /* Group.swift */,
+				2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */,
+				2F95C1541CEAD25500C27911 /* GroupCollectionViewCell.swift */,
+				2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */,
+			);
+			name = Groups;
+			sourceTree = "<group>";
+		};
+		2F58660F1CF5762100D66A66 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC391CDAB6B700A2F79C /* FriendsViewController.swift */,
+			);
+			name = Friends;
+			sourceTree = "<group>";
+		};
+		2F5866101CF5762D00D66A66 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC571CDAB7B200A2F79C /* ProfileViewController.swift */,
+				2F0AEC691CE2C92100A2F79C /* User.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		2F5866111CF5766900D66A66 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC6B1CE3F47000A2F79C /* Order.swift */,
+				2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */,
+				2F95C15C1CEC0B4200C27911 /* OrderViewTableViewCell.swift */,
+				8398B8741CED3A2000C028EE /* Drink.swift */,
+				2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */,
+				2F0AEC6D1CE3F47000A2F79C /* OrderFormViewController.swift */,
+				2F58660B1CF56B3900D66A66 /* PayOrderViewController.swift */,
+				2F0AEC6C1CE3F47000A2F79C /* OrderConfirmationViewController.swift */,
+			);
+			name = Orders;
 			sourceTree = "<group>";
 		};
 		838CDA6C1CE3F874000EBE71 /* BobaRunBackend */ = {
