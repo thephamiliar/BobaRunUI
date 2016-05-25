@@ -25,6 +25,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         testGroup.roomName = "CSM117 :D"
         testGroup.roomTimeStamp = "05/04/16"
         rooms = [testGroup]
+        rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
         
         tableView = UITableView()
 //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)

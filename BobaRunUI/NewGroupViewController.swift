@@ -22,6 +22,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         friendsList = []// TODO: get friends from WebAPI
+        friendsList.sortInPlace({ $0.lastName < $1.lastName })
         
         tableView = UITableView()
         let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)

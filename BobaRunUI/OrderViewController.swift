@@ -46,6 +46,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         testFriend.image = UIImage(named: "faithfulness")!
         order1.user = testFriend
         orders = [order1]
+        orders.sortInPlace({ $0.user.username < $1.user.username })
         
         // user is runner
         if (room.runner == NSUserDefaults.standardUserDefaults().stringForKey("USERNAME")) {

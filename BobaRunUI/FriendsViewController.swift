@@ -31,6 +31,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
                             self.friends.append(User(json: entry))
                         }
                         dispatch_async(dispatch_get_main_queue(),{
+                            self.friends.sortInPlace({ $0.lastName < $1.lastName })
                             self.tableView.reloadData()
                         })
                     }
