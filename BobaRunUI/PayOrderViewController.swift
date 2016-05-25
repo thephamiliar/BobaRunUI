@@ -43,7 +43,7 @@ class PayOrderViewController: UIViewController, UITableViewDelegate, UITableView
         let payButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
         payButton.center = footerView.center
         payButton.setTitle("Pay Now", forState: UIControlState.Normal)
-        payButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
+        payButton.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
         payButton.addTarget(self, action: #selector(PayOrderViewController.selectedPayButton(_:)), forControlEvents: .TouchUpInside)
         payButton.layer.cornerRadius = 5
         self.view.addSubview(payButton)

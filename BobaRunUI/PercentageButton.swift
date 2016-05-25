@@ -13,9 +13,9 @@ class PercentageButton : UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.setTitleColor(UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1), forState: .Normal)
+        self.setTitleColor(UIColor(red: 0, green: 122/255, blue: 1, alpha: 1), forState: .Normal)
         self.setTitleColor(UIColor.whiteColor(), forState: .Selected)
-        self.layer.borderColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1).CGColor
+        self.layer.borderColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1).CGColor
         self.layer.borderWidth = 2
         self.layer.cornerRadius = 5
     }

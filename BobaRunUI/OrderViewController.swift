@@ -29,14 +29,9 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let nav = self.navigationController?.navigationBar
-        nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         navigationItem.title = "Orders"
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(OrderViewController.addNewOrder(_:)))
         self.navigationItem.rightBarButtonItem = addButton
-        
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
         // TODO: populate orders from Backend
         var order1 = Order()
@@ -70,7 +65,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
             let confirmButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
             confirmButton.center = footerView.center
             confirmButton.setTitle("Confirm", forState: UIControlState.Normal)
-            confirmButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
+            confirmButton.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
             confirmButton.addTarget(self, action: #selector(OrderViewController.selectedConfirmButton(_:)), forControlEvents: .TouchUpInside)
             confirmButton.layer.cornerRadius = 5
             self.view.addSubview(confirmButton)

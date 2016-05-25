@@ -39,19 +39,14 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         let submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
         submitButton.center = footerView.center
         submitButton.setTitle("Submit", forState: UIControlState.Normal)
-        submitButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
+        submitButton.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
         submitButton.addTarget(self, action: #selector(NewGroupViewController.selectedSubmitButton(_:)), forControlEvents: .TouchUpInside)
         submitButton.layer.cornerRadius = 5
         self.view.addSubview(submitButton)
     }
     
     override func viewDidAppear(animated: Bool) {
-        let nav = self.navigationController?.navigationBar
-        nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         navigationItem.title = "New Group"
-        
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
     }
     
     override func didReceiveMemoryWarning() {

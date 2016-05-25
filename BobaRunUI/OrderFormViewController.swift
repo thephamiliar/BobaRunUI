@@ -54,7 +54,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
 
         submitButton.center = footerView.center
         submitButton.setTitle("Submit", forState: UIControlState.Normal)
-        submitButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
+        submitButton.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
         submitButton.addTarget(self, action: #selector(OrderFormViewController.selectedSubmitButton(_:)), forControlEvents: .TouchUpInside)
         submitButton.layer.cornerRadius = 5
         self.view.addSubview(submitButton)
@@ -107,12 +107,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewDidAppear(animated: Bool) {
-        let nav = self.navigationController?.navigationBar
-        nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         navigationItem.title = "BobaRun"
-        
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
     }
     
     override func didReceiveMemoryWarning() {
@@ -260,7 +255,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
                 selectedIceLevel?.selected = false
                 selectedIceLevel = sender
             }
-            sender.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
+            sender.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
             sender.selected = true
         }
     }

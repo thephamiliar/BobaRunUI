@@ -16,14 +16,9 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let nav = self.navigationController?.navigationBar
-        nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         navigationItem.title = "Rooms"
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(HomePageViewController.addNewRoom(_:)))
         self.navigationItem.rightBarButtonItem = addButton
-        
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
         // TODO: populate groups from Backend
         var testGroup = Room()

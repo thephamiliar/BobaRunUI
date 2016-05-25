@@ -38,7 +38,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         submitButton.center = footerView.center
         submitButton.setTitle("Continue", forState: UIControlState.Normal)
-        submitButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
+        submitButton.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
         submitButton.addTarget(self, action: #selector(ShopViewController.selectedContinueButton(_:)), forControlEvents: .TouchUpInside)
         submitButton.layer.cornerRadius = 5
         self.view.addSubview(submitButton)
@@ -47,13 +47,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var nav = self.navigationController?.navigationBar
-        nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         self.navigationItem.title = "Boba Shops"
-        
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
-        nav?.titleTextAttributes = titleDict as! [String : AnyObject]
         // Do any additional setup after loading the view, typically from a nib.
     }
     

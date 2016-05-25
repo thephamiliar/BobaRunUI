@@ -46,7 +46,7 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
             let confirmButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
             confirmButton.center = footerView.center
             confirmButton.setTitle("Confirm", forState: UIControlState.Normal)
-            confirmButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
+            confirmButton.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
             confirmButton.addTarget(self, action: #selector(OrderConfirmationViewController.selectedConfirmButton(_:)), forControlEvents: .TouchUpInside)
             confirmButton.layer.cornerRadius = 5
             self.view.addSubview(confirmButton)
