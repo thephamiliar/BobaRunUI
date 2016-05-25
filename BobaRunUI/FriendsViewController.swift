@@ -43,13 +43,13 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var nav = self.navigationController?.navigationBar
+        let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         self.navigationItem.title = "Friends"
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
-        nav?.titleTextAttributes = titleDict as! [String : AnyObject]
+        nav?.titleTextAttributes = titleDict as? [String : AnyObject]
         // Do any additional setup after loading the view, typically from a nib.
         
         
@@ -87,8 +87,9 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let orderViewController = OrderViewController()
-        self.navigationController?.pushViewController(orderViewController, animated: true)
+        let profileViewController = ProfileViewController()
+        profileViewController.user = friends[indexPath.row]
+        self.navigationController?.pushViewController(profileViewController, animated: true)
     }
     
 }

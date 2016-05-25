@@ -28,8 +28,8 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     var selectedSugarLevel : UIButton?
     var selectedIceLevel : UIButton?
     let formViewCellReuseIdentifier = "formViewCellReuseIdentifier"
-    let buttonHeight = CGFloat(35)
-    let buttonWidth = CGFloat(50)
+    let buttonHeight = CGFloat(30)
+    let buttonWidth = CGFloat(40)
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
@@ -159,7 +159,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
             numRows = 1
             break
         case OrderSection.Toppings.rawValue:
-            numRows = toppingItems.count
+            numRows = toppingItems.count+1
             break
         default:
             numRows = 0
@@ -184,8 +184,13 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
             generatePercentageButtons(OrderSection.IceLevel, cell: cell)
             break
         case OrderSection.Toppings.rawValue:
-            cell.textLabel?.text = toppingItems[indexPath.row]
-            cell.detailTextLabel?.text = toppingPrices[indexPath.row]
+            if (indexPath.row < toppingItems.count) {
+                cell.textLabel?.text = toppingItems[indexPath.row]
+                cell.detailTextLabel?.text = toppingPrices[indexPath.row]
+            } else {
+                cell.textLabel?.text = "None"
+                cell.detailTextLabel?.text = "$0.00"
+            }
             break
         default:
             cell.textLabel?.text = "Other"
@@ -200,8 +205,9 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         var currXPos = CGFloat(0)
         
         while buttonNum <= 100 {
-            let button: PercentageButton = PercentageButton(frame: CGRectMake(currXPos + buttonPadding, cell.bounds.minY+5, buttonWidth, buttonHeight))
+            let button: PercentageButton = PercentageButton(frame: CGRectMake(currXPos + buttonPadding, cell.bounds.minY+8, buttonWidth, buttonHeight))
             button.setTitle(String(buttonNum) + "%", forState: UIControlState.Normal)
+            button.titleLabel!.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
             button.tag = section.rawValue
             button.addTarget(self, action: #selector(OrderFormViewController.selectedButton(_:)), forControlEvents: .TouchUpInside)
             cell.contentView.addSubview(button)
@@ -261,23 +267,32 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func selectedSubmitButton(sender: UIButton!) {
         var order = Order()
-        let tableSelections = tableView.indexPathsForSelectedRows!
-            for indexPath in tableSelections {
-                if indexPath.section == OrderSection.TeaType.rawValue {
-                    let selectedCell = tableView.cellForRowAtIndexPath(indexPath )
-                    order.teaType = selectedCell!.textLabel!.text!
-                } else if indexPath.section == OrderSection.Toppings.rawValue {
-                    let selectedCell = tableView.cellForRowAtIndexPath(indexPath )
-                    order.toppings.append(selectedCell!.textLabel!.text!)
-                }
+        let tableSelections = tableView.indexPathsForSelectedRows
+        if (tableSelections != nil && selectedSugarLevel != nil && selectedIceLevel != nil) {
+            for indexPath in tableSelections! {
+                    if indexPath.section == OrderSection.TeaType.rawValue {
+                        let selectedCell = tableView.cellForRowAtIndexPath(indexPath )
+                        order.teaType = selectedCell!.textLabel!.text!
+                    } else if indexPath.section == OrderSection.Toppings.rawValue {
+                        let selectedCell = tableView.cellForRowAtIndexPath(indexPath )
+                        order.toppings.append(selectedCell!.textLabel!.text!)
+                    }
+            }
+            order.sugarLevel = selectedSugarLevel!.titleLabel!.text!
+            order.iceLevel = selectedIceLevel!.titleLabel!.text!
+            
+            // TODO: Send order to database (roomid, member, drink)
+            
+            let confirmationViewController = OrderConfirmationViewController(order: order, confirmButton: true)
+            self.navigationController?.pushViewController(confirmationViewController, animated: true)
+        } else {
+            let alertView:UIAlertView = UIAlertView()
+            alertView.title = "Order Incomplete!"
+            alertView.message = "Please fill out complete form."
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
         }
-        order.sugarLevel = selectedSugarLevel!.titleLabel!.text!
-        order.iceLevel = selectedIceLevel!.titleLabel!.text!
-        
-        // TODO: Send order to database (roomid, member, drink)
-        
-        let confirmationViewController = OrderConfirmationViewController(order: order)
-        self.navigationController?.pushViewController(confirmationViewController, animated: true)
     }
     
 }

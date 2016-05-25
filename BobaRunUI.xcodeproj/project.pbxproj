@@ -24,6 +24,7 @@
 		2F0AEC741CE3F47000A2F79C /* PercentageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */; };
 		2F0AEC761CE3F48100A2F79C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0AEC751CE3F48100A2F79C /* Images.xcassets */; };
 		2F5866041CF2CA5D00D66A66 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */; };
+		2F58660C1CF56B3900D66A66 /* PayOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58660B1CF56B3900D66A66 /* PayOrderViewController.swift */; };
 		2F95C14F1CEAC3F000C27911 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */; };
 		2F95C1511CEACB5C00C27911 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1501CEACB5C00C27911 /* Group.swift */; };
 		2F95C1531CEAD1ED00C27911 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */; };
@@ -97,6 +98,7 @@
 		2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentageButton.swift; sourceTree = "<group>"; };
 		2F0AEC751CE3F48100A2F79C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		2F58660B1CF56B3900D66A66 /* PayOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayOrderViewController.swift; sourceTree = "<group>"; };
 		2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		2F95C1501CEACB5C00C27911 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				2F0AEC5B1CDAC22500A2F79C /* NewRoomViewController.swift */,
 				2F0AEC6B1CE3F47000A2F79C /* Order.swift */,
 				2F0AEC6C1CE3F47000A2F79C /* OrderConfirmationViewController.swift */,
+				2F58660B1CF56B3900D66A66 /* PayOrderViewController.swift */,
 				2F0AEC6D1CE3F47000A2F79C /* OrderFormViewController.swift */,
 				2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */,
 				2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */,
@@ -389,6 +392,7 @@
 				2F0AEC701CE3F47000A2F79C /* Order.swift in Sources */,
 				2F5866041CF2CA5D00D66A66 /* ShopViewController.swift in Sources */,
 				2F0AEC381CDAB6B700A2F79C /* HomePageViewController.swift in Sources */,
+				2F58660C1CF56B3900D66A66 /* PayOrderViewController.swift in Sources */,
 				838CDA761CE58571000EBE71 /* BobaRunAPI.swift in Sources */,
 				2F0AEC731CE3F47000A2F79C /* OrderViewController.swift in Sources */,
 			);

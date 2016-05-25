@@ -75,12 +75,14 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let orderViewController = OrderViewController()
+        let orderViewController = OrderViewController(room: rooms[indexPath.row])
+        orderViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(orderViewController, animated: true)
     }
 
     func addNewRoom(sender: AnyObject) {
         let newRoomViewController = ShopViewController()
+        newRoomViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(newRoomViewController, animated: true)
     }
 }

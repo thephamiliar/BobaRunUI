@@ -61,7 +61,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.registerClass(GroupCollectionViewCell.self, forCellWithReuseIdentifier: groupViewCellReuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.lightGrayColor()
+        collectionView.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
         self.view.addSubview(collectionView)
         
     }
@@ -102,11 +102,13 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let groupViewController = GroupViewController()
         groupViewController.group = groups[indexPath.row]
+        groupViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(groupViewController, animated: true)
     }
     
     func addNewGroup(sender: AnyObject) {
         let newGroupViewController = NewGroupViewController()
+        newGroupViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(newGroupViewController, animated: true)
     }
 }

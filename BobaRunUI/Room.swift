@@ -12,4 +12,6 @@ struct Room {
     var roomID: String = ""
     var roomName: String = ""
     var roomTimeStamp: String = ""
+    var runner: User = User()
+    var confirmed: Bool = false
 }

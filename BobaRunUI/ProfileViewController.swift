@@ -50,7 +50,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
         tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: userViewCellReuseIdentifier)
-        tableView.allowsMultipleSelection = true
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -121,8 +120,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let orderViewController = OrderViewController()
-        self.navigationController?.pushViewController(orderViewController, animated: true)
+        // TODO: change password option
     }
 
 }
