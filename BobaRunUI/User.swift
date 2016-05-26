@@ -25,8 +25,8 @@ class User: NSObject {
     
     init(json: JSON) {
         image = UIImage()
-        firstName = ""
-        lastName = ""
+        firstName = json["first_name"].stringValue
+        lastName = json["last_name"].stringValue
         username = json["username"].stringValue
         password = json["password"].stringValue
         email = json["email"].stringValue

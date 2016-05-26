@@ -9,10 +9,23 @@
 import Foundation
 import UIKit
 
-struct Group {
-    var groupID: String = ""
-    var groupName: String = ""
-    var groupTimeStamp: String = ""
-    var users: [User] = []
-    var image: UIImage = UIImage()
+class Group: NSObject {
+    var groupID: String?
+    var groupName: String?
+    var users: [User]?
+    var names: [String]?
+    var groupTimeStamp: String?
+    var image: UIImage?
+    
+    override init () {
+        
+    }
+    
+    init(json: JSON) {
+        image = UIImage()
+        groupName = json["group_name"].stringValue
+        groupID = json["g_id"].stringValue
+        users = []
+        
+    }
 }

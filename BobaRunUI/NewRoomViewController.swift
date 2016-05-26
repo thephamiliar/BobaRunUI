@@ -120,16 +120,16 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.imageView!.layer.masksToBounds = true;
             
             let users = groupsList[indexPath.row].users
-            cell.detailTextLabel!.text = users[0].firstName
-            if (users.count > 1) {
+            cell.detailTextLabel!.text = users![0].firstName
+            if (users!.count > 1) {
                 var index = 1
-                while (index < 8 && index < users.count) {
-                    cell.detailTextLabel!.text = cell.detailTextLabel!.text! + ", " + (users[index].firstName! as String)
+                while (index < 8 && index < users!.count) {
+                    cell.detailTextLabel!.text = cell.detailTextLabel!.text! + ", " + (users![index].firstName! as String)
                     index += 1
                 }
             }
-            if (users.count > 8) {
-                cell.detailTextLabel!.text = cell.detailTextLabel!.text! + " +" + String(users.count-8)
+            if (users!.count > 8) {
+                cell.detailTextLabel!.text = cell.detailTextLabel!.text! + " +" + String(users!.count-8)
             }
 
         }

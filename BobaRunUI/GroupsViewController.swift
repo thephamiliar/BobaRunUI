@@ -10,7 +10,7 @@ import UIKit
 
 class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     var collectionView: UICollectionView!
-    var groups : [Group]!
+    var groups = [Group]()
     let groupViewCellReuseIdentifier = "groupViewCellReuseIdentifier"
     
     override func viewDidLoad() {
@@ -26,6 +26,47 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
         // TODO: populate groups from Backend
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        BobaRunAPI.bobaRunSharedInstance.getGroup(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+            print ("getting my groups")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not retrieve groups")
+                }
+                else {
+                    if let results = json["result"].array {
+                        self.groups.removeAll()
+                        for entry in results {
+                            let temp_group = Group(json: entry)
+                            var temp_users = [User]()
+                            
+                        BobaRunAPI.bobaRunSharedInstance.getGroupMembers(temp_group.groupID!) { (json: JSON) in
+                                print ("getting my group members")
+                                if let creation_error = json["error"].string {
+                                    if creation_error == "true" {
+                                        print ("could not retrieve groups")
+                                    }
+                                    else {
+                                        if let mem_results = json["result"].array {
+                                            for u in mem_results {
+                                                temp_users.append(User(json: u))
+                                            }
+                                            temp_group.users = temp_users
+                                        }
+                                    }
+                                }
+                            }
+                            self.groups.append(temp_group)
+                        }
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.collectionView.reloadData()
+                        })
+                    }
+                }
+            }
+        }
+
+        
         let testFriend = User()
         testFriend.firstName = "Jessica"
         testFriend.lastName = "Pham"
@@ -84,16 +125,16 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         cell.groupTimeStampLabel!.text = groups[indexPath.row].groupTimeStamp
         
         let users = groups[indexPath.row].users
-        cell.groupMembers!.text = users[0].firstName
-        if (users.count > 1) {
+        cell.groupMembers!.text = users![0].firstName
+        if (users!.count > 1) {
             var index = 1
-            while (index < 8 && index < users.count) {
-                cell.groupMembers!.text = cell.groupMembers!.text! + ", " + (users[index].firstName! as String)
+            while (index < 8 && index < users!.count) {
+                cell.groupMembers!.text = cell.groupMembers!.text! + ", " + (users![index].firstName! as String)
                 index += 1
             }
         }
-        if (users.count > 8) {
-            cell.groupMembers!.text = cell.groupMembers!.text! + " +" + String(users.count-8)
+        if (users!.count > 8) {
+            cell.groupMembers!.text = cell.groupMembers!.text! + " +" + String(users!.count-8)
         }
         
         return cell

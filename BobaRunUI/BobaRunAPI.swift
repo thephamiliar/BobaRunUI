@@ -186,6 +186,16 @@ class BobaRunAPI: NSObject {
         createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
+    func getGroupMembers(g_id: String, onCompletion: (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)group_member/show/g_id")!)
+        request.HTTPMethod = "POST"
+        let postString = "g_id=" + g_id
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+
+    
     func createNewGroupMember(g_id: String, username: String, onCompletion: (JSON) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)group_member/create")!)
         request.HTTPMethod = "POST"
