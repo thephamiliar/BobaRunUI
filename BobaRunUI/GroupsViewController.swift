@@ -53,14 +53,14 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
                                             }
                                             temp_group.users = temp_users
                                         }
+                                        dispatch_async(dispatch_get_main_queue(),{
+                                            self.collectionView.reloadData()
+                                        })
                                     }
                                 }
                             }
                             self.groups.append(temp_group)
                         }
-                        dispatch_async(dispatch_get_main_queue(),{
-                            self.collectionView.reloadData()
-                        })
                     }
                 }
             }

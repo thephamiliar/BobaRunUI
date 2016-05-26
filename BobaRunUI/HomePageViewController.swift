@@ -10,7 +10,7 @@ import UIKit
 
 class HomePageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tableView : UITableView!
-    var rooms : [Room]!
+    var rooms = [Room]()
     let homePageViewCellReuseIdentifier = "homePageViewCellReuseIdentifier"
     
 
@@ -27,10 +27,26 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
         // TODO: populate groups from Backend
-        var testGroup = Room()
-        testGroup.roomName = "CSM117 :D"
-        testGroup.roomTimeStamp = "05/04/16"
-        rooms = [testGroup]
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        BobaRunAPI.bobaRunSharedInstance.getUserRooms(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+            print ("getting my rooms")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not retrieve rooms")
+                }
+                else {
+                    if let results = json["result"].array {
+                        self.rooms.removeAll()
+                        for entry in results {
+                            self.rooms.append(Room(json: entry))
+                        }
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+            }
+        }
         
         tableView = UITableView()
 //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
@@ -69,7 +85,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = UITableViewCell(style: .Value1, reuseIdentifier: homePageViewCellReuseIdentifier)
         
         cell.textLabel!.text = rooms[indexPath.row].roomName
-        cell.detailTextLabel!.text = rooms[indexPath.row].roomTimeStamp
+        // cell.detailTextLabel!.text = rooms[indexPath.row].roomTimeStamp
         
         cell.selectionStyle = .None
         return cell

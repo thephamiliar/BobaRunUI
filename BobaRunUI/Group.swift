@@ -13,7 +13,6 @@ class Group: NSObject {
     var groupID: String?
     var groupName: String?
     var users: [User]?
-    var names: [String]?
     var groupTimeStamp: String?
     var image: UIImage?
     
@@ -22,7 +21,7 @@ class Group: NSObject {
     }
     
     init(json: JSON) {
-        image = UIImage()
+        image = (json["image"] != nil) ? UIImage(named: json["image"].stringValue) : UIImage(named: "faithfulness")
         groupName = json["group_name"].stringValue
         groupID = json["g_id"].stringValue
         users = []

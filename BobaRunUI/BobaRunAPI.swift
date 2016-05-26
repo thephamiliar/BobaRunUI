@@ -146,6 +146,15 @@ class BobaRunAPI: NSObject {
         createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
+    func getUserRooms(username: String, onCompletion: (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room/show/member/username")!)
+        request.HTTPMethod = "POST"
+        let postString = "username=" + username
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+    
     func deleteRoom(roomId: String, onCompletion: (JSON) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room/delete")!)
         request.HTTPMethod = "POST"

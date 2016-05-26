@@ -24,7 +24,7 @@ class User: NSObject {
     }
     
     init(json: JSON) {
-        image = UIImage()
+        image = (json["image"] != nil) ? UIImage(named: json["image"].stringValue) : UIImage(named: "faithfulness")
         firstName = json["first_name"].stringValue
         lastName = json["last_name"].stringValue
         username = json["username"].stringValue

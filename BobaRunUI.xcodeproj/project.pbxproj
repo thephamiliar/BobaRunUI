@@ -33,7 +33,6 @@
 		838CDA761CE58571000EBE71 /* BobaRunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838CDA751CE58571000EBE71 /* BobaRunAPI.swift */; };
 		838CDA781CE585A1000EBE71 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */; };
 		8398B8751CED3A2000C028EE /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8398B8741CED3A2000C028EE /* Drink.swift */; };
-		8398B94F1CEFD79200C028EE /* GroupMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8398B94E1CEFD79200C028EE /* GroupMember.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,7 +105,6 @@
 		838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		8398B8741CED3A2000C028EE /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		8398B8E21CED413500C028EE /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
-		8398B94E1CEFD79200C028EE /* GroupMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMember.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +206,6 @@
 			children = (
 				838CDA751CE58571000EBE71 /* BobaRunAPI.swift */,
 				838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */,
-				8398B94E1CEFD79200C028EE /* GroupMember.swift */,
 			);
 			name = BobaRunBackend;
 			path = BobaRunUI;
@@ -376,7 +373,6 @@
 				2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */,
 				2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */,
 				2F0AEC361CDAB6B700A2F79C /* AppDelegate.swift in Sources */,
-				8398B94F1CEFD79200C028EE /* GroupMember.swift in Sources */,
 				2F95C1511CEACB5C00C27911 /* Group.swift in Sources */,
 				2F0AEC721CE3F47000A2F79C /* OrderFormViewController.swift in Sources */,
 				2F95C1531CEAD1ED00C27911 /* GroupViewController.swift in Sources */,

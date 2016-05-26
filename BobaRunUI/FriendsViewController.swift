@@ -15,7 +15,6 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewWillAppear(animated: Bool) {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-
         BobaRunAPI.bobaRunSharedInstance.getFriends(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
             print ("getting friends")
             if let creation_error = json["error"].string {

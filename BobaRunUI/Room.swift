@@ -8,8 +8,19 @@
 
 import Foundation
 
-struct Room {
-    var roomID: String = ""
-    var roomName: String = ""
-    var roomTimeStamp: String = ""
+class Room: NSObject {
+    var roomID: String?
+    var roomName: String?
+    var runner_id: Int?
+    
+    override init () {
+        
+    }
+    
+    init(json: JSON) {
+        roomID = json["room_id"].stringValue
+        roomName = json["room_name"].stringValue
+        runner_id = json["runner_id"].intValue
+        
+    }
 }
