@@ -19,6 +19,11 @@ class GroupCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         self.backgroundColor = UIColor.whiteColor()
         
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 1
+        self.layer.shadowOffset = CGSizeMake(1, 1)
+        self.layer.shadowColor = UIColor.lightGrayColor().CGColor
+        
         imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height/3))
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
         contentView.addSubview(imageView)

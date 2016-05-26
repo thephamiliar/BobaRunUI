@@ -22,12 +22,6 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let navBar = self.navigationController?.navigationBar
-        navBar!.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
-        navigationItem.title = "New Room"
-        
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navBar?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
         let testFriend = User()
         testFriend.firstName = "Jessica"
@@ -55,7 +49,9 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
         testGroup.users = [testFriend, testFriend2, testFriend3, testFriend4]
         testGroup.image = UIImage(named: "love")!
         friendsList = [testFriend, testFriend2, testFriend3, testFriend4] // TODO: get friends from WebAPI
+        friendsList.sortInPlace({ $0.lastName < $1.lastName })
         groupsList = [testGroup]    // TODO: get groups from WebAPI
+        groupsList.sortInPlace({ $0.groupName < $1.groupName })
         
         tableView = UITableView()
         let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
@@ -73,19 +69,14 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
         let submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
         submitButton.center = footerView.center
         submitButton.setTitle("Submit", forState: UIControlState.Normal)
-        submitButton.backgroundColor = UIColor(red: 127/255, green: 72/255, blue: 140/255, alpha: 1)
+        submitButton.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
         submitButton.addTarget(self, action: #selector(NewGroupViewController.selectedSubmitButton(_:)), forControlEvents: .TouchUpInside)
         submitButton.layer.cornerRadius = 5
         self.view.addSubview(submitButton)
     }
     
     override func viewDidAppear(animated: Bool) {
-        let nav = self.navigationController?.navigationBar
-        nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
-        navigationItem.title = "New Group"
-        
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
+        navigationItem.title = "Invite Friends"
     }
     
     override func didReceiveMemoryWarning() {
@@ -151,7 +142,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
         // TODO: send new room to backend?
         // TODO: push notifications
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
 
 

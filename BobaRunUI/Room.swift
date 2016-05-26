@@ -12,6 +12,9 @@ class Room: NSObject {
     var roomID: String?
     var roomName: String?
     var runner_id: Int?
+    var roomTimeStamp: String = ""
+    var runner: User = User()
+    var confirmed: Bool = false
     
     override init () {
         

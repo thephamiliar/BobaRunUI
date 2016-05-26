@@ -23,6 +23,8 @@
 		2F0AEC731CE3F47000A2F79C /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */; };
 		2F0AEC741CE3F47000A2F79C /* PercentageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */; };
 		2F0AEC761CE3F48100A2F79C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0AEC751CE3F48100A2F79C /* Images.xcassets */; };
+		2F5866041CF2CA5D00D66A66 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */; };
+		2F58660C1CF56B3900D66A66 /* PayOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58660B1CF56B3900D66A66 /* PayOrderViewController.swift */; };
 		2F95C14F1CEAC3F000C27911 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */; };
 		2F95C1511CEACB5C00C27911 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1501CEACB5C00C27911 /* Group.swift */; };
 		2F95C1531CEAD1ED00C27911 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */; };
@@ -30,6 +32,7 @@
 		2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */; };
 		2F95C1591CEBD4A200C27911 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1581CEBD4A200C27911 /* LoginViewController.swift */; };
 		2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */; };
+		2F95C15D1CEC0B4200C27911 /* OrderViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C15C1CEC0B4200C27911 /* OrderViewTableViewCell.swift */; };
 		838CDA761CE58571000EBE71 /* BobaRunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838CDA751CE58571000EBE71 /* BobaRunAPI.swift */; };
 		838CDA781CE585A1000EBE71 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */; };
 		8398B8751CED3A2000C028EE /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8398B8741CED3A2000C028EE /* Drink.swift */; };
@@ -94,6 +97,8 @@
 		2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentageButton.swift; sourceTree = "<group>"; };
 		2F0AEC751CE3F48100A2F79C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		2F58660B1CF56B3900D66A66 /* PayOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayOrderViewController.swift; sourceTree = "<group>"; };
 		2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		2F95C1501CEACB5C00C27911 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +106,7 @@
 		2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
 		2F95C1581CEBD4A200C27911 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		2F95C15C1CEC0B4200C27911 /* OrderViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewTableViewCell.swift; sourceTree = "<group>"; };
 		838CDA751CE58571000EBE71 /* BobaRunAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BobaRunAPI.swift; sourceTree = "<group>"; };
 		838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		8398B8741CED3A2000C028EE /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
@@ -148,30 +154,17 @@
 		2F0AEC321CDAB6B700A2F79C /* BobaRunUI */ = {
 			isa = PBXGroup;
 			children = (
+				2F5866101CF5762D00D66A66 /* Profile */,
+				2F58660F1CF5762100D66A66 /* Friends */,
+				2F58660E1CF5761800D66A66 /* Groups */,
+				2F58660D1CF5760700D66A66 /* Rooms */,
 				2F0AEC351CDAB6B700A2F79C /* AppDelegate.swift */,
-				2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */,
 				2F95C1581CEBD4A200C27911 /* LoginViewController.swift */,
 				2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */,
-				2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */,
-				2F0AEC5B1CDAC22500A2F79C /* NewRoomViewController.swift */,
-				2F0AEC6B1CE3F47000A2F79C /* Order.swift */,
-				2F0AEC6C1CE3F47000A2F79C /* OrderConfirmationViewController.swift */,
-				2F0AEC6D1CE3F47000A2F79C /* OrderFormViewController.swift */,
-				2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */,
-				2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */,
 				2F0AEC751CE3F48100A2F79C /* Images.xcassets */,
-				2F0AEC591CDABE2800A2F79C /* Room.swift */,
-				2F0AEC391CDAB6B700A2F79C /* FriendsViewController.swift */,
-				2F0AEC691CE2C92100A2F79C /* User.swift */,
-				2F0AEC571CDAB7B200A2F79C /* ProfileViewController.swift */,
-				2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */,
-				2F95C1541CEAD25500C27911 /* GroupCollectionViewCell.swift */,
-				2F95C1501CEACB5C00C27911 /* Group.swift */,
-				2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */,
 				2F0AEC3B1CDAB6B700A2F79C /* Main.storyboard */,
 				2F0AEC401CDAB6B700A2F79C /* LaunchScreen.xib */,
 				2F0AEC331CDAB6B700A2F79C /* Supporting Files */,
-				8398B8741CED3A2000C028EE /* Drink.swift */,
 			);
 			path = BobaRunUI;
 			sourceTree = "<group>";
@@ -199,6 +192,62 @@
 				2F0AEC4C1CDAB6B700A2F79C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2F58660D1CF5760700D66A66 /* Rooms */ = {
+			isa = PBXGroup;
+			children = (
+				2F5866111CF5766900D66A66 /* Orders */,
+				2F0AEC5B1CDAC22500A2F79C /* NewRoomViewController.swift */,
+				2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */,
+				2F0AEC591CDABE2800A2F79C /* Room.swift */,
+				2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */,
+			);
+			name = Rooms;
+			sourceTree = "<group>";
+		};
+		2F58660E1CF5761800D66A66 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				2F95C1561CEB13B500C27911 /* NewGroupViewController.swift */,
+				2F95C1501CEACB5C00C27911 /* Group.swift */,
+				2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */,
+				2F95C1541CEAD25500C27911 /* GroupCollectionViewCell.swift */,
+				2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */,
+			);
+			name = Groups;
+			sourceTree = "<group>";
+		};
+		2F58660F1CF5762100D66A66 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC391CDAB6B700A2F79C /* FriendsViewController.swift */,
+			);
+			name = Friends;
+			sourceTree = "<group>";
+		};
+		2F5866101CF5762D00D66A66 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC571CDAB7B200A2F79C /* ProfileViewController.swift */,
+				2F0AEC691CE2C92100A2F79C /* User.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		2F5866111CF5766900D66A66 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				2F0AEC6B1CE3F47000A2F79C /* Order.swift */,
+				2F0AEC6E1CE3F47000A2F79C /* OrderViewController.swift */,
+				2F95C15C1CEC0B4200C27911 /* OrderViewTableViewCell.swift */,
+				8398B8741CED3A2000C028EE /* Drink.swift */,
+				2F0AEC6F1CE3F47000A2F79C /* PercentageButton.swift */,
+				2F0AEC6D1CE3F47000A2F79C /* OrderFormViewController.swift */,
+				2F58660B1CF56B3900D66A66 /* PayOrderViewController.swift */,
+				2F0AEC6C1CE3F47000A2F79C /* OrderConfirmationViewController.swift */,
+			);
+			name = Orders;
 			sourceTree = "<group>";
 		};
 		838CDA6C1CE3F874000EBE71 /* BobaRunBackend */ = {
@@ -371,6 +420,7 @@
 				2F95C14F1CEAC3F000C27911 /* GroupsViewController.swift in Sources */,
 				2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */,
 				2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */,
+				2F95C15D1CEC0B4200C27911 /* OrderViewTableViewCell.swift in Sources */,
 				2F0AEC361CDAB6B700A2F79C /* AppDelegate.swift in Sources */,
 				2F95C1511CEACB5C00C27911 /* Group.swift in Sources */,
 				2F0AEC721CE3F47000A2F79C /* OrderFormViewController.swift in Sources */,
@@ -380,7 +430,9 @@
 				2F0AEC581CDAB7B200A2F79C /* ProfileViewController.swift in Sources */,
 				2F95C1551CEAD25500C27911 /* GroupCollectionViewCell.swift in Sources */,
 				2F0AEC701CE3F47000A2F79C /* Order.swift in Sources */,
+				2F5866041CF2CA5D00D66A66 /* ShopViewController.swift in Sources */,
 				2F0AEC381CDAB6B700A2F79C /* HomePageViewController.swift in Sources */,
+				2F58660C1CF56B3900D66A66 /* PayOrderViewController.swift in Sources */,
 				838CDA761CE58571000EBE71 /* BobaRunAPI.swift in Sources */,
 				2F0AEC731CE3F47000A2F79C /* OrderViewController.swift in Sources */,
 			);

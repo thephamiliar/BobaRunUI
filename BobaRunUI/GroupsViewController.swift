@@ -16,14 +16,9 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let nav = self.navigationController?.navigationBar
-        nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         navigationItem.title = "Groups"
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(GroupsViewController.addNewGroup(_:)))
         self.navigationItem.rightBarButtonItem = addButton
-        
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
         // TODO: populate groups from Backend
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -102,7 +97,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.registerClass(GroupCollectionViewCell.self, forCellWithReuseIdentifier: groupViewCellReuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.lightGrayColor()
+        collectionView.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
         self.view.addSubview(collectionView)
         
     }
@@ -143,11 +138,13 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let groupViewController = GroupViewController()
         groupViewController.group = groups[indexPath.row]
+        groupViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(groupViewController, animated: true)
     }
     
     func addNewGroup(sender: AnyObject) {
         let newGroupViewController = NewGroupViewController()
+        newGroupViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(newGroupViewController, animated: true)
     }
 }

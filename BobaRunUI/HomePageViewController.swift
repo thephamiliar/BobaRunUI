@@ -17,14 +17,9 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let nav = self.navigationController?.navigationBar
-        nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         navigationItem.title = "Rooms"
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(HomePageViewController.addNewRoom(_:)))
         self.navigationItem.rightBarButtonItem = addButton
-        
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
         // TODO: populate groups from Backend
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -41,12 +36,14 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                             self.rooms.append(Room(json: entry))
                         }
                         dispatch_async(dispatch_get_main_queue(),{
+                            self.rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
                             self.tableView.reloadData()
                         })
                     }
                 }
             }
         }
+        
         
         tableView = UITableView()
 //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
@@ -92,12 +89,14 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let orderViewController = OrderViewController()
+        let orderViewController = OrderViewController(room: rooms[indexPath.row])
+        orderViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(orderViewController, animated: true)
     }
 
     func addNewRoom(sender: AnyObject) {
-        let newRoomViewController = NewRoomViewController()
+        let newRoomViewController = ShopViewController()
+        newRoomViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(newRoomViewController, animated: true)
     }
 }

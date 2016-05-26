@@ -40,18 +40,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nav = self.navigationController?.navigationBar
-        nav?.barTintColor = UIColor(red: 98/255, green: 40/255, blue: 112/255, alpha: 1)
         navigationItem.title = "Profile"
-        
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        nav?.titleTextAttributes = (titleDict as! [String : AnyObject])
         
         tableView = UITableView()
         //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
         tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: userViewCellReuseIdentifier)
-        tableView.allowsMultipleSelection = true
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -122,8 +116,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let orderViewController = OrderViewController()
-        self.navigationController?.pushViewController(orderViewController, animated: true)
+        // TODO: change password option
     }
 
 }

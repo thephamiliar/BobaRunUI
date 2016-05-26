@@ -14,4 +14,5 @@ struct Order {
     var sugarLevel: String = ""
     var iceLevel: String = ""
     var toppings: [String] = []
+    var paid: Bool = false
 }
