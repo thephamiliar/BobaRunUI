@@ -73,8 +73,8 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(friendViewCellReuseIdentifier, forIndexPath: indexPath) 
         
-        // cell.textLabel!.text = friends[indexPath.row].firstName! + " " + friends[indexPath.row].lastName!
-        cell.textLabel!.text = friends[indexPath.row].username
+         cell.textLabel!.text = friends[indexPath.row].firstName! + " " + friends[indexPath.row].lastName!
+        // cell.textLabel!.text = friends[indexPath.row].username
         cell.imageView!.image = friends[indexPath.row].image
         cell.imageView!.layer.cornerRadius = 25;
         cell.imageView!.layer.masksToBounds = true;
