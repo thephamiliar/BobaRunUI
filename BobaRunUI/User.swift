@@ -15,6 +15,7 @@ class User: NSObject {
     var username: String?
     var password: String?
     var email: String?
+    var phoneNumber: String?
     var venmo_id: String?
     var id: Int?
     var image: UIImage?
@@ -31,6 +32,7 @@ class User: NSObject {
         password = json["password"].stringValue
         email = json["email"].stringValue
         venmo_id = json["venmo_id"].stringValue
+        phoneNumber = json["phone_number"].stringValue
         id = json["id"].intValue
     }
 }

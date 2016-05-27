@@ -23,7 +23,28 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        friendsList = []// TODO: get friends from WebAPI
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        BobaRunAPI.bobaRunSharedInstance.getFriends(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+            print ("getting friends for group creation")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not retrieve friends")
+                }
+                else {
+                    if let results = json["result"].array {
+                        self.friendsList.removeAll()
+                        for entry in results {
+                            let temp_user = User(json: entry)
+                            self.friendsList.append(temp_user)
+                        }
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.friendsList.sortInPlace({ $0.lastName < $1.lastName })
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+            }
+        }
         friendsList.sortInPlace({ $0.lastName < $1.lastName })
         
         tableView = UITableView()

@@ -99,8 +99,8 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let profileViewController = ProfileViewController()
-        profileViewController.user = friends[indexPath.row]
+        let profileViewController = ProfileViewController(user: friends[indexPath.row])
+        // profileViewController.user = friends[indexPath.row]
         self.navigationController?.pushViewController(profileViewController, animated: true)
     }
     

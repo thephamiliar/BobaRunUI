@@ -33,8 +33,20 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
+    var room : Room = Room()
+    var user : User = User()
     
     var tableView : UITableView!
+    
+    init(user: User, room: Room) {
+        self.room = room
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required  init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
     
     override func viewWillAppear(animated: Bool) {
         tableView = UITableView()
@@ -278,9 +290,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
             order.sugarLevel = selectedSugarLevel!.titleLabel!.text!
             order.iceLevel = selectedIceLevel!.titleLabel!.text!
             
-            // TODO: Send order to database (roomid, member, drink)
-            
-            let confirmationViewController = OrderConfirmationViewController(order: order, confirmButton: true)
+            let confirmationViewController = OrderConfirmationViewController(order: order, room: room, user: user, confirmButton: true)
             self.navigationController?.pushViewController(confirmationViewController, animated: true)
         } else {
             let alertView:UIAlertView = UIAlertView()

@@ -13,7 +13,8 @@ typealias ServiceResponse = (JSON, NSError?) -> Void
 
 class BobaRunAPI: NSObject {
     
-    let baseUrl = "https://boba-run.herokuapp.com/"
+    // let baseUrl = "https://boba-run.herokuapp.com/"
+    let baseUrl = "http://localhost:5000/"
     
     class var bobaRunSharedInstance : BobaRunAPI {
         struct Static {
@@ -95,6 +96,15 @@ class BobaRunAPI: NSObject {
         createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
+    func getUserWithId(id: String, onCompletion: (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)user/show/id")!)
+        request.HTTPMethod = "POST"
+        let postString = "id=" + id
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+    
     // =============
     // FRIEND CALLS
     // =============
@@ -146,6 +156,15 @@ class BobaRunAPI: NSObject {
         createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
+    func createNewRoomWithUserName(roomName: String, username: String, onCompletion: (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room/create/username")!)
+        request.HTTPMethod = "POST"
+        let postString = "room_name=" + roomName + "&username=" + username
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+    
     func getUserRooms(username: String, onCompletion: (JSON) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room/show/member/username")!)
         request.HTTPMethod = "POST"
@@ -167,8 +186,17 @@ class BobaRunAPI: NSObject {
     func addMemberToRoom(roomId: String, memberId: String, drink: String, price: Double, onCompletion: (JSON) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room_member/create")!)
         request.HTTPMethod = "POST"
-        let p = String(format:"%.1f", price)
+        let p = String(format:"%.2f", price)
         let postString = "room_id=" + roomId + "&member_id=" + memberId + "&drink=" + drink + "&price=" + p
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+    
+    func getRoomOrders(roomId: String, onCompletion: (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room_member/show")!)
+        request.HTTPMethod = "POST"
+        let postString = "room_id=" + roomId
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         createHTTPPostRequest(request, onCompletion: onCompletion)
