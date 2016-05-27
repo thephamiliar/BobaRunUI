@@ -33,10 +33,20 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
-    var roomId = "1_0"
-    var memberId = "1"
+    var room : Room = Room()
+    var user : User = User()
     
     var tableView : UITableView!
+    
+    init(user: User, room: Room) {
+        self.room = room
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required  init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
     
     override func viewWillAppear(animated: Bool) {
         tableView = UITableView()
@@ -83,7 +93,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
                                 if (category != "Toppings") {
                                     let drink_temp = Drink(json: entry)
                                     self.menuItems.append(drink_temp.name!)
-                                    self.menuPrices.append("$" + String(drink_temp.price!))
+                                    self.menuPrices.append("$" + String(format:"%.2f",drink_temp.price!))
                                 }
                                 
                             }
@@ -91,7 +101,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
                         let temp = self.menu["Toppings"]
                         for drink in temp! {
                             self.toppingItems.append(drink.name!)
-                            self.toppingPrices.append("$" + String(drink.price!))
+                            self.toppingPrices.append("$" + String(format:"%.2f",drink.price!))
                         }
                         dispatch_async(dispatch_get_main_queue(),{
                             self.tableView.reloadData()
@@ -278,7 +288,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
             order.sugarLevel = selectedSugarLevel!.titleLabel!.text!
             order.iceLevel = selectedIceLevel!.titleLabel!.text!
             
-            let confirmationViewController = OrderConfirmationViewController(order: order, confirmButton: true)
+            let confirmationViewController = OrderConfirmationViewController(order: order, room: room, user: user, confirmButton: true)
             self.navigationController?.pushViewController(confirmationViewController, animated: true)
         } else {
             let alertView:UIAlertView = UIAlertView()

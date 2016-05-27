@@ -13,8 +13,8 @@ typealias ServiceResponse = (JSON, NSError?) -> Void
 
 class BobaRunAPI: NSObject {
     
-    // let baseUrl = "https://boba-run.herokuapp.com/"
-    let baseUrl = "http://localhost:5000/"
+    let baseUrl = "https://boba-run.herokuapp.com/"
+    // let baseUrl = "http://localhost:5000/"
     
     class var bobaRunSharedInstance : BobaRunAPI {
         struct Static {
@@ -186,7 +186,7 @@ class BobaRunAPI: NSObject {
     func addMemberToRoom(roomId: String, memberId: String, drink: String, price: Double, onCompletion: (JSON) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room_member/create")!)
         request.HTTPMethod = "POST"
-        let p = String(format:"%.1f", price)
+        let p = String(format:"%.2f", price)
         let postString = "room_id=" + roomId + "&member_id=" + memberId + "&drink=" + drink + "&price=" + p
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         

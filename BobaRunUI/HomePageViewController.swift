@@ -11,6 +11,7 @@ import UIKit
 class HomePageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tableView : UITableView!
     var rooms = [Room]()
+    var user = User()
     let homePageViewCellReuseIdentifier = "homePageViewCellReuseIdentifier"
     override func viewWillAppear(animated: Bool) {
         navigationItem.title = "Rooms"
@@ -26,6 +27,29 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
             // TODO: any user specific details here
             // self.usernameLabel.text = prefs.valueForKey("USERNAME") as NSString
             let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+            if (self.user.id == nil) {
+                BobaRunAPI.bobaRunSharedInstance.getUser(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+                    print ("getting user info")
+                    if let creation_error = json["error"].string {
+                        if creation_error == "true" {
+                            print ("could get user info")
+                        }
+                        else {
+                            if let results = json["result"].array {
+                                for entry in results {
+                                    self.user = (User(json: entry))
+                                    // self.user.image = UIImage(named: "faithfulness")!
+                                }
+                                dispatch_async(dispatch_get_main_queue(),{
+                                    self.tableView.reloadData()
+                                })
+                            }
+                        }
+                    }
+                }
+            }
+
+            
             BobaRunAPI.bobaRunSharedInstance.getUserRooms(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
                 print ("getting my rooms")
                 if let creation_error = json["error"].string {
@@ -85,7 +109,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let orderViewController = OrderViewController(room: rooms[indexPath.row])
+        let orderViewController = OrderViewController(room: rooms[indexPath.row], user: user)
         orderViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(orderViewController, animated: true)
     }

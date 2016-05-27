@@ -11,14 +11,17 @@ import CoreData
 
 class OrderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var room : Room!
+    var user : User!
+    var order : Order!
     var tableView : UITableView!
     var orders = [Order]()
     let orderViewCellReuseIdentifier = "orderViewCellReuseIdentifier"
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
     
-    init(room: Room) {
+    init(room: Room, user: User) {
         self.room = room
+        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -160,14 +163,14 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let order = orders[indexPath.row]
+        self.order = orders[indexPath.row]
         if (room.runner == NSUserDefaults.standardUserDefaults().stringForKey("USERNAME") && !room.confirmed) {
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
         } else if (order.user == NSUserDefaults.standardUserDefaults().stringForKey("USERNAME") && room.confirmed) {
             let payOrderViewController = PayOrderViewController(order: order)
             self.navigationController?.pushViewController(payOrderViewController, animated: true)
         } else {
-            let confirmationViewController = OrderConfirmationViewController(order: order, confirmButton: false)
+            let confirmationViewController = OrderConfirmationViewController(order: self.order, room: self.room, user: self.user, confirmButton: false)
             self.navigationController?.pushViewController(confirmationViewController, animated: true)
         }
     }
@@ -179,7 +182,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func addNewOrder(sender: AnyObject) {
-        let orderFormViewController = OrderFormViewController()
+        let orderFormViewController = OrderFormViewController(user: self.user, room: self.room)
         self.navigationController?.pushViewController(orderFormViewController, animated: true)
     }
     

@@ -10,14 +10,18 @@ import UIKit
 
 class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var order: Order!
+    var room: Room!
+    var user: User!
     var button : Bool = false
     var tableView : UITableView!
     let formViewCellReuseIdentifier = "formViewCellReuseIdentifier"
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
 
-    init(order: Order, confirmButton: Bool) {
+    init(order: Order, room: Room, user: User, confirmButton: Bool) {
         self.order = order
+        self.room = room
+        self.user = user
         self.button = confirmButton
         super.init(nibName: nil, bundle: nil)
     }
@@ -114,7 +118,7 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
         // TODO: add to master page
         let order_string = constructOrderString(order)
         print (order_string)
-        BobaRunAPI.bobaRunSharedInstance.addMemberToRoom("1_0", memberId: "2", drink: order_string, price: 3.5) { (json: JSON) in
+        BobaRunAPI.bobaRunSharedInstance.addMemberToRoom(self.room.roomID!, memberId: "\(self.user.id!)", drink: order_string, price: 3.5) { (json: JSON) in
             print ("saving drink")
             if let creation_error = json["error"].string {
                 if creation_error == "true" {

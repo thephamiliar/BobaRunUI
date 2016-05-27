@@ -133,9 +133,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         } else {
             if (indexPath.row == 0) {
-                cell.textLabel!.text = "Change Password"
-                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-                cell.imageView!.image = user.image
+                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                if (prefs.valueForKey("USERNAME") as? String == user.username) {
+                    cell.textLabel!.text = "Change Password"
+                    cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                    cell.imageView!.image = user.image
+                }
             } else {
                 let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                 if (prefs.valueForKey("USERNAME") as? String == user.username) {
