@@ -51,50 +51,51 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             
             
-            BobaRunAPI.bobaRunSharedInstance.getUserRooms(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
-                print ("getting my rooms")
-                if let creation_error = json["error"].string {
-                    if creation_error == "true" {
-                        print ("could not retrieve rooms")
-                    }
-                    else {
-                        if let results = json["runner_rooms"].array {
-                            self.runnerRooms.removeAll()
-                            for entry in results {
-                                self.runnerRooms.append(Room(json: entry))
+                BobaRunAPI.bobaRunSharedInstance.getUserRooms(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+                    print ("getting my rooms")
+                    if let creation_error = json["error"].string {
+                        if creation_error == "true" {
+                            print ("could not retrieve rooms")
+                        }
+                        else {
+                            if let results = json["runner_rooms"].array {
+                                self.runnerRooms.removeAll()
+                                for entry in results {
+                                    self.runnerRooms.append(Room(json: entry))
+                                }
+                                dispatch_async(dispatch_get_main_queue(),{
+    //                                self.runnerRooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
+                                    self.tableView.reloadData()
+                                    })
                             }
-                            dispatch_async(dispatch_get_main_queue(),{
-//                                self.runnerRooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
-                                self.tableView.reloadData()
+                            if let results = json["member_rooms"].array {
+                                self.memberRooms.removeAll()
+                                for entry in results {
+                                    self.memberRooms.append(Room(json: entry))
+                                }
+                                dispatch_async(dispatch_get_main_queue(),{
+                                    //                                self.rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
+                                    self.tableView.reloadData()
                                 })
-                        }
-                        if let results = json["member_rooms"].array {
-                            self.memberRooms.removeAll()
-                            for entry in results {
-                                self.memberRooms.append(Room(json: entry))
                             }
-                            dispatch_async(dispatch_get_main_queue(),{
-                                //                                self.rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
-                                self.tableView.reloadData()
-                            })
+                            
                         }
-                        
                     }
                 }
             }
-            }
-
-            tableView = UITableView()
-            //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
-            tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
-            tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: homePageViewCellReuseIdentifier)
-            tableView.allowsMultipleSelection = true
-            tableView.delegate = self
-            tableView.dataSource = self
-            self.view.addSubview(tableView)
         }
+    }
+    
+    override func viewDidLoad() {
         
-        
+        tableView = UITableView()
+        //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
+        tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: homePageViewCellReuseIdentifier)
+        tableView.allowsMultipleSelection = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.view.addSubview(tableView)
     }
 
     override func didReceiveMemoryWarning() {
