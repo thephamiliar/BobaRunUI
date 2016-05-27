@@ -16,6 +16,15 @@ class JoinRoomViewController: UIViewController {
     var room = Room()
     var user = User()
     
+    init(user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required  init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +56,10 @@ class JoinRoomViewController: UIViewController {
     }
     
     func selectedJoinButton(sender: UIButton!) {
-        let orderFormViewController = OrderFormViewController(user: user, room: room)
+        let roomId = roomIDTextView.text
+        // assume roomId is correct
+        let orderFormViewController = OrderFormViewController(user: user, roomId: roomId!)
+        
         orderFormViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(orderFormViewController, animated: true)
     }

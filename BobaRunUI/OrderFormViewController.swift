@@ -35,11 +35,18 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     let submitButtonHeight = CGFloat(50)
     var room : Room = Room()
     var user : User = User()
+    var roomId : String = ""
     
     var tableView : UITableView!
     
     init(user: User, room: Room) {
         self.room = room
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(user: User, roomId: String) {
+        self.roomId = roomId
         self.user = user
         super.init(nibName: nil, bundle: nil)
     }
@@ -289,9 +296,15 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             order.sugarLevel = selectedSugarLevel!.titleLabel!.text!
             order.iceLevel = selectedIceLevel!.titleLabel!.text!
-            
-            let confirmationViewController = OrderConfirmationViewController(order: order, room: room, user: user, confirmButton: true)
-            self.navigationController?.pushViewController(confirmationViewController, animated: true)
+            if (self.roomId == "") {
+                let confirmationViewController = OrderConfirmationViewController(order: order, room: room, user: user, confirmButton: true)
+                self.navigationController?.pushViewController(confirmationViewController, animated: true)
+            }
+            else {
+                let confirmationViewController = OrderConfirmationViewController(order: order, roomId: roomId, user: user, confirmButton: true)
+                self.navigationController?.pushViewController(confirmationViewController, animated: true)
+            }
+
         } else {
             let alertView:UIAlertView = UIAlertView()
             alertView.title = "Order Incomplete!"

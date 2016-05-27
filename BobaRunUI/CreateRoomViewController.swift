@@ -11,6 +11,16 @@ import UIKit
 class CreateRoomViewController: UIViewController {
     var roomNameTextView : UITextField!
     var createRoomButton : UIButton!
+    var user = User()
+    
+    init(user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required  init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +53,11 @@ class CreateRoomViewController: UIViewController {
     }
     
     func selectedCreateButton(sender: UIButton!) {
-        let shopViewController = ShopViewController()
+        let roomName = roomNameTextView.text
+        let shopViewController = ShopViewController(roomName: roomName!, user: user)
         shopViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(shopViewController, animated: true)
+    
     }
 
 }

@@ -28,8 +28,6 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             // TODO: any user specific details here
             // self.usernameLabel.text = prefs.valueForKey("USERNAME") as NSString
-            let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            if (self.user.id == nil) {
                 BobaRunAPI.bobaRunSharedInstance.getUser(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
                     print ("getting user info")
                     if let creation_error = json["error"].string {
@@ -48,41 +46,38 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                             }
                         }
                     }
-                }
-            
-            
-                BobaRunAPI.bobaRunSharedInstance.getUserRooms(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
-                    print ("getting my rooms")
-                    if let creation_error = json["error"].string {
-                        if creation_error == "true" {
-                            print ("could not retrieve rooms")
-                        }
-                        else {
-                            if let results = json["runner_rooms"].array {
-                                self.runnerRooms.removeAll()
-                                for entry in results {
-                                    self.runnerRooms.append(Room(json: entry))
-                                }
-                                dispatch_async(dispatch_get_main_queue(),{
-    //                                self.runnerRooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
-                                    self.tableView.reloadData()
+                    BobaRunAPI.bobaRunSharedInstance.getUserRooms(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+                        print ("getting my rooms")
+                        if let creation_error = json["error"].string {
+                            if creation_error == "true" {
+                                print ("could not retrieve rooms")
+                            }
+                            else {
+                                if let results = json["runner_rooms"].array {
+                                    self.runnerRooms.removeAll()
+                                    for entry in results {
+                                        self.runnerRooms.append(Room(json: entry))
+                                    }
+                                    dispatch_async(dispatch_get_main_queue(),{
+                                        //                                self.runnerRooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
+                                        self.tableView.reloadData()
                                     })
-                            }
-                            if let results = json["member_rooms"].array {
-                                self.memberRooms.removeAll()
-                                for entry in results {
-                                    self.memberRooms.append(Room(json: entry))
                                 }
-                                dispatch_async(dispatch_get_main_queue(),{
-                                    //                                self.rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
-                                    self.tableView.reloadData()
-                                })
+                                if let results = json["member_rooms"].array {
+                                    self.memberRooms.removeAll()
+                                    for entry in results {
+                                        self.memberRooms.append(Room(json: entry))
+                                    }
+                                    dispatch_async(dispatch_get_main_queue(),{
+                                        //                                self.rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
+                                        self.tableView.reloadData()
+                                    })
+                                }
+                                
                             }
-                            
                         }
                     }
                 }
-            }
         }
     }
     
@@ -143,7 +138,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func addNewRoom(sender: AnyObject) {
-        let roomSelectionViewController = RoomSelectionViewController()
+        let roomSelectionViewController = RoomSelectionViewController(user: user)
         roomSelectionViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(roomSelectionViewController, animated: true)
     }

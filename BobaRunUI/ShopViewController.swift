@@ -18,6 +18,19 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
     
+    var user = User()
+    var roomName = ""
+    
+    init(roomName: String, user: User) {
+        self.user = user
+        self.roomName = roomName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required  init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+    
     override func viewWillAppear(animated: Bool) {
         // TODO: backend yelp api to get array of boba shop names
         
@@ -75,7 +88,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func selectedContinueButton(sender: UIButton!) {
-        let inviteViewController = NewRoomViewController()
+        let inviteViewController = NewRoomViewController(roomName: roomName, user: user)
         self.navigationController?.pushViewController(inviteViewController, animated: true)
     }
     

@@ -20,7 +20,19 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
-    let roomname = "TEST ROOM 1"
+    
+    var user = User()
+    var roomname = ""
+    
+    init(roomName: String, user: User) {
+        self.user = user
+        self.roomname = roomName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required  init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
     
     var tableView : UITableView!
     
