@@ -121,7 +121,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // TODO: change password option
+        
+
         // TODO: LOGOUT
+        if (indexPath.section == 1 && indexPath.row == 1) {
+            let appDomain = NSBundle.mainBundle().bundleIdentifier
+            NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+            
+            self.tabBarController?.selectedIndex = 0
+        }
     }
 
 }

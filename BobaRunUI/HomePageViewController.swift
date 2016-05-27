@@ -23,6 +23,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // TODO: populate groups from Backend
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        if (prefs.valueForKey("USERNAME") != nil) {
         BobaRunAPI.bobaRunSharedInstance.getUserRooms(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
             print ("getting my rooms")
             if let creation_error = json["error"].string {
@@ -43,7 +44,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
-        
+        }
         
         tableView = UITableView()
 //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
