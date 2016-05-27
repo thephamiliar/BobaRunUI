@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import MessageUI
 
-class NewRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var friendsList: [User]!
+class NewRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate {
+    // var friendsList: [User]!
+    var friendsList = [User]()
+    var numbers = [String]()
     var groupsList: [Group]!
     let newRoomViewCellReuseIdentifier = "newRoomViewCellReuseIdentifier"
     let buttonHeight = CGFloat(35)
@@ -17,12 +20,35 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
+    let roomname = "TEST ROOM 1"
     
     var tableView : UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        BobaRunAPI.bobaRunSharedInstance.getFriends(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+            print ("getting friends")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not retrieve friends")
+                }
+                else {
+                    if let results = json["result"].array {
+                        self.friendsList.removeAll()
+                        for entry in results {
+                            let temp_user = User(json: entry)
+                            self.friendsList.append(temp_user)
+//                            self.numbers.append(temp_user.phoneNumber!)
+                        }
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.friendsList.sortInPlace({ $0.lastName < $1.lastName })
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+            }
+        }
         let testFriend = User()
         testFriend.firstName = "Jessica"
         testFriend.lastName = "Pham"
@@ -48,7 +74,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
         testGroup.groupTimeStamp = "05/16/16"
         testGroup.users = [testFriend, testFriend2, testFriend3, testFriend4]
         testGroup.image = UIImage(named: "love")!
-        friendsList = [testFriend, testFriend2, testFriend3, testFriend4] // TODO: get friends from WebAPI
+//        friendsList = [testFriend, testFriend2, testFriend3, testFriend4] // TODO: get friends from WebAPI
         friendsList.sortInPlace({ $0.lastName < $1.lastName })
         groupsList = [testGroup]    // TODO: get groups from WebAPI
         groupsList.sortInPlace({ $0.groupName < $1.groupName })
@@ -131,6 +157,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+        numbers.append(friendsList[indexPath.row].phoneNumber!)
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
@@ -141,6 +168,60 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     func selectedSubmitButton(sender: UIButton!) {
         // TODO: send new room to backend?
         // TODO: push notifications
+        var messageVC = MFMessageComposeViewController()
+        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        BobaRunAPI.bobaRunSharedInstance.createNewRoomWithUserName(roomname, username: prefs.valueForKey("USERNAME") as! String){ (json: JSON) in
+            print ("creating room")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not create room")
+                }
+                else {
+                    if let results = json["result"].string {
+                        print(results)
+                        dispatch_async(dispatch_get_main_queue(),{
+                            messageVC.body = "Room ID: \(results). Please enter this ID to join this room!";
+                            messageVC.recipients = self.numbers
+                            messageVC.messageComposeDelegate = self;
+                            self.presentViewController(messageVC, animated: false, completion: nil)
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+            }
+        }
+        
+        //        //need user input for roomname in argument below
+        //        BobaRunAPI.bobaRunSharedInstance.createNewRoom(roomname, User.ID){ (json: JSON) in
+        //
+        //            if let creation_error = json["error"].string {
+        //                if creation_error == "true" {
+        //                    print ("could not create room")
+        //                }
+        //            else {
+        //                    results = json["result"].array
+        //                }
+        //            }
+        //        }
+        
+        
+    }
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+        switch (result.rawValue) {
+        case MessageComposeResultCancelled.rawValue:
+            print("Message was cancelled")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultFailed.rawValue:
+            print("Message failed")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultSent.rawValue:
+            print("Message was sent")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        default:
+            break;
+        }
         
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
