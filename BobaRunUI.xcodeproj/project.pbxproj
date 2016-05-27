@@ -25,6 +25,9 @@
 		2F0AEC761CE3F48100A2F79C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0AEC751CE3F48100A2F79C /* Images.xcassets */; };
 		2F5866041CF2CA5D00D66A66 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */; };
 		2F58660C1CF56B3900D66A66 /* PayOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58660B1CF56B3900D66A66 /* PayOrderViewController.swift */; };
+		2F6E70631CF7C87E00906A0D /* RoomSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6E70621CF7C87E00906A0D /* RoomSelectionViewController.swift */; };
+		2F6E70691CF7CE1100906A0D /* JoinRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6E70681CF7CE1100906A0D /* JoinRoomViewController.swift */; };
+		2F6E706B1CF7CF3400906A0D /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6E706A1CF7CF3400906A0D /* CreateRoomViewController.swift */; };
 		2F95C14F1CEAC3F000C27911 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */; };
 		2F95C1511CEACB5C00C27911 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1501CEACB5C00C27911 /* Group.swift */; };
 		2F95C1531CEAD1ED00C27911 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */; };
@@ -99,6 +102,9 @@
 		2F0AEC751CE3F48100A2F79C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		2F58660B1CF56B3900D66A66 /* PayOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayOrderViewController.swift; sourceTree = "<group>"; };
+		2F6E70621CF7C87E00906A0D /* RoomSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomSelectionViewController.swift; sourceTree = "<group>"; };
+		2F6E70681CF7CE1100906A0D /* JoinRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinRoomViewController.swift; sourceTree = "<group>"; };
+		2F6E706A1CF7CF3400906A0D /* CreateRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
 		2F95C14E1CEAC3F000C27911 /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		2F95C1501CEACB5C00C27911 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		2F95C1521CEAD1ED00C27911 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +208,9 @@
 				2F5866031CF2CA5D00D66A66 /* ShopViewController.swift */,
 				2F0AEC591CDABE2800A2F79C /* Room.swift */,
 				2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */,
+				2F6E70621CF7C87E00906A0D /* RoomSelectionViewController.swift */,
+				2F6E70681CF7CE1100906A0D /* JoinRoomViewController.swift */,
+				2F6E706A1CF7CF3400906A0D /* CreateRoomViewController.swift */,
 			);
 			name = Rooms;
 			sourceTree = "<group>";
@@ -412,11 +421,13 @@
 			files = (
 				2F95C1591CEBD4A200C27911 /* LoginViewController.swift in Sources */,
 				2F0AEC741CE3F47000A2F79C /* PercentageButton.swift in Sources */,
+				2F6E70631CF7C87E00906A0D /* RoomSelectionViewController.swift in Sources */,
 				2F0AEC3A1CDAB6B700A2F79C /* FriendsViewController.swift in Sources */,
 				2F0AEC6A1CE2C92100A2F79C /* User.swift in Sources */,
 				838CDA781CE585A1000EBE71 /* SwiftyJSON.swift in Sources */,
 				2F0AEC711CE3F47000A2F79C /* OrderConfirmationViewController.swift in Sources */,
 				2F0AEC5C1CDAC22500A2F79C /* NewRoomViewController.swift in Sources */,
+				2F6E70691CF7CE1100906A0D /* JoinRoomViewController.swift in Sources */,
 				2F95C14F1CEAC3F000C27911 /* GroupsViewController.swift in Sources */,
 				2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */,
 				2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */,
@@ -425,6 +436,7 @@
 				2F95C1511CEACB5C00C27911 /* Group.swift in Sources */,
 				2F0AEC721CE3F47000A2F79C /* OrderFormViewController.swift in Sources */,
 				2F95C1531CEAD1ED00C27911 /* GroupViewController.swift in Sources */,
+				2F6E706B1CF7CF3400906A0D /* CreateRoomViewController.swift in Sources */,
 				8398B8751CED3A2000C028EE /* Drink.swift in Sources */,
 				2F0AEC5A1CDABE2800A2F79C /* Room.swift in Sources */,
 				2F0AEC581CDAB7B200A2F79C /* ProfileViewController.swift in Sources */,

@@ -95,9 +95,9 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func addNewRoom(sender: AnyObject) {
-        let newRoomViewController = ShopViewController()
-        newRoomViewController.hidesBottomBarWhenPushed = true;
-        self.navigationController?.pushViewController(newRoomViewController, animated: true)
+        let roomSelectionViewController = RoomSelectionViewController()
+        roomSelectionViewController.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(roomSelectionViewController, animated: true)
     }
 }
 

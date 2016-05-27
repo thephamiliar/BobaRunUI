@@ -81,7 +81,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
                                 if (category != "Toppings") {
                                     let drink_temp = Drink(json: entry)
                                     self.menuItems.append(drink_temp.name!)
-                                    self.menuPrices.append("$" + String(drink_temp.price!))
+                                    self.menuPrices.append("$" + String(format: "%.2f", drink_temp.price!))
                                 }
                                 
                             }
@@ -89,7 +89,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
                         let temp = self.menu["Toppings"]
                         for drink in temp! {
                             self.toppingItems.append(drink.name!)
-                            self.toppingPrices.append("$" + String(drink.price!))
+                            self.toppingPrices.append("$" + String(format: "%.2f", drink.price!))
                         }
                         dispatch_async(dispatch_get_main_queue(),{
                             self.tableView.reloadData()
