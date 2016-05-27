@@ -100,7 +100,13 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         let cell = tableView.dequeueReusableCellWithIdentifier(orderViewCellReuseIdentifier) as! OrderViewTableViewCell
         cell.userLabel.text = order.user.username
-        cell.priceLabel.text = "$3.25" // TODO : add price to orders
+        if (order.paid) {
+            cell.priceLabel.text = "PAID"
+            cell.priceLabel.textColor = UIColor.greenColor()
+        } else {
+            cell.priceLabel.text = "$3.25" // TODO : add price to orders
+            cell.priceLabel.textColor = UIColor.redColor()
+        }
         cell.teaTypeLabel.text = "Tea Type: " + order.teaType
         cell.sugarLevelLabel.text = "Sugar Level: " + order.sugarLevel
         cell.iceLevelLabel.text = "Ice Level: " + order.iceLevel

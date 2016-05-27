@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.detailTextLabel!.text = user.username
                 cell.imageView!.image = user.image
             } else {
-                cell.textLabel!.text = "Email"
+                cell.textLabel!.text = "Phone Number"
                 cell.detailTextLabel!.text = user.email
                 cell.imageView!.image = user.image
             }

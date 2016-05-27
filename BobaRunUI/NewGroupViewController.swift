@@ -16,6 +16,8 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
+    let searchController = UISearchController(searchResultsController: nil)
+    var filteredFriends = [User]()
     
     var tableView : UITableView!
     
@@ -32,6 +34,11 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(tableView)
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
         
         let footerView: UIView = UIView(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width, footerHeight))
         footerView.backgroundColor = UIColor(red: 248/255, green: 241/255, blue: 243/255, alpha: 1)
@@ -57,14 +64,24 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredFriends.count
+        }
         return friendsList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(friendViewCellReuseIdentifier, forIndexPath: indexPath)
         
-        cell.textLabel!.text = friendsList[indexPath.row].firstName! + " " + friendsList[indexPath.row].lastName!
-        cell.imageView!.image = friendsList[indexPath.row].image
+        let friend: User
+        if searchController.active && searchController.searchBar.text != "" {
+            friend = filteredFriends[indexPath.row]
+        } else {
+            friend = friendsList[indexPath.row]
+        }
+        
+        cell.textLabel!.text = friend.firstName! + " " + friend.lastName!
+        cell.imageView!.image = friend.image
         cell.imageView!.layer.cornerRadius = 25;
         cell.imageView!.layer.masksToBounds = true;
         
@@ -86,5 +103,19 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredFriends = friendsList.filter { friend in
+            return friend.firstName!.lowercaseString.containsString(searchText.lowercaseString) || friend.lastName!.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        tableView.reloadData()
+    }
 
+}
+
+extension NewGroupViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 }
