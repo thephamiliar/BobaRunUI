@@ -37,7 +37,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                             self.rooms.append(Room(json: entry))
                         }
                         dispatch_async(dispatch_get_main_queue(),{
-                            self.rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
+                            // self.rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
                             self.tableView.reloadData()
                         })
                     }
