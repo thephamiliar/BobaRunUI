@@ -7,8 +7,36 @@
 //
 
 import UIKit
+import Darwin
+import MessageUI
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MFMessageComposeViewControllerDelegate, UINavagationControllerDelegate {
+    
+    @IBAction func sendMessage(sender: AnyObject) {
+        var messageVC = MFMessageComposeViewController()
+        
+        messageVC.body = "Room ID: \(randomIdentifier)";
+        messageVC.recipients = ["Enter tel-nr"]
+        messageVC.messageComposeDelegate = self;
+        
+        self.presentViewController(messageVC, animated: false, completion: nil)
+    }
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+        switch (result.value) {
+        case MessageComposeResultCancelled.value:
+            println("Message was cancelled")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultFailed.value:
+            println("Message failed")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultSent.value:
+            println("Message was sent")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        default:
+            break;
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

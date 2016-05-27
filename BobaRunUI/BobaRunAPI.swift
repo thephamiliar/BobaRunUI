@@ -83,6 +83,16 @@ class BobaRunAPI: NSObject {
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         createHTTPPostRequest(request, onCompletion: onCompletion)
+        
+    }
+    
+    func getNumbers(username: String, onCompletion: (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)user/show/numbers")!)
+        request.HTTPMethod = "POST"
+        let postString = "username=" + username
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
     // =============

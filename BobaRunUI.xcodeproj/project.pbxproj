@@ -36,6 +36,7 @@
 		838CDA761CE58571000EBE71 /* BobaRunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838CDA751CE58571000EBE71 /* BobaRunAPI.swift */; };
 		838CDA781CE585A1000EBE71 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */; };
 		8398B8751CED3A2000C028EE /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8398B8741CED3A2000C028EE /* Drink.swift */; };
+		FFD07FAD1CF7B60100E9D2DC /* BobaRunUI in Resources */ = {isa = PBXBuildFile; fileRef = FFD07FAC1CF7B60100E9D2DC /* BobaRunUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		8398B8741CED3A2000C028EE /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		8398B8E21CED413500C028EE /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
+		FFD07FAC1CF7B60100E9D2DC /* BobaRunUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BobaRunUI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 		2F0AEC271CDAB6B700A2F79C = {
 			isa = PBXGroup;
 			children = (
+				FFD07FAC1CF7B60100E9D2DC /* BobaRunUI */,
 				8398B8E21CED413500C028EE /* Pods.xcodeproj */,
 				838CDA6C1CE3F874000EBE71 /* BobaRunBackend */,
 				2F0AEC321CDAB6B700A2F79C /* BobaRunUI */,
@@ -390,6 +393,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFD07FAD1CF7B60100E9D2DC /* BobaRunUI in Resources */,
 				2F0AEC761CE3F48100A2F79C /* Images.xcassets in Resources */,
 				2F0AEC3D1CDAB6B700A2F79C /* Main.storyboard in Resources */,
 				2F0AEC421CDAB6B700A2F79C /* LaunchScreen.xib in Resources */,

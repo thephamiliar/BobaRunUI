@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Darwin
+import MessageUI
 
-class NewRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+class NewRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate {
     var friendsList: [User]!
     var groupsList: [Group]!
     let newRoomViewCellReuseIdentifier = "newRoomViewCellReuseIdentifier"
@@ -139,8 +142,43 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func selectedSubmitButton(sender: UIButton!) {
-        // TODO: send new room to backend?
-        // TODO: push notifications
+        // TODO: generate text messsage
+        var messageVC = MFMessageComposeViewController()
+        var results;
+        //need user input for roomname in argument below
+        BobaRunAPI.bobaRunSharedInstance.createNewRoom(roomname, User.ID){ (json: JSON) in
+        
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not create room")
+                }
+            else {
+                    results = json["result"].array
+                }
+            }
+        }
+        messageVC.body = "Room ID: \(results). Please enter this ID to join this room!";
+        messageVC.recipients = ["Enter tel-nr"]
+        messageVC.messageComposeDelegate = self;
+        
+        self.presentViewController(messageVC, animated: false, completion: nil)
+    }
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+        switch (result.value) {
+        case MessageComposeResultCancelled.value:
+            println("Message was cancelled")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultFailed.value:
+            println("Message failed")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultSent.value:
+            println("Message was sent")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        default:
+            break;
+        }
+
         
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
