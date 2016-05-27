@@ -101,6 +101,10 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
         self.view.addSubview(submitButton)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+    }
+    
     override func viewDidAppear(animated: Bool) {
         navigationItem.title = "Invite Friends"
     }

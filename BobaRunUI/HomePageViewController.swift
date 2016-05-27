@@ -12,10 +12,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     var tableView : UITableView!
     var rooms = [Room]()
     let homePageViewCellReuseIdentifier = "homePageViewCellReuseIdentifier"
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    override func viewWillAppear(animated: Bool) {
         navigationItem.title = "Rooms"
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(HomePageViewController.addNewRoom(_:)))
         self.navigationItem.rightBarButtonItem = addButton
@@ -42,25 +39,31 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                                 self.rooms.append(Room(json: entry))
                             }
                             dispatch_async(dispatch_get_main_queue(),{
-//                                self.rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
+                                //                                self.rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
                                 self.tableView.reloadData()
                             })
                         }
                     }
                 }
             }
-            tableView = UITableView()
-            //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
-            tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
-            tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: homePageViewCellReuseIdentifier)
-            tableView.allowsMultipleSelection = true
-            tableView.delegate = self
-            tableView.dataSource = self
-            self.view.addSubview(tableView)
         }
-        
-        
+
+
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        tableView = UITableView()
+        //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
+        tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: homePageViewCellReuseIdentifier)
+        tableView.allowsMultipleSelection = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.view.addSubview(tableView)
+    }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
