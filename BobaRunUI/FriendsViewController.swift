@@ -16,6 +16,9 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     var filteredFriends = [User]()
     
     override func viewWillAppear(animated: Bool) {
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(FriendsViewController.addNewFriend(_:)))
+        self.navigationItem.rightBarButtonItem = addButton
+        
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         BobaRunAPI.bobaRunSharedInstance.getFriends(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
             print ("getting friends")
@@ -107,6 +110,12 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         tableView.reloadData()
+    }
+    
+    func addNewFriend(sender: UIButton!) {
+        let newFriendViewController = NewFriendViewController()
+        newFriendViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(newFriendViewController, animated: true)
     }
 }
 
