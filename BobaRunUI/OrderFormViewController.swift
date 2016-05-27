@@ -266,11 +266,13 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         if (tableSelections != nil && selectedSugarLevel != nil && selectedIceLevel != nil) {
             for indexPath in tableSelections! {
                     if indexPath.section == OrderSection.TeaType.rawValue {
-                        let selectedCell = tableView.cellForRowAtIndexPath(indexPath )
-                        order.teaType = selectedCell!.textLabel!.text!
+                        order.teaType = menuItems[indexPath.row]
                     } else if indexPath.section == OrderSection.Toppings.rawValue {
-                        let selectedCell = tableView.cellForRowAtIndexPath(indexPath )
-                        order.toppings.append(selectedCell!.textLabel!.text!)
+                        if (indexPath.row < toppingItems.count) {
+                            order.toppings.append(toppingItems[indexPath.row])
+                        } else {
+                            order.toppings.append("None")
+                        }
                     }
             }
             order.sugarLevel = selectedSugarLevel!.titleLabel!.text!
