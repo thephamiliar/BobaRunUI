@@ -12,6 +12,8 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     var tableView : UITableView!
     var friends = [User]()
     let friendViewCellReuseIdentifier = "friendViewCellReuseIdentifier"
+    let searchController = UISearchController(searchResultsController: nil)
+    var filteredFriends = [User]()
     
     override func viewWillAppear(animated: Bool) {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -45,7 +47,6 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // Do any additional setup after loading the view, typically from a nib.
         
-        
         self.tableView = UITableView()
         //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
         self.tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
@@ -55,6 +56,11 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         self.tableView.dataSource = self
         self.view.addSubview(self.tableView)
         
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,15 +69,25 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredFriends.count
+        }
         return friends.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(friendViewCellReuseIdentifier, forIndexPath: indexPath) 
         
-         cell.textLabel!.text = friends[indexPath.row].firstName! + " " + friends[indexPath.row].lastName!
+        let friend: User
+        if searchController.active && searchController.searchBar.text != "" {
+            friend = filteredFriends[indexPath.row]
+        } else {
+            friend = friends[indexPath.row]
+        }
+        
+         cell.textLabel!.text = friend.firstName! + " " + friend.lastName!
         // cell.textLabel!.text = friends[indexPath.row].username
-        cell.imageView!.image = friends[indexPath.row].image
+        cell.imageView!.image = friend.image
         cell.imageView!.layer.cornerRadius = 25;
         cell.imageView!.layer.masksToBounds = true;
         
@@ -85,5 +101,17 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         self.navigationController?.pushViewController(profileViewController, animated: true)
     }
     
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredFriends = friends.filter { friend in
+            return friend.firstName!.lowercaseString.containsString(searchText.lowercaseString) || friend.lastName!.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        tableView.reloadData()
+    }
 }
 
+extension FriendsViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}

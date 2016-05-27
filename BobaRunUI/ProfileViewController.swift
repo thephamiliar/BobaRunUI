@@ -89,7 +89,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (section == 0) ? 2 : 1
+        return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -106,9 +106,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.imageView!.image = user.image
             }
         } else {
-            cell.textLabel!.text = "Change Password"
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            cell.imageView!.image = user.image
+            if (indexPath.row == 0) {
+                cell.textLabel!.text = "Change Password"
+                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                cell.imageView!.image = user.image
+            } else {
+                cell.textLabel!.text = "Log Out"
+            }
         }
         
         cell.selectionStyle = .None
@@ -117,6 +121,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // TODO: change password option
+        // TODO: LOGOUT
     }
 
 }

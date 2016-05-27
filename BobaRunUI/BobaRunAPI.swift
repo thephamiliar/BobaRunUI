@@ -13,7 +13,7 @@ typealias ServiceResponse = (JSON, NSError?) -> Void
 
 class BobaRunAPI: NSObject {
     
-    let baseUrl = "http://localhost:5000/"
+    let baseUrl = "https://boba-run.herokuapp.com/"
     
     class var bobaRunSharedInstance : BobaRunAPI {
         struct Static {
