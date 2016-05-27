@@ -58,6 +58,7 @@ class LoginViewController: UIViewController {
                                 self.user.image = UIImage(named: "faithfulness")!
                                 var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                                 prefs.setObject(self.user.username, forKey: "USERNAME")
+                                // prefs.setObject(self.user.id, forKey: "ID")
                                 prefs.setInteger(1, forKey: "ISLOGGEDIN")
                                 prefs.synchronize()
                                 

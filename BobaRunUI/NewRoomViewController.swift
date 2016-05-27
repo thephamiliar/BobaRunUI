@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Darwin
 import MessageUI
 
 
@@ -20,6 +19,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
+    var roomname = ""
     
     var tableView : UITableView!
     
@@ -144,36 +144,55 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     func selectedSubmitButton(sender: UIButton!) {
         // TODO: generate text messsage
         var messageVC = MFMessageComposeViewController()
-        var results;
-        //need user input for roomname in argument below
-        BobaRunAPI.bobaRunSharedInstance.createNewRoom(roomname, User.ID){ (json: JSON) in
         
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        BobaRunAPI.bobaRunSharedInstance.createNewRoom(roomname, runnerId: prefs.valueForKey("USERNAME") as! String){ (json: JSON) in
+            print ("creating room")
             if let creation_error = json["error"].string {
                 if creation_error == "true" {
                     print ("could not create room")
                 }
-            else {
-                    results = json["result"].array
+                else {
+                    if let results = json["result"].string {
+                        print(results)
+                        dispatch_async(dispatch_get_main_queue(),{
+                            messageVC.body = "Room ID: \(results). Please enter this ID to join this room!";
+                            messageVC.recipients = ["Enter tel-nr"]
+                            messageVC.messageComposeDelegate = self;
+                            self.presentViewController(messageVC, animated: false, completion: nil)
+                            self.tableView.reloadData()
+                        })
+                    }
                 }
             }
         }
-        messageVC.body = "Room ID: \(results). Please enter this ID to join this room!";
-        messageVC.recipients = ["Enter tel-nr"]
-        messageVC.messageComposeDelegate = self;
-        
-        self.presentViewController(messageVC, animated: false, completion: nil)
+
+//        //need user input for roomname in argument below
+//        BobaRunAPI.bobaRunSharedInstance.createNewRoom(roomname, User.ID){ (json: JSON) in
+//        
+//            if let creation_error = json["error"].string {
+//                if creation_error == "true" {
+//                    print ("could not create room")
+//                }
+//            else {
+//                    results = json["result"].array
+//                }
+//            }
+//        }
+
+    
     }
     
     func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
-        switch (result.value) {
-        case MessageComposeResultCancelled.value:
-            println("Message was cancelled")
+        switch (result.rawValue) {
+        case MessageComposeResultCancelled.rawValue:
+            print("Message was cancelled")
             self.dismissViewControllerAnimated(true, completion: nil)
-        case MessageComposeResultFailed.value:
-            println("Message failed")
+        case MessageComposeResultFailed.rawValue:
+            print("Message failed")
             self.dismissViewControllerAnimated(true, completion: nil)
-        case MessageComposeResultSent.value:
-            println("Message was sent")
+        case MessageComposeResultSent.rawValue:
+            print("Message was sent")
             self.dismissViewControllerAnimated(true, completion: nil)
         default:
             break;
