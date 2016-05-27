@@ -12,6 +12,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var tableView : UITableView!
     var group : Group!
     var friends : [User]!
+    var user = User()
     let friendViewCellReuseIdentifier = "friendViewCellReuseIdentifier"
     
     override func viewDidLoad() {
@@ -54,7 +55,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let profileViewController = ProfileViewController()
+        let profileViewController = ProfileViewController(user: user)
         profileViewController.user = friends[indexPath.row]
         self.navigationController?.pushViewController(profileViewController, animated: true)
     }

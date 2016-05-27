@@ -12,6 +12,10 @@ class JoinRoomViewController: UIViewController {
     var roomIDTextView : UITextField!
     var joinRoomButton : UIButton!
     
+    // todo: get user and room
+    var room = Room()
+    var user = User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +47,7 @@ class JoinRoomViewController: UIViewController {
     }
     
     func selectedJoinButton(sender: UIButton!) {
-        let orderFormViewController = OrderFormViewController()
+        let orderFormViewController = OrderFormViewController(user: user, room: room)
         orderFormViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(orderFormViewController, animated: true)
     }

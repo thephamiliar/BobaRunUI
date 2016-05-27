@@ -7,51 +7,118 @@
 //
 
 import UIKit
+import MessageUI
 
-class NewRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var friendsList: [User]!
-    var groupsList: [Group]!
+class NewRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMessageComposeViewControllerDelegate {
+    // var friendsList: [User]!
+    var friendsList = [User]()
+    var numbers = [String]()
+    var groupsList = [Group]()
     let newRoomViewCellReuseIdentifier = "newRoomViewCellReuseIdentifier"
     let buttonHeight = CGFloat(35)
     let buttonWidth = CGFloat(50)
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
+    let roomname = "TEST ROOM 1"
     
     var tableView : UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        BobaRunAPI.bobaRunSharedInstance.getFriends(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+            print ("getting friends")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not retrieve friends")
+                }
+                else {
+                    if let results = json["result"].array {
+                        self.friendsList.removeAll()
+                        for entry in results {
+                            let temp_user = User(json: entry)
+                            self.friendsList.append(temp_user)
+//                            self.numbers.append(temp_user.phoneNumber!)
+                        }
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.friendsList.sortInPlace({ $0.lastName < $1.lastName })
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+            }
+        }
         
-        let testFriend = User()
-        testFriend.firstName = "Jessica"
-        testFriend.lastName = "Pham"
-        testFriend.username = "jmpham613"
-        testFriend.image = UIImage(named: "faithfulness")!
-        let testFriend2 = User()
-        testFriend2.firstName = "Joanna"
-        testFriend2.lastName = "Chen"
-        testFriend2.username = "jchen94"
-        testFriend2.image = UIImage(named: "faithfulness")!
-        let testFriend3 = User()
-        testFriend3.firstName = "Nick"
-        testFriend3.lastName = "Yu"
-        testFriend3.username = "nyu"
-        testFriend3.image = UIImage(named: "faithfulness")!
-        let testFriend4 = User()
-        testFriend4.firstName = "Louis"
-        testFriend4.lastName = "Truong"
-        testFriend4.username = "ltroung"
-        testFriend4.image = UIImage(named: "faithfulness")!
-        var testGroup = Group()
-        testGroup.groupName = "CSM117 :D"
-        testGroup.groupTimeStamp = "05/16/16"
-        testGroup.users = [testFriend, testFriend2, testFriend3, testFriend4]
-        testGroup.image = UIImage(named: "love")!
-        friendsList = [testFriend, testFriend2, testFriend3, testFriend4] // TODO: get friends from WebAPI
-        friendsList.sortInPlace({ $0.lastName < $1.lastName })
-        groupsList = [testGroup]    // TODO: get groups from WebAPI
-        groupsList.sortInPlace({ $0.groupName < $1.groupName })
+        BobaRunAPI.bobaRunSharedInstance.getGroup(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+            print ("getting my groups")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not retrieve groups")
+                }
+                else {
+                    if let results = json["result"].array {
+                        self.groupsList.removeAll()
+                        for entry in results {
+                            let temp_group = Group(json: entry)
+                            var temp_users = [User]()
+                            
+                            BobaRunAPI.bobaRunSharedInstance.getGroupMembers(temp_group.groupID!) { (json: JSON) in
+                                print ("getting my group members")
+                                if let creation_error = json["error"].string {
+                                    if creation_error == "true" {
+                                        print ("could not retrieve groups")
+                                    }
+                                    else {
+                                        if let mem_results = json["result"].array {
+                                            for u in mem_results {
+                                                temp_users.append(User(json: u))
+                                            }
+                                            temp_group.users = temp_users
+                                        }
+                                        dispatch_async(dispatch_get_main_queue(),{
+                                            self.tableView.reloadData()
+                                        })
+                                    }
+                                }
+                            }
+                            self.groupsList.append(temp_group)
+                            // self.groupsList.sortInPlace({ $0.groupName < $1.groupName })
+                        }
+                    }
+                }
+            }
+        }
+
+//        let testFriend = User()
+//        testFriend.firstName = "Jessica"
+//        testFriend.lastName = "Pham"
+//        testFriend.username = "jmpham613"
+//        testFriend.image = UIImage(named: "faithfulness")!
+//        let testFriend2 = User()
+//        testFriend2.firstName = "Joanna"
+//        testFriend2.lastName = "Chen"
+//        testFriend2.username = "jchen94"
+//        testFriend2.image = UIImage(named: "faithfulness")!
+//        let testFriend3 = User()
+//        testFriend3.firstName = "Nick"
+//        testFriend3.lastName = "Yu"
+//        testFriend3.username = "nyu"
+//        testFriend3.image = UIImage(named: "faithfulness")!
+//        let testFriend4 = User()
+//        testFriend4.firstName = "Louis"
+//        testFriend4.lastName = "Truong"
+//        testFriend4.username = "ltroung"
+//        testFriend4.image = UIImage(named: "faithfulness")!
+//        var testGroup = Group()
+//        testGroup.groupName = "CSM117 :D"
+//        testGroup.groupTimeStamp = "05/16/16"
+//        testGroup.users = [testFriend, testFriend2, testFriend3, testFriend4]
+//        testGroup.image = UIImage(named: "love")!
+//        friendsList = [testFriend, testFriend2, testFriend3, testFriend4] // TODO: get friends from WebAPI
+//        friendsList.sortInPlace({ $0.lastName < $1.lastName })
+//        groupsList = [testGroup]    // TODO: get groups from WebAPI
+//        groupsList.sortInPlace({ $0.groupName < $1.groupName })
         
         tableView = UITableView()
         let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
@@ -73,6 +140,10 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
         submitButton.addTarget(self, action: #selector(NewGroupViewController.selectedSubmitButton(_:)), forControlEvents: .TouchUpInside)
         submitButton.layer.cornerRadius = 5
         self.view.addSubview(submitButton)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -131,6 +202,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+        numbers.append(friendsList[indexPath.row].phoneNumber!)
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
@@ -141,6 +213,46 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     func selectedSubmitButton(sender: UIButton!) {
         // TODO: send new room to backend?
         // TODO: push notifications
+        var messageVC = MFMessageComposeViewController()
+        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        BobaRunAPI.bobaRunSharedInstance.createNewRoomWithUserName(roomname, username: prefs.valueForKey("USERNAME") as! String){ (json: JSON) in
+            print ("creating room")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not create room")
+                }
+                else {
+                    if let results = json["result"].string {
+                        print(results)
+                        dispatch_async(dispatch_get_main_queue(),{
+                            messageVC.body = "Room ID: \(results). Please enter this ID to join this room!";
+                            messageVC.recipients = self.numbers
+                            messageVC.messageComposeDelegate = self;
+                            self.presentViewController(messageVC, animated: false, completion: nil)
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+        switch (result.rawValue) {
+        case MessageComposeResultCancelled.rawValue:
+            print("Message was cancelled")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultFailed.rawValue:
+            print("Message failed")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultSent.rawValue:
+            print("Message was sent")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        default:
+            break;
+        }
         
         self.navigationController?.popToRootViewControllerAnimated(true)
     }

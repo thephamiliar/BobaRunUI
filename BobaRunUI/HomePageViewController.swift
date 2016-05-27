@@ -12,12 +12,10 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     var tableView : UITableView!
     var runnerRooms = [Room]()
     var memberRooms = [Room]()
-    let homePageViewCellReuseIdentifier = "homePageViewCellReuseIdentifier"
-    
+    var user = User()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    let homePageViewCellReuseIdentifier = "homePageViewCellReuseIdentifier"
+    override func viewWillAppear(animated: Bool) {
         navigationItem.title = "Rooms"
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(HomePageViewController.addNewRoom(_:)))
         self.navigationItem.rightBarButtonItem = addButton
@@ -31,6 +29,28 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
             // TODO: any user specific details here
             // self.usernameLabel.text = prefs.valueForKey("USERNAME") as NSString
             let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+            if (self.user.id == nil) {
+                BobaRunAPI.bobaRunSharedInstance.getUser(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+                    print ("getting user info")
+                    if let creation_error = json["error"].string {
+                        if creation_error == "true" {
+                            print ("could get user info")
+                        }
+                        else {
+                            if let results = json["result"].array {
+                                for entry in results {
+                                    self.user = (User(json: entry))
+                                    // self.user.image = UIImage(named: "faithfulness")!
+                                }
+                                dispatch_async(dispatch_get_main_queue(),{
+                                    self.tableView.reloadData()
+                                })
+                            }
+                        }
+                    }
+                }
+            
+            
             BobaRunAPI.bobaRunSharedInstance.getUserRooms(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
                 print ("getting my rooms")
                 if let creation_error = json["error"].string {
@@ -38,19 +58,32 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                         print ("could not retrieve rooms")
                     }
                     else {
-                        if let results = json["result"].array {
+                        if let results = json["runner_rooms"].array {
                             self.runnerRooms.removeAll()
                             for entry in results {
                                 self.runnerRooms.append(Room(json: entry))
                             }
                             dispatch_async(dispatch_get_main_queue(),{
-                                self.runnerRooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
+//                                self.runnerRooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
+                                self.tableView.reloadData()
+                                })
+                        }
+                        if let results = json["member_rooms"].array {
+                            self.memberRooms.removeAll()
+                            for entry in results {
+                                self.memberRooms.append(Room(json: entry))
+                            }
+                            dispatch_async(dispatch_get_main_queue(),{
+                                //                                self.rooms.sortInPlace({ $0.roomTimeStamp > $1.roomTimeStamp })
                                 self.tableView.reloadData()
                             })
                         }
+                        
                     }
                 }
             }
+            }
+
             tableView = UITableView()
             //        var tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
             tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
@@ -102,7 +135,8 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             room = memberRooms[indexPath.row]
         }
-        let orderViewController = OrderViewController(room: room)
+        let orderViewController = OrderViewController(room: room, user: user)
+
         orderViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(orderViewController, animated: true)
     }
