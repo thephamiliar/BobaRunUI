@@ -52,4 +52,10 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.selectionStyle = .None
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let profileViewController = ProfileViewController()
+        profileViewController.user = friends[indexPath.row]
+        self.navigationController?.pushViewController(profileViewController, animated: true)
+    }
 }

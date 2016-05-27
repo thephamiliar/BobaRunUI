@@ -60,34 +60,6 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
                 }
             }
         }
-
-        
-        let testFriend = User()
-        testFriend.firstName = "Jessica"
-        testFriend.lastName = "Pham"
-        testFriend.username = "jmpham613"
-        testFriend.image = UIImage(named: "faithfulness")!
-        let testFriend2 = User()
-        testFriend2.firstName = "Joanna"
-        testFriend2.lastName = "Chen"
-        testFriend2.username = "jchen94"
-        testFriend2.image = UIImage(named: "faithfulness")!
-        let testFriend3 = User()
-        testFriend3.firstName = "Nick"
-        testFriend3.lastName = "Yu"
-        testFriend3.username = "nyu"
-        testFriend3.image = UIImage(named: "faithfulness")!
-        let testFriend4 = User()
-        testFriend4.firstName = "Louis"
-        testFriend4.lastName = "Truong"
-        testFriend4.username = "ltroung"
-        testFriend4.image = UIImage(named: "faithfulness")!
-        var testGroup = Group()
-        testGroup.groupName = "CSM117 :D"
-        testGroup.groupTimeStamp = "05/16/16"
-        testGroup.users = [testFriend, testFriend2, testFriend3, testFriend4]
-        testGroup.image = UIImage(named: "love")!
-        groups = [testGroup]
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
