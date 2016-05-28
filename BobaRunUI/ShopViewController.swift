@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 
-class ShopViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ShopViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     var tableView : UITableView!
     var shops = [String]()
     let shopViewCellReuseIdentifier = "shopViewCellReuseIdentifier"
@@ -17,6 +19,9 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
+    
+    var locationManager:CLLocationManager!
+    var businesses = [Business]()
     
     var user = User()
     var roomName = ""
@@ -61,6 +66,11 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.title = "Boba Shops"
+        locationManager = CLLocationManager()
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -70,14 +80,16 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shops.count
+        
+        return businesses.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(shopViewCellReuseIdentifier, forIndexPath: indexPath)
         
         // cell.textLabel!.text = friends[indexPath.row].firstName! + " " + friends[indexPath.row].lastName!
-        cell.textLabel!.text = shops[indexPath.row]
+
+        cell.textLabel!.text = self.businesses[indexPath.row].name
         
         cell.selectionStyle = .None
         return cell
@@ -90,6 +102,44 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     func selectedContinueButton(sender: UIButton!) {
         let inviteViewController = NewRoomViewController(roomName: roomName, user: user)
         self.navigationController?.pushViewController(inviteViewController, animated: true)
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        //        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
+        Business.searchWithTerm("Milk Tea", location: "\(locValue.latitude),\(locValue.longitude)", completion: { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses = businesses
+            
+                for business in businesses {
+                    print(business.name!)
+                    print(business.address!)
+                }
+            
+            if (businesses.count == 0) {
+                print ("No businesses nearby.")
+            }
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                self.tableView.reloadData()
+            })
+            
+        })
+        manager.stopUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print ("cannot get location, set default to San Francisco.")
+        
+        Business.searchWithTerm("Milk Tea", location: "37.785771,-122.406165", completion: { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses = businesses
+            
+            for business in businesses {
+                print(business.name!)
+                print(business.address!)
+            }
+        })
+        manager.stopUpdatingLocation()
     }
     
 }
