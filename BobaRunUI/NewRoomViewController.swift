@@ -225,7 +225,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     func selectedSubmitButton(sender: UIButton!) {
         // TODO: send new room to backend?
         // TODO: push notifications
-        var messageVC = MFMessageComposeViewController()
+        let messageVC = MFMessageComposeViewController()
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         BobaRunAPI.bobaRunSharedInstance.createNewRoomWithUserName(roomname, username: prefs.valueForKey("USERNAME") as! String){ (json: JSON) in
@@ -251,7 +251,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     
-    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
         switch (result.rawValue) {
         case MessageComposeResultCancelled.rawValue:
             print("Message was cancelled")

@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
                             for entry in results {
                                 self.user = (User(json:entry))
                                 self.user.image = UIImage(named: "faithfulness")!
-                                var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                                 prefs.setObject(self.user.username, forKey: "USERNAME")
                                 prefs.setInteger(1, forKey: "ISLOGGEDIN")
                                 prefs.synchronize()

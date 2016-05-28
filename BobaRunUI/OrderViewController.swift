@@ -47,7 +47,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
                     if let results = json["result"].array {
                         self.orders.removeAll()
                         for entry in results {
-                            var temp_order = Order(json: entry)
+                            let temp_order = Order(json: entry)
                         BobaRunAPI.bobaRunSharedInstance.getUserWithId(String(temp_order.userId)) { (json: JSON) in
                                 print ("getting user info")
                                 if let creation_error = json["error"].string {

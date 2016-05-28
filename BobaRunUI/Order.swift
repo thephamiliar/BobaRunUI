@@ -19,7 +19,7 @@ class Order: NSObject {
     var username : String = ""
     var roomId : String = ""
     var userId : Int = -1
-    var price : Double = 2.0
+    var price : Double = 0.0
     var drinkPurchased : Bool = false
     var id : String = ""
     

@@ -16,14 +16,13 @@ enum OrderSection : Int {
     case SugarLevel
     case IceLevel
     case Toppings
+    case Price
 }
 
 class OrderFormViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var menuItems: [String] = []
-    var menuPrices: [String] = []
+    var menuItems: [Drink] = []
     var menu = [String:[Drink]]()
-    var toppingItems: [String] = []
-    var toppingPrices: [String] = []
+    var toppingItems: [Drink] = []
     var selectedType : NSIndexPath?
     var selectedSugarLevel : UIButton?
     var selectedIceLevel : UIButton?
@@ -56,27 +55,6 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewWillAppear(animated: Bool) {
-        tableView = UITableView()
-        let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
-        tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: formViewCellReuseIdentifier)
-        tableView.allowsMultipleSelection = true
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.view.addSubview(tableView)
-        
-        let footerView: UIView = UIView(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width, footerHeight))
-        footerView.backgroundColor = UIColor(red: 248/255, green: 241/255, blue: 243/255, alpha: 1)
-        self.view.addSubview(footerView)
-        
-        let submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
-
-        submitButton.center = footerView.center
-        submitButton.setTitle("Submit", forState: UIControlState.Normal)
-        submitButton.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
-        submitButton.addTarget(self, action: #selector(OrderFormViewController.selectedSubmitButton(_:)), forControlEvents: .TouchUpInside)
-        submitButton.layer.cornerRadius = 5
-        self.view.addSubview(submitButton)
         BobaRunAPI.bobaRunSharedInstance.getMenuWithYelpID("CoCo Westwood") { (json: JSON) in
             print ("getting menu")
             if let creation_error = json["error"].string {
@@ -99,16 +77,17 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
                                 
                                 if (category != "Toppings") {
                                     let drink_temp = Drink(json: entry)
-                                    self.menuItems.append(drink_temp.name!)
-                                    self.menuPrices.append("$" + String(format: "%.2f", drink_temp.price!))
+                                    self.menuItems.append(drink_temp)
+                                    // self.menuItems.append(drink_temp.name!)
+                                    // self.menuPrices.append("$" + String(format: "%.2f", drink_temp.price!))
                                 }
                                 
                             }
                         }
                         let temp = self.menu["Toppings"]
                         for drink in temp! {
-                            self.toppingItems.append(drink.name!)
-                            self.toppingPrices.append("$" + String(format: "%.2f", drink.price!))
+                            self.toppingItems.append(drink)
+                            // self.toppingPrices.append("$" + String(format: "%.2f", drink.price!))
                         }
                         dispatch_async(dispatch_get_main_queue(),{
                             self.tableView.reloadData()
@@ -122,6 +101,27 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView = UITableView()
+        let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
+        tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: formViewCellReuseIdentifier)
+        tableView.allowsMultipleSelection = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.view.addSubview(tableView)
+        
+        let footerView: UIView = UIView(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width, footerHeight))
+        footerView.backgroundColor = UIColor(red: 248/255, green: 241/255, blue: 243/255, alpha: 1)
+        self.view.addSubview(footerView)
+        
+        let submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
+        
+        submitButton.center = footerView.center
+        submitButton.setTitle("Submit", forState: UIControlState.Normal)
+        submitButton.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
+        submitButton.addTarget(self, action: #selector(OrderFormViewController.selectedSubmitButton(_:)), forControlEvents: .TouchUpInside)
+        submitButton.layer.cornerRadius = 5
+        self.view.addSubview(submitButton)
         
     }
     
@@ -188,8 +188,9 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         
         switch (indexPath.section) {
         case OrderSection.TeaType.rawValue:
-            cell.textLabel?.text = menuItems[indexPath.row] as? String
-            cell.detailTextLabel?.text = menuPrices[indexPath.row] as? String
+            cell.textLabel?.text = menuItems[indexPath.row].name! as? String
+            // self.menuPrices.append("$" + String(format: "%.2f", drink_temp.price!))
+            cell.detailTextLabel?.text = "$" + String(format: "%.2f", menuItems[indexPath.row].price!)
             break
         case OrderSection.SugarLevel.rawValue:
             generatePercentageButtons(OrderSection.SugarLevel, cell: cell)
@@ -199,8 +200,8 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
             break
         case OrderSection.Toppings.rawValue:
             if (indexPath.row < toppingItems.count) {
-                cell.textLabel?.text = toppingItems[indexPath.row]
-                cell.detailTextLabel?.text = toppingPrices[indexPath.row]
+                cell.textLabel?.text = toppingItems[indexPath.row].name
+                cell.detailTextLabel?.text = "$" + String(format: "%.2f", toppingItems[indexPath.row].price!)
             } else {
                 cell.textLabel?.text = "None"
                 cell.detailTextLabel?.text = "$0.00"
@@ -280,15 +281,19 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func selectedSubmitButton(sender: UIButton!) {
-        var order = Order()
+        let order = Order()
+        order.price = 0.0
         let tableSelections = tableView.indexPathsForSelectedRows
         if (tableSelections != nil && selectedSugarLevel != nil && selectedIceLevel != nil) {
             for indexPath in tableSelections! {
                     if indexPath.section == OrderSection.TeaType.rawValue {
-                        order.teaType = menuItems[indexPath.row]
+                        order.teaType = menuItems[indexPath.row].name!
+                        order.price = order.price + menuItems[indexPath.row].price!
                     } else if indexPath.section == OrderSection.Toppings.rawValue {
                         if (indexPath.row < toppingItems.count) {
-                            order.toppings.append(toppingItems[indexPath.row])
+                            order.toppings.append(toppingItems[indexPath.row].name!)
+                            order.price = order.price + toppingItems[indexPath.row].price!
+
                         } else {
                             order.toppings.append("None")
                         }
@@ -316,4 +321,3 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
 }
-

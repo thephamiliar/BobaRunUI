@@ -22,6 +22,7 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
     init(order: Order, room: Room, user: User, confirmButton: Bool) {
         self.order = order
         self.room = room
+        self.roomId = room.roomID
         self.user = user
         self.button = confirmButton
         super.init(nibName: nil, bundle: nil)
@@ -67,7 +68,7 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -96,6 +97,9 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
                 }
             }
             break
+        case OrderSection.Price.rawValue:
+            cell.textLabel!.text = "Price:"
+            cell.detailTextLabel!.text = "$" + String(format: "%.2f", order.price)
         default:
             cell.textLabel!.text = "Other"
         }
@@ -130,7 +134,7 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
         if (self.roomId == "") {
             self.roomId = self.room.roomID!
         }
-        BobaRunAPI.bobaRunSharedInstance.addMemberToRoom(self.roomId!, memberId: "\(self.user.id!)", drink: order_string, price: 3.5) { (json: JSON) in
+        BobaRunAPI.bobaRunSharedInstance.addMemberToRoom(self.roomId!, memberId: "\(self.user.id!)", drink: order_string, price: order.price) { (json: JSON) in
             print ("saving drink")
             if let creation_error = json["error"].string {
                 if creation_error == "true" {
