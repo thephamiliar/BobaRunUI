@@ -13,8 +13,8 @@ typealias ServiceResponse = (JSON, NSError?) -> Void
 
 class BobaRunAPI: NSObject {
     
-    let baseUrl = "https://boba-run.herokuapp.com/"
-    //let baseUrl = "http://localhost:5000/"
+    // let baseUrl = "https://boba-run.herokuapp.com/"
+    let baseUrl = "http://localhost:5000/"
     
     class var bobaRunSharedInstance : BobaRunAPI {
         struct Static {
@@ -188,6 +188,24 @@ class BobaRunAPI: NSObject {
         request.HTTPMethod = "POST"
         let p = String(format:"%.2f", price)
         let postString = "room_id=" + roomId + "&member_id=" + memberId + "&drink=" + drink + "&price=" + p
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+    
+    func markOrderAsPurchased (orderId: String, onCompletion : (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room_member/edit/drink_purchased/set_true")!)
+        request.HTTPMethod = "POST"
+        let postString = "id=" + orderId
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+    
+    func markOrderAsPaid (orderId: String, onCompletion : (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room_member/edit/runner_paid/set_true")!)
+        request.HTTPMethod = "POST"
+        let postString = "id=" + orderId
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         createHTTPPostRequest(request, onCompletion: onCompletion)
