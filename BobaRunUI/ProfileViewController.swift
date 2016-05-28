@@ -26,7 +26,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Do any additional setup after loading the view, typically from a nib.
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
 
-        if (self.user.id == nil) {
         BobaRunAPI.bobaRunSharedInstance.getUser(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
             print ("getting user info")
             if let creation_error = json["error"].string {
@@ -45,7 +44,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     }
                 }
             }
-        }
         }
         
     }

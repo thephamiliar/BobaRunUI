@@ -14,7 +14,6 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     var user : User!
     var order : Order!
     var tableView : UITableView!
-    var allOrdersPurchased = true
     var orders = [Order]()
     let orderViewCellReuseIdentifier = "orderViewCellReuseIdentifier"
     let footerHeight = CGFloat(80)
@@ -49,9 +48,6 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
                         self.orders.removeAll()
                         for entry in results {
                             var temp_order = Order(json: entry)
-                            if (!temp_order.drinkPurchased) {
-                                self.allOrdersPurchased = false
-                            }
                         BobaRunAPI.bobaRunSharedInstance.getUserWithId(String(temp_order.userId)) { (json: JSON) in
                                 print ("getting user info")
                                 if let creation_error = json["error"].string {
@@ -83,7 +79,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
 //        orders.sortInPlace({ $0.userId < $1.userId })
         
         // user is runner
-        if (room.runner_id == user.id && !self.allOrdersPurchased) {
+        if (room.runner_id == user.id && !room.allDrinksPurchased) {
             tableView = UITableView()
             let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
             tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
@@ -164,10 +160,8 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.order = orders[indexPath.row]
-        // if (room.runner_id == user.id && !room.confirmed) {
-        if (room.runner_id == user.id && !self.allOrdersPurchased) {
+        if (room.runner_id == user.id && !room.allDrinksPurchased) {
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
-        // } else if (order.userId == user.id && room.confirmed) {
         } else if (order.userId == user.id && order.drinkPurchased && !order.paid) {
             let payOrderViewController = PayOrderViewController(order: order)
             self.navigationController?.pushViewController(payOrderViewController, animated: true)
@@ -178,7 +172,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if (room.runner_id == user.id && !room.confirmed) {
+        if (room.runner_id == user.id && !room.allDrinksPurchased) {
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
         }
     }
