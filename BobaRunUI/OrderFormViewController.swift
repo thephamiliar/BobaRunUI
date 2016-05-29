@@ -65,7 +65,11 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
                 }
                 else {
                     print ("populating menu")
+                    
                     if let results = json["result"].array {
+                        self.menuItems.removeAll()
+                        self.toppingItems.removeAll()
+                        self.menu.removeAll()
                         for entry in results {
                             if let category = entry["category"].string {
                                 if (self.menu[category] != nil) {

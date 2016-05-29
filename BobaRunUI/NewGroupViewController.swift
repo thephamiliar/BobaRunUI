@@ -142,18 +142,12 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                                         print (self.friendsList[friend.row].username! + "successfully added")
                                     }
                                 }
-                                dispatch_async(dispatch_get_main_queue(),{
-                                    self.friendsList.sortInPlace({ $0.lastName < $1.lastName })
-                                    self.tableView.reloadData()
-                                })
                             }
                         }
                     }
                 }
             }
         }
-
-        
         self.navigationController?.popViewControllerAnimated(true)
     }
     

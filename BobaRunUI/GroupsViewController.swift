@@ -13,14 +13,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
     var groups = [Group]()
     let groupViewCellReuseIdentifier = "groupViewCellReuseIdentifier"
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.title = "Groups"
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(GroupsViewController.addNewGroup(_:)))
-        self.navigationItem.rightBarButtonItem = addButton
-        
-        // TODO: populate groups from Backend
+    override func viewWillAppear(animated: Bool) {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         BobaRunAPI.bobaRunSharedInstance.getGroup(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
             print ("getting my groups")
@@ -35,7 +28,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
                             let temp_group = Group(json: entry)
                             var temp_users = [User]()
                             
-                        BobaRunAPI.bobaRunSharedInstance.getGroupMembers(temp_group.groupID!) { (json: JSON) in
+                            BobaRunAPI.bobaRunSharedInstance.getGroupMembers(temp_group.groupID!) { (json: JSON) in
                                 print ("getting my group members")
                                 if let creation_error = json["error"].string {
                                     if creation_error == "true" {
@@ -60,6 +53,16 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
                 }
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        navigationItem.title = "Groups"
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(GroupsViewController.addNewGroup(_:)))
+        self.navigationItem.rightBarButtonItem = addButton
+        
+        // TODO: populate groups from Backend
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
@@ -89,7 +92,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         cell.groupLabel!.text = groups[indexPath.row].groupName
         cell.imageView!.image = groups[indexPath.row].image
         cell.imageView!.layer.masksToBounds = true;
-        cell.groupTimeStampLabel!.text = groups[indexPath.row].groupTimeStamp
+        cell.groupTimeStampLabel!.text = "Tap to View Details" // groups[indexPath.row].groupTimeStamp
         
         let users = groups[indexPath.row].users
         if (users!.count > 0) {
