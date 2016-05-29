@@ -21,12 +21,14 @@ enum OrderSection : Int {
 
 class OrderFormViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var menuItems: [Drink] = []
+    var filteredDrinks = [Drink]()
     var menu = [String:[Drink]]()
     var toppingItems: [Drink] = []
     var selectedType : NSIndexPath?
     var selectedSugarLevel : UIButton?
     var selectedIceLevel : UIButton?
     let formViewCellReuseIdentifier = "formViewCellReuseIdentifier"
+    let searchController = UISearchController(searchResultsController: nil)
     let buttonHeight = CGFloat(30)
     let buttonWidth = CGFloat(40)
     let buttonPadding = CGFloat(20)
@@ -123,6 +125,14 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         submitButton.layer.cornerRadius = 5
         self.view.addSubview(submitButton)
         
+        searchController.searchBar.scopeButtonTitles = ["Milk Tea", "Fruity", "Yakult", "Slushies"]
+        searchController.searchBar.delegate = self
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -167,7 +177,12 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         
         switch (section) {
         case OrderSection.TeaType.rawValue:
-            numRows = menuItems.count
+            if searchController.active && searchController.searchBar.text != "" {
+                numRows = filteredDrinks.count
+            } else {
+                numRows = menuItems.count
+            }
+            
             break
         case OrderSection.SugarLevel.rawValue, OrderSection.IceLevel.rawValue:
             numRows = 1
@@ -188,9 +203,14 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         
         switch (indexPath.section) {
         case OrderSection.TeaType.rawValue:
-            cell.textLabel?.text = menuItems[indexPath.row].name! as? String
-            // self.menuPrices.append("$" + String(format: "%.2f", drink_temp.price!))
-            cell.detailTextLabel?.text = "$" + String(format: "%.2f", menuItems[indexPath.row].price!)
+            let drink: Drink
+            if searchController.active && searchController.searchBar.text != "" {
+                drink = filteredDrinks[indexPath.row]
+            } else {
+                drink = menuItems[indexPath.row]
+            }
+            cell.textLabel?.text = drink.name! as? String
+            cell.detailTextLabel?.text = "$" + String(format: "%.2f", drink.price!)
             break
         case OrderSection.SugarLevel.rawValue:
             generatePercentageButtons(OrderSection.SugarLevel, cell: cell)
@@ -287,8 +307,14 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         if (tableSelections != nil && selectedSugarLevel != nil && selectedIceLevel != nil) {
             for indexPath in tableSelections! {
                     if indexPath.section == OrderSection.TeaType.rawValue {
-                        order.teaType = menuItems[indexPath.row].name!
-                        order.price = order.price + menuItems[indexPath.row].price!
+                        let drink: Drink
+                        if searchController.active && searchController.searchBar.text != "" {
+                            drink = filteredDrinks[indexPath.row]
+                        } else {
+                            drink = menuItems[indexPath.row]
+                        }
+                        order.teaType = drink.name!
+                        order.price = order.price + drink.price!
                     } else if indexPath.section == OrderSection.Toppings.rawValue {
                         if (indexPath.row < toppingItems.count) {
                             order.toppings.append(toppingItems[indexPath.row].name!)
@@ -320,4 +346,48 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    func categoryMatcher(drinkCategory: String, scope: String) -> Bool {
+        // ["Milk Tea", "Fruity", "Yakult", "Slushies"]
+        if (scope == "Milk Tea") {
+            return drinkCategory == "Tea & Milk Tea" || drinkCategory == "Whipped Cream" || drinkCategory == "Tea Latte" || drinkCategory == "Chocolate" || drinkCategory == "Fresh Milk"
+        }
+    
+        if (scope == "Fruity") {
+            return drinkCategory == "Fresh Fruit" || drinkCategory == "Mixed Juice"
+        }
+        
+        if (scope == "Yakult") {
+            return drinkCategory == "Yakult"
+        }
+        
+        if (scope == "Slushies") {
+            return drinkCategory == "Slush & Smoothie"
+        }
+        return true
+    }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredDrinks = menuItems.filter { drink in
+            let categoryMatch = (scope == "All") || categoryMatcher(drink.category!, scope: scope)
+            return categoryMatch && drink.name!.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        tableView.reloadData()
+    }
+    
+}
+
+
+
+extension OrderFormViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+    }
+}
+
+extension OrderFormViewController: UISearchBarDelegate {
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }
 }
