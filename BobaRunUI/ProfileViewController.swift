@@ -116,6 +116,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return 2
     }
     
+    func formatPhoneNumber(phoneNumber: String) -> String {
+        var number = "(" + phoneNumber.substringWithRange(Range<String.Index>(start: phoneNumber.startIndex, end: phoneNumber.startIndex.advancedBy(3))) + ") "
+        number = number + phoneNumber.substringWithRange(Range<String.Index>(start: phoneNumber.startIndex.advancedBy(3), end: phoneNumber.startIndex.advancedBy(6))) + "-"
+        number = number + phoneNumber.substringWithRange(Range<String.Index>(start: phoneNumber.startIndex.advancedBy(6), end: phoneNumber.endIndex))
+        return number
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: userViewCellReuseIdentifier)
         
@@ -126,7 +133,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.imageView!.image = user.image
             } else {
                 cell.textLabel!.text = "Phone Number"
-                cell.detailTextLabel!.text = user.email
+                cell.detailTextLabel!.text = user.phoneNumber == nil ? "" : formatPhoneNumber(user.phoneNumber!)
                 cell.imageView!.image = user.image
             }
         } else {

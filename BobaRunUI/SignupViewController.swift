@@ -8,25 +8,37 @@
 
 import UIKit
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, UITextFieldDelegate {
 
     
     @IBOutlet weak var firstNameText: UITextField!
     @IBOutlet weak var lastNameText: UITextField!
     @IBOutlet weak var phoneNumberText: UITextField!
-    @IBOutlet weak var usernameText: UITextField!
+    @IBOutlet weak var usernameText: UITextField! = nil
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var confirmPasswordText: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.firstNameText.delegate = self
+        self.lastNameText.delegate = self
+        self.phoneNumberText.delegate = self
+        self.usernameText.delegate = self
+        self.passwordText.delegate = self
+        self.confirmPasswordText.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     @IBAction func signUpTapped(sender: AnyObject) {
