@@ -20,15 +20,15 @@ class NewFriendViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.whiteColor()
         
-        friendUsernameTextView = UITextField(frame: CGRectMake(0, self.view.frame.height/2 - 20, 150, 40))
+        friendUsernameTextView = UITextField(frame: CGRectMake(0, self.view.frame.height/2 - 60, 150, 40))
         friendUsernameTextView.center.x = self.view.center.x
         friendUsernameTextView.placeholder = "Friend's Username"
-        friendUsernameTextView.borderStyle = UITextBorderStyle.Line
+        friendUsernameTextView.borderStyle = UITextBorderStyle.RoundedRect
         friendUsernameTextView.layer.borderColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1).CGColor
         friendUsernameTextView.layer.cornerRadius = 5
         self.view.addSubview(friendUsernameTextView)
         
-        addFriendButton = UIButton(frame: CGRectMake(0, self.view.frame.height/2 + 40, 150, 50))
+        addFriendButton = UIButton(frame: CGRectMake(0, self.view.frame.height/2, 150, 50))
         addFriendButton.center.x = self.view.center.x
         addFriendButton.setTitle("Add Friend", forState: UIControlState.Normal)
         addFriendButton.addTarget(self, action: #selector(NewFriendViewController.selectedNewFriendButton(_:)), forControlEvents: .TouchUpInside)
@@ -44,7 +44,32 @@ class NewFriendViewController: UIViewController {
     
     func selectedNewFriendButton(sender: UIButton!) {
         // TODO: add new friend to backend
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        BobaRunAPI.bobaRunSharedInstance.addFriend(prefs.valueForKey("USERNAME") as! String, friendName: self.friendUsernameTextView.text!) { (json: JSON) in
+            print ("adding friend")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not retrieve friends")
+                    let alertView:UIAlertView = UIAlertView()
+                    alertView.title = "Error"
+                    alertView.message = "Could not find User with username: " + self.friendUsernameTextView.text!
+                    alertView.delegate = self
+                    alertView.addButtonWithTitle("OK")
+                    alertView.show()
+                }
+                else {
+                    let alertView:UIAlertView = UIAlertView()
+                    alertView.title = "Success!"
+                    alertView.message = self.friendUsernameTextView.text! + " added to friends list"
+                    alertView.delegate = self
+                    alertView.addButtonWithTitle("OK")
+                    alertView.show()
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+
+                }
+            }
+        }
+
     }
     
 }

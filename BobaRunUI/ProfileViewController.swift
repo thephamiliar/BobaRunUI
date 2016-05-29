@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(animated: Bool) {
         // Do any additional setup after loading the view, typically from a nib.
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-
+        if (user.id == nil) {
         BobaRunAPI.bobaRunSharedInstance.getUser(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
             print ("getting user info")
             if let creation_error = json["error"].string {
@@ -44,6 +44,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     }
                 }
             }
+        }
         }
         
     }
@@ -116,6 +117,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func formatPhoneNumber(phoneNumber: String) -> String {
+        if (phoneNumber.characters.count < 10) {
+            return phoneNumber
+        }
         var number = "(" + phoneNumber.substringWithRange(Range<String.Index>(start: phoneNumber.startIndex, end: phoneNumber.startIndex.advancedBy(3))) + ") "
         number = number + phoneNumber.substringWithRange(Range<String.Index>(start: phoneNumber.startIndex.advancedBy(3), end: phoneNumber.startIndex.advancedBy(6))) + "-"
         number = number + phoneNumber.substringWithRange(Range<String.Index>(start: phoneNumber.startIndex.advancedBy(6), end: phoneNumber.endIndex))
@@ -157,8 +161,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // TODO: change password option
-        
-
         // TODO: LOGOUT
         if (indexPath.section == 1 && indexPath.row == 1) {
             let appDomain = NSBundle.mainBundle().bundleIdentifier
