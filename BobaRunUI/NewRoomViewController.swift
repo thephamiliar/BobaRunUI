@@ -194,6 +194,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.imageView!.layer.masksToBounds = true;
             
             let users = groupsList[indexPath.row].users
+            if (users!.count > 0) {
             cell.detailTextLabel!.text = users![0].firstName
             if (users!.count > 1) {
                 var index = 1
@@ -201,6 +202,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
                     cell.detailTextLabel!.text = cell.detailTextLabel!.text! + ", " + (users![index].firstName! as String)
                     index += 1
                 }
+            }
             }
             if (users!.count > 8) {
                 cell.detailTextLabel!.text = cell.detailTextLabel!.text! + " +" + String(users!.count-8)

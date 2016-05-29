@@ -92,6 +92,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         cell.groupTimeStampLabel!.text = groups[indexPath.row].groupTimeStamp
         
         let users = groups[indexPath.row].users
+        if (users!.count > 0) {
         cell.groupMembers!.text = users![0].firstName
         if (users!.count > 1) {
             var index = 1
@@ -99,6 +100,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
                 cell.groupMembers!.text = cell.groupMembers!.text! + ", " + (users![index].firstName! as String)
                 index += 1
             }
+        }
         }
         if (users!.count > 8) {
             cell.groupMembers!.text = cell.groupMembers!.text! + " +" + String(users!.count-8)

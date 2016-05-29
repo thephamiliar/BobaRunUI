@@ -95,7 +95,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             var image = (user.image != nil) ? user.image : UIImage(named: "faithfulness")
             image = resizeImage(image!, newWidth: CGFloat(150))
             let imageView = UIImageView(image: image)
-//            imageView.image = imageWithImage(image!, scaledToSize: CGSize(width: 20, height: 20))
             view.frame = CGRectMake(0, 0, self.view.frame.width, CGFloat(200))
         
             imageView.frame = CGRectMake((self.view.frame.size.width/2) - (image!.size.width/2), 50, image!.size.width, image!.size.height)

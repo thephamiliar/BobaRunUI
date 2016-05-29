@@ -133,13 +133,13 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                         // results holds the new Group ID
                         let friends_to_add = self.tableView.indexPathsForSelectedRows
                         for friend in friends_to_add! {
-                            BobaRunAPI.bobaRunSharedInstance.createGroup(results, friendsList[friend].username) { (json: JSON) in
+                            BobaRunAPI.bobaRunSharedInstance.createNewGroupMember(results, username: self.friendsList[friend.row].username!) { (json: JSON) in
                                 if let creation_error = json["error"].string {
                                     if creation_error == "true" {
                                         print ("error")
                                     }
                                     else {
-                                        print (friendsList[friend].username + "successfully added")
+                                        print (self.friendsList[friend.row].username! + "successfully added")
                                     }
                                 }
                                 dispatch_async(dispatch_get_main_queue(),{
