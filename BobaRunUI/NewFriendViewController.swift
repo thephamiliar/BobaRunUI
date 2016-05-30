@@ -58,17 +58,18 @@ class NewFriendViewController: UIViewController {
                     alertView.show()
                 }
                 else {
-                    let alertView:UIAlertView = UIAlertView()
-                    alertView.title = "Success!"
-                    alertView.message = self.friendUsernameTextView.text! + " added to friends list"
-                    alertView.delegate = self
-                    alertView.addButtonWithTitle("OK")
-                    alertView.show()
-                    self.navigationController?.popToRootViewControllerAnimated(true)
-
+                    dispatch_async(dispatch_get_main_queue(),{
+                        let alertView:UIAlertView = UIAlertView()
+                        alertView.title = "Success!"
+                        alertView.message = self.friendUsernameTextView.text! + " added to friends list"
+                        alertView.delegate = self
+                        alertView.addButtonWithTitle("OK")
+                        alertView.show()
+                    })
                 }
             }
         }
+        self.navigationController?.popToRootViewControllerAnimated(true)
 
     }
     
