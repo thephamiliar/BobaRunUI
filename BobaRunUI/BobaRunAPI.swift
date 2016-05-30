@@ -68,11 +68,11 @@ class BobaRunAPI: NSObject {
         createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
-    func createUser(username: String, password: String, onCompletion: (JSON) -> Void) {
+    func createUser(username: String, password: String, firstName: String, lastName: String, phoneNumber: String, onCompletion: (JSON) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)user/create")!)
         request.HTTPMethod = "POST"
-        let postString = "username=" + username + "&password=" + password
+        let postString = "username=" + username + "&password=" + password + "&first_name=" + firstName + "&last_name=" + lastName + "&phone_number=" + phoneNumber
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         createHTTPPostRequest(request, onCompletion: onCompletion)

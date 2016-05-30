@@ -45,6 +45,9 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         let username:NSString = usernameText.text! as NSString
         let password:NSString = passwordText.text! as NSString
         let confirm_password:NSString = confirmPasswordText.text! as NSString
+        let firstName = firstNameText.text!
+        let lastName = lastNameText.text!
+        let phoneNumber = phoneNumberText.text!
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
             let alertView:UIAlertView = UIAlertView()
@@ -109,7 +112,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
 //                    
 //                    if(success == 1)
 //                    {
-            BobaRunAPI.bobaRunSharedInstance.createUser(username as String, password: password as String) { (json: JSON) in
+            BobaRunAPI.bobaRunSharedInstance.createUser(username as String, password: password as String, firstName: firstName, lastName: lastName, phoneNumber: phoneNumber) { (json: JSON) in
                 if let creation_error = json["error"].string {
                     if creation_error == "true" {
                         dispatch_async(dispatch_get_main_queue(),{
