@@ -87,15 +87,52 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 85
     }
     
+    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            completion(data: data, response: response, error: error)
+            }.resume()
+    }
+//
+//    func downloadImage(url: NSURL){
+//        print("Download Started")
+//        print("lastPathComponent: " + (url.lastPathComponent ?? ""))
+//        getDataFromUrl(url) { (data, response, error)  in
+//            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+//                guard let data = data where error == nil else { return }
+//                print(response?.suggestedFilename ?? "")
+//                print("Download Finished")
+//                imageView.image = UIImage(data: data)
+//            }
+//        }
+//    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(shopViewCellReuseIdentifier, forIndexPath: indexPath) as! ShopTableViewCell
     
         // TODO: shop object backend integration
-        cell.shopImageView.image = UIImage(named: "love")
+        print("Download Started")
+        print("lastPathComponent: " + (businesses[indexPath.row].imageURL!.lastPathComponent ?? ""))
+        getDataFromUrl(businesses[indexPath.row].imageURL!) { (data, response, error)  in
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                guard let data = data where error == nil else { return }
+                print(response?.suggestedFilename ?? "")
+                print("Download Finished")
+                cell.shopImageView.image = UIImage(data: data)
+            }
+        }
+        // cell.shopImageView.image = UIImage(named: "love")
         cell.titleLabel.text = self.businesses[indexPath.row].name
-        cell.ratingLabel.text = String(self.businesses[indexPath.row].rating)
+        cell.ratingLabel.text = String("\(self.businesses[indexPath.row].reviewCount!) Reviews")
+        getDataFromUrl(businesses[indexPath.row].ratingImageURL!) { (data, response, error)  in
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                guard let data = data where error == nil else { return }
+                print(response?.suggestedFilename ?? "")
+                print("Download Finished")
+                cell.ratingImageView.image = UIImage(data: data)
+            }
+        }
         cell.addressLabel.text = self.businesses[indexPath.row].address
-        cell.descriptionLabel.text  = self.businesses[indexPath.row].categories
+        // cell.descriptionLabel.text  = self.businesses[indexPath.row].categories
 
         cell.selectionStyle = .None
         return cell
