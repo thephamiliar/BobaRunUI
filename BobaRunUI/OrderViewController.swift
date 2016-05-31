@@ -135,7 +135,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
             cell.priceLabel.text = "PAID"
             cell.priceLabel.textColor = UIColor.greenColor()
         } else {
-            cell.priceLabel.text = "$3.25" // TODO : add price to orders
+            cell.priceLabel.text = "$" + String(format: "%.2f", order.price)
             cell.priceLabel.textColor = UIColor.redColor()
         }
         if (order.user.firstName != nil) {
@@ -154,6 +154,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
             cell.toppingsLabel.text = toppingsText
         }
+        cell.priceLabel.text = "$" + String(format: "%.2f", order.price)
         
         return cell
     }

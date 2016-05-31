@@ -92,7 +92,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
         cell.groupLabel!.text = groups[indexPath.row].groupName
         cell.imageView!.image = groups[indexPath.row].image
         cell.imageView!.layer.masksToBounds = true;
-        cell.groupTimeStampLabel!.text = "Tap to View Details" // groups[indexPath.row].groupTimeStamp
+        // cell.groupTimeStampLabel!.text = "Tap to View Details" // groups[indexPath.row].groupTimeStamp
         
         let users = groups[indexPath.row].users
         if (users!.count > 0) {

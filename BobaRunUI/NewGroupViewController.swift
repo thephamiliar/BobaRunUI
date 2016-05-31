@@ -18,8 +18,18 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     let submitButtonHeight = CGFloat(50)
     let searchController = UISearchController(searchResultsController: nil)
     var filteredFriends = [User]()
+    var name = ""
     
     var tableView : UITableView!
+    
+    init(groupName: String) {
+        self.name = groupName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required  init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,7 +132,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     func selectedSubmitButton(sender: UIButton!) {
         // TODO: send new group to backend
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        BobaRunAPI.bobaRunSharedInstance.createGroup(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+        BobaRunAPI.bobaRunSharedInstance.createGroup(prefs.valueForKey("USERNAME") as! String, groupName: name) { (json: JSON) in
             print ("creating base group")
             if let creation_error = json["error"].string {
                 if creation_error == "true" {

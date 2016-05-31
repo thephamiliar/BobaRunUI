@@ -24,7 +24,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
         self.layer.shadowOffset = CGSizeMake(1, 1)
         self.layer.shadowColor = UIColor.lightGrayColor().CGColor
         
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height/3))
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height/2))
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
         contentView.addSubview(imageView)
         
@@ -33,13 +33,13 @@ class GroupCollectionViewCell: UICollectionViewCell {
         groupLabel.textAlignment = .Center
         contentView.addSubview(groupLabel)
         
-        groupTimeStampLabel = UILabel(frame: CGRect(x: 0, y: groupLabel.frame.maxY, width: frame.size.width, height: frame.size.height/6))
-        groupTimeStampLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
-        groupTimeStampLabel.textAlignment = .Center
-        groupTimeStampLabel.font = groupTimeStampLabel.font.fontWithSize(10)
-        contentView.addSubview(groupTimeStampLabel)
+//        groupTimeStampLabel = UILabel(frame: CGRect(x: 0, y: groupLabel.frame.maxY, width: frame.size.width, height: frame.size.height/6))
+//        groupTimeStampLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+//        groupTimeStampLabel.textAlignment = .Center
+//        groupTimeStampLabel.font = groupTimeStampLabel.font.fontWithSize(10)
+//        contentView.addSubview(groupTimeStampLabel)
         
-        separator = UIView(frame: CGRect(x: 10, y: groupTimeStampLabel.frame.maxY, width: frame.size.width-20, height: 1))
+        separator = UIView(frame: CGRect(x: 10, y: groupLabel.frame.maxY, width: frame.size.width-20, height: 1))
         separator.backgroundColor = UIColor.lightGrayColor()
         contentView.addSubview(separator)
         

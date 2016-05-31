@@ -140,18 +140,20 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
                 if creation_error == "true" {
                     print ("drink failed to save")
                 }
-            }
-        }
+            else {
         dispatch_async(dispatch_get_main_queue(),{
             let alertView:UIAlertView = UIAlertView()
             alertView.title = "Success!"
-            alertView.message = "Your drink has successfully been sent to \(self.room.roomName!)."
+            alertView.message = "Your drink has successfully been sent!"
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
         })
-
+            }
+        }
+        }
         self.navigationController?.popToRootViewControllerAnimated(true)
+
     }
 }
 

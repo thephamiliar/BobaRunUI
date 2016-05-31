@@ -79,6 +79,9 @@ class PayOrderViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
             break
+        case OrderSection.Price.rawValue:
+            cell.textLabel!.text = "Price:"
+            cell.detailTextLabel!.text = "$" + String(format: "%.2f", order.price)
         default:
             cell.textLabel!.text = "Other"
         }

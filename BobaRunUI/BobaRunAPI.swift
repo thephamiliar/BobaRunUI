@@ -232,10 +232,10 @@ class BobaRunAPI: NSObject {
         createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
-    func createGroup(username: String, onCompletion: (JSON) -> Void) {
+    func createGroup(username: String, groupName: String, onCompletion: (JSON) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)group/create")!)
         request.HTTPMethod = "POST"
-        let postString = "owner_username=" + username
+        let postString = "owner_username=" + username + "&group_name=" + groupName
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         createHTTPPostRequest(request, onCompletion: onCompletion)

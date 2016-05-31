@@ -23,6 +23,7 @@ class JoinRoomViewController: UIViewController, UITextFieldDelegate {
     
     required  init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
+        self.roomIDTextView.delegate = self
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -33,7 +34,6 @@ class JoinRoomViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.roomIDTextView.delegate = self
         // Do any additional setup after loading the view.
         navigationItem.title = "Join Room"
         

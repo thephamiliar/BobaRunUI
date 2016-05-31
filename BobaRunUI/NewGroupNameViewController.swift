@@ -20,15 +20,15 @@ class NewGroupNameViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.whiteColor()
         
-        groupNameTextView = UITextField(frame: CGRectMake(0, self.view.frame.height/2 - 20, 150, 40))
+        groupNameTextView = UITextField(frame: CGRectMake(0, self.view.frame.height/2 - 60, 150, 40))
         groupNameTextView.center.x = self.view.center.x
         groupNameTextView.placeholder = "Group Name"
-        groupNameTextView.borderStyle = UITextBorderStyle.Line
+        groupNameTextView.borderStyle = UITextBorderStyle.RoundedRect
         groupNameTextView.layer.borderColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1).CGColor
         groupNameTextView.layer.cornerRadius = 5
         self.view.addSubview(groupNameTextView)
         
-        createGroupButton = UIButton(frame: CGRectMake(0, self.view.frame.height/2 + 40, 150, 50))
+        createGroupButton = UIButton(frame: CGRectMake(0, self.view.frame.height/2, 150, 50))
         createGroupButton.center.x = self.view.center.x
         createGroupButton.setTitle("Create Group", forState: UIControlState.Normal)
         createGroupButton.addTarget(self, action: #selector(NewGroupNameViewController.selectedCreateButton(_:)), forControlEvents: .TouchUpInside)
@@ -43,7 +43,7 @@ class NewGroupNameViewController: UIViewController {
     }
     
     func selectedCreateButton(sender: UIButton!) {
-        let newGroupViewController = NewGroupViewController()
+        let newGroupViewController = NewGroupViewController(groupName: groupNameTextView.text!)
         newGroupViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(newGroupViewController, animated: true)
     }
