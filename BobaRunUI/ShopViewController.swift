@@ -24,7 +24,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView = UITableView()
         let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
         tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: shopViewCellReuseIdentifier)
+        tableView.registerClass(ShopTableViewCell.self, forCellReuseIdentifier: shopViewCellReuseIdentifier)
         tableView.allowsMultipleSelection = true
         tableView.delegate = self
         tableView.dataSource = self
@@ -57,21 +57,33 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shops.count
+        return 1
+        //return shops.count
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 85
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(shopViewCellReuseIdentifier, forIndexPath: indexPath)
-        
-        // cell.textLabel!.text = friends[indexPath.row].firstName! + " " + friends[indexPath.row].lastName!
-        cell.textLabel!.text = shops[indexPath.row]
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier(shopViewCellReuseIdentifier, forIndexPath: indexPath) as! ShopTableViewCell
+    
+        // TODO: shop object backend integration
+        cell.shopImageView.image = UIImage(named: "love")
+        cell.titleLabel.text = "Milk"
+        cell.ratingLabel.text = "4/5"
+        cell.addressLabel.text = "1435 Le Conte Ave ..."
+        cell.descriptionLabel.text  = "Coffee & Tea ..."
         cell.selectionStyle = .None
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
          tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
     }
     
     func selectedContinueButton(sender: UIButton!) {

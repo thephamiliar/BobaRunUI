@@ -30,7 +30,6 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(tableView)
-        
     }
     
     override func didReceiveMemoryWarning() {

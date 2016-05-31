@@ -122,7 +122,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     func selectedSubmitButton(sender: UIButton!) {
         // TODO: send new group to backend
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {

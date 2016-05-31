@@ -115,7 +115,7 @@ class GroupsViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func addNewGroup(sender: AnyObject) {
-        let newGroupViewController = NewGroupViewController()
+        let newGroupViewController = NewGroupNameViewController()
         newGroupViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(newGroupViewController, animated: true)
     }
