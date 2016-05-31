@@ -15,6 +15,7 @@ class Room: NSObject {
     var roomTimeStamp: String = ""
     var runner: User = User()
     var confirmed: Bool = false
+    var allDrinksPurchased: Bool = false
     
     override init () {
         
@@ -24,6 +25,8 @@ class Room: NSObject {
         roomID = json["room_id"].stringValue
         roomName = json["room_name"].stringValue
         runner_id = json["runner_id"].intValue
+        allDrinksPurchased = json["all_drinks_purchased"].boolValue
+        
         
     }
 }

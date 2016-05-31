@@ -20,7 +20,19 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
-    let roomname = "TEST ROOM 1"
+    
+    var user = User()
+    var roomname = ""
+    
+    init(roomName: String, user: User) {
+        self.user = user
+        self.roomname = roomName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required  init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
     
     var tableView : UITableView!
     
@@ -182,6 +194,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.imageView!.layer.masksToBounds = true;
             
             let users = groupsList[indexPath.row].users
+            if (users!.count > 0) {
             cell.detailTextLabel!.text = users![0].firstName
             if (users!.count > 1) {
                 var index = 1
@@ -189,6 +202,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
                     cell.detailTextLabel!.text = cell.detailTextLabel!.text! + ", " + (users![index].firstName! as String)
                     index += 1
                 }
+            }
             }
             if (users!.count > 8) {
                 cell.detailTextLabel!.text = cell.detailTextLabel!.text! + " +" + String(users!.count-8)
@@ -213,7 +227,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
     func selectedSubmitButton(sender: UIButton!) {
         // TODO: send new room to backend?
         // TODO: push notifications
-        var messageVC = MFMessageComposeViewController()
+        let messageVC = MFMessageComposeViewController()
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         BobaRunAPI.bobaRunSharedInstance.createNewRoomWithUserName(roomname, username: prefs.valueForKey("USERNAME") as! String){ (json: JSON) in
@@ -239,7 +253,7 @@ class NewRoomViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     
-    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
         switch (result.rawValue) {
         case MessageComposeResultCancelled.rawValue:
             print("Message was cancelled")

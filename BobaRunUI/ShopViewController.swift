@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 
-class ShopViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ShopViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     var tableView : UITableView!
     var shops = [String]()
     let shopViewCellReuseIdentifier = "shopViewCellReuseIdentifier"
@@ -17,6 +19,22 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     let buttonPadding = CGFloat(20)
     let footerHeight = CGFloat(80)
     let submitButtonHeight = CGFloat(50)
+    
+    var locationManager:CLLocationManager!
+    var businesses = [Business]()
+    
+    var user = User()
+    var roomName = ""
+    
+    init(roomName: String, user: User) {
+        self.user = user
+        self.roomName = roomName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required  init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
     
     override func viewWillAppear(animated: Bool) {
         // TODO: backend yelp api to get array of boba shop names
@@ -48,6 +66,11 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.title = "Boba Shops"
+        locationManager = CLLocationManager()
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -57,8 +80,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-        //return shops.count
+        return businesses.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -70,10 +92,11 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     
         // TODO: shop object backend integration
         cell.shopImageView.image = UIImage(named: "love")
-        cell.titleLabel.text = "Milk"
-        cell.ratingLabel.text = "4/5"
-        cell.addressLabel.text = "1435 Le Conte Ave ..."
-        cell.descriptionLabel.text  = "Coffee & Tea ..."
+        cell.titleLabel.text = self.businesses[indexPath.row].name
+        cell.ratingLabel.text = String(self.businesses[indexPath.row].rating)
+        cell.addressLabel.text = self.businesses[indexPath.row].address
+        cell.descriptionLabel.text  = self.businesses[indexPath.row].categories
+
         cell.selectionStyle = .None
         return cell
     }
@@ -87,8 +110,46 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func selectedContinueButton(sender: UIButton!) {
-        let inviteViewController = NewRoomViewController()
+        let inviteViewController = NewRoomViewController(roomName: roomName, user: user)
         self.navigationController?.pushViewController(inviteViewController, animated: true)
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        //        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
+        Business.searchWithTerm("Milk Tea", location: "\(locValue.latitude),\(locValue.longitude)", completion: { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses = businesses
+            
+                for business in businesses {
+                    print(business.name!)
+                    print(business.address!)
+                }
+            
+            if (businesses.count == 0) {
+                print ("No businesses nearby.")
+            }
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                self.tableView.reloadData()
+            })
+            
+        })
+        manager.stopUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print ("cannot get location, set default to San Francisco.")
+        
+        Business.searchWithTerm("Milk Tea", location: "37.785771,-122.406165", completion: { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses = businesses
+            
+            for business in businesses {
+                print(business.name!)
+                print(business.address!)
+            }
+        })
+        manager.stopUpdatingLocation()
     }
     
 }

@@ -8,20 +8,27 @@
 
 import UIKit
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, UITextFieldDelegate {
 
     
     @IBOutlet weak var firstNameText: UITextField!
     @IBOutlet weak var lastNameText: UITextField!
     @IBOutlet weak var phoneNumberText: UITextField!
-    @IBOutlet weak var usernameText: UITextField!
+    @IBOutlet weak var usernameText: UITextField! = nil
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var confirmPasswordText: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.firstNameText.delegate = self
+        self.lastNameText.delegate = self
+        self.phoneNumberText.delegate = self
+        self.usernameText.delegate = self
+        self.passwordText.delegate = self
+        self.confirmPasswordText.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,10 +36,18 @@ class SignupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     @IBAction func signUpTapped(sender: AnyObject) {
         let username:NSString = usernameText.text! as NSString
         let password:NSString = passwordText.text! as NSString
         let confirm_password:NSString = confirmPasswordText.text! as NSString
+        let firstName = firstNameText.text!
+        let lastName = lastNameText.text!
+        let phoneNumber = phoneNumberText.text!
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
             let alertView:UIAlertView = UIAlertView()
@@ -97,7 +112,7 @@ class SignupViewController: UIViewController {
 //                    
 //                    if(success == 1)
 //                    {
-            BobaRunAPI.bobaRunSharedInstance.createUser(username as String, password: password as String) { (json: JSON) in
+            BobaRunAPI.bobaRunSharedInstance.createUser(username as String, password: password as String, firstName: firstName, lastName: lastName, phoneNumber: phoneNumber) { (json: JSON) in
                 if let creation_error = json["error"].string {
                     if creation_error == "true" {
                         dispatch_async(dispatch_get_main_queue(),{

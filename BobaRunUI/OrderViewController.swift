@@ -47,7 +47,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
                     if let results = json["result"].array {
                         self.orders.removeAll()
                         for entry in results {
-                            var temp_order = Order(json: entry)
+                            let temp_order = Order(json: entry)
                         BobaRunAPI.bobaRunSharedInstance.getUserWithId(String(temp_order.userId)) { (json: JSON) in
                                 print ("getting user info")
                                 if let creation_error = json["error"].string {
@@ -76,22 +76,10 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
 
-//                var order1 = Order()
-//        order1.iceLevel = "50%"
-//        order1.toppings = ["Boba", "Pudding"]
-//        order1.sugarLevel = "50%"
-//        order1.teaType = "Milk Tea"
-//        let testFriend = User()
-//        testFriend.firstName = "Jessica"
-//        testFriend.lastName = "Pham"
-//        testFriend.username = "jmpham613"
-//        testFriend.image = UIImage(named: "faithfulness")!
-//        order1.user = testFriend
-//        orders = [order1]
 //        orders.sortInPlace({ $0.userId < $1.userId })
         
         // user is runner
-        if (room.runner == NSUserDefaults.standardUserDefaults().stringForKey("USERNAME")) {
+        if (room.runner_id == user.id && !room.allDrinksPurchased) {
             tableView = UITableView()
             let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
             tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
@@ -172,9 +160,9 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.order = orders[indexPath.row]
-        if (room.runner == NSUserDefaults.standardUserDefaults().stringForKey("USERNAME") && !room.confirmed) {
+        if (room.runner_id == user.id && !room.allDrinksPurchased) {
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
-        } else if (order.user == NSUserDefaults.standardUserDefaults().stringForKey("USERNAME") && room.confirmed) {
+        } else if (order.userId == user.id && order.drinkPurchased && !order.paid) {
             let payOrderViewController = PayOrderViewController(order: order)
             self.navigationController?.pushViewController(payOrderViewController, animated: true)
         } else {
@@ -184,7 +172,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if (room.runner == NSUserDefaults.standardUserDefaults().stringForKey("USERNAME") && !room.confirmed) {
+        if (room.runner_id == user.id && !room.allDrinksPurchased) {
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
         }
     }
@@ -196,6 +184,22 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func selectedConfirmButton(sender: UIButton!) {
         // TODO: change room to confirmed in backend
+        let tableSelections = tableView.indexPathsForSelectedRows
+        if (tableSelections != nil) {
+            for indexPath in tableSelections! {
+                BobaRunAPI.bobaRunSharedInstance.markOrderAsPurchased("\(self.orders[indexPath.row].id)!") { (json: JSON) in
+                    print ("setting drink purchased to true")
+                    if let creation_error = json["error"].string {
+                        if creation_error == "true" {
+                            print ("could not set drink purchased to true for this order")
+                        }
+                        else {
+                            print ("successfully set drink to true")
+                        }
+                    }
+                }
+            }
+        }
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }

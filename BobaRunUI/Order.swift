@@ -19,8 +19,9 @@ class Order: NSObject {
     var username : String = ""
     var roomId : String = ""
     var userId : Int = -1
-    var price : Double = 2.0
+    var price : Double = 0.0
     var drinkPurchased : Bool = false
+    var id : String = ""
     
     init(json: JSON) {
         let order = json["drink"].stringValue
@@ -43,6 +44,7 @@ class Order: NSObject {
         userId = json["room_members_id"].intValue
         drinkPurchased = json["drink_purchased"].boolValue
         paid = json["runner_paid"].boolValue
+        id = json["id"].stringValue
     }
  
     override init() {}

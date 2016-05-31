@@ -16,18 +16,19 @@ enum OrderSection : Int {
     case SugarLevel
     case IceLevel
     case Toppings
+    case Price
 }
 
 class OrderFormViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var menuItems: [String] = []
-    var menuPrices: [String] = []
+    var menuItems: [Drink] = []
+    var filteredDrinks = [Drink]()
     var menu = [String:[Drink]]()
-    var toppingItems: [String] = []
-    var toppingPrices: [String] = []
+    var toppingItems: [Drink] = []
     var selectedType : NSIndexPath?
     var selectedSugarLevel : UIButton?
     var selectedIceLevel : UIButton?
     let formViewCellReuseIdentifier = "formViewCellReuseIdentifier"
+    let searchController = UISearchController(searchResultsController: nil)
     let buttonHeight = CGFloat(30)
     let buttonWidth = CGFloat(40)
     let buttonPadding = CGFloat(20)
@@ -35,6 +36,7 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     let submitButtonHeight = CGFloat(50)
     var room : Room = Room()
     var user : User = User()
+    var roomId : String = ""
     
     var tableView : UITableView!
     
@@ -44,11 +46,67 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         super.init(nibName: nil, bundle: nil)
     }
     
+    init(user: User, roomId: String) {
+        self.roomId = roomId
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     required  init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
     
     override func viewWillAppear(animated: Bool) {
+        BobaRunAPI.bobaRunSharedInstance.getMenuWithYelpID("CoCo Westwood") { (json: JSON) in
+            print ("getting menu")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("No menu available.")
+                }
+                else {
+                    print ("populating menu")
+                    
+                    if let results = json["result"].array {
+                        self.menuItems.removeAll()
+                        self.toppingItems.removeAll()
+                        self.menu.removeAll()
+                        for entry in results {
+                            if let category = entry["category"].string {
+                                if (self.menu[category] != nil) {
+                                    self.menu[category]!.append(Drink(json: entry))
+                                }
+                                else {
+                                    var temp = [Drink]()
+                                    temp.append(Drink(json: entry))
+                                    self.menu[category] = temp
+                                }
+                                
+                                if (category != "Toppings") {
+                                    let drink_temp = Drink(json: entry)
+                                    self.menuItems.append(drink_temp)
+                                    // self.menuItems.append(drink_temp.name!)
+                                    // self.menuPrices.append("$" + String(format: "%.2f", drink_temp.price!))
+                                }
+                                
+                            }
+                        }
+                        let temp = self.menu["Toppings"]
+                        for drink in temp! {
+                            self.toppingItems.append(drink)
+                            // self.toppingPrices.append("$" + String(format: "%.2f", drink.price!))
+                        }
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.tableView.reloadData()
+                        })
+
+                    }
+                }
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         tableView = UITableView()
         let tableFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-footerHeight)
         tableView = UITableView(frame: tableFrame, style: UITableViewStyle.Plain)
@@ -63,58 +121,21 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         self.view.addSubview(footerView)
         
         let submitButton: UIButton = UIButton(frame: CGRectMake(0, CGRectGetMaxY(tableFrame), self.view.frame.width-30, submitButtonHeight))
-
+        
         submitButton.center = footerView.center
         submitButton.setTitle("Submit", forState: UIControlState.Normal)
         submitButton.backgroundColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
         submitButton.addTarget(self, action: #selector(OrderFormViewController.selectedSubmitButton(_:)), forControlEvents: .TouchUpInside)
         submitButton.layer.cornerRadius = 5
         self.view.addSubview(submitButton)
-        BobaRunAPI.bobaRunSharedInstance.getMenuWithYelpID("CoCo Westwood") { (json: JSON) in
-            print ("getting menu")
-            if let creation_error = json["error"].string {
-                if creation_error == "true" {
-                    print ("No menu available.")
-                }
-                else {
-                    print ("populating menu")
-                    if let results = json["result"].array {
-                        for entry in results {
-                            if let category = entry["category"].string {
-                                if (self.menu[category] != nil) {
-                                    self.menu[category]!.append(Drink(json: entry))
-                                }
-                                else {
-                                    var temp = [Drink]()
-                                    temp.append(Drink(json: entry))
-                                    self.menu[category] = temp
-                                }
-                                
-                                if (category != "Toppings") {
-                                    let drink_temp = Drink(json: entry)
-                                    self.menuItems.append(drink_temp.name!)
-                                    self.menuPrices.append("$" + String(format: "%.2f", drink_temp.price!))
-                                }
-                                
-                            }
-                        }
-                        let temp = self.menu["Toppings"]
-                        for drink in temp! {
-                            self.toppingItems.append(drink.name!)
-                            self.toppingPrices.append("$" + String(format: "%.2f", drink.price!))
-                        }
-                        dispatch_async(dispatch_get_main_queue(),{
-                            self.tableView.reloadData()
-                        })
-
-                    }
-                }
-            }
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        
+        searchController.searchBar.scopeButtonTitles = ["Milk Tea", "Fruity", "Yakult", "Slushies"]
+        searchController.searchBar.delegate = self
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
         
     }
     
@@ -160,7 +181,12 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         
         switch (section) {
         case OrderSection.TeaType.rawValue:
-            numRows = menuItems.count
+            if searchController.active && searchController.searchBar.text != "" {
+                numRows = filteredDrinks.count
+            } else {
+                numRows = menuItems.count
+            }
+            
             break
         case OrderSection.SugarLevel.rawValue, OrderSection.IceLevel.rawValue:
             numRows = 1
@@ -181,8 +207,14 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         
         switch (indexPath.section) {
         case OrderSection.TeaType.rawValue:
-            cell.textLabel?.text = menuItems[indexPath.row] as? String
-            cell.detailTextLabel?.text = menuPrices[indexPath.row] as? String
+            let drink: Drink
+            if searchController.active && searchController.searchBar.text != "" {
+                drink = filteredDrinks[indexPath.row]
+            } else {
+                drink = menuItems[indexPath.row]
+            }
+            cell.textLabel?.text = drink.name! as? String
+            cell.detailTextLabel?.text = "$" + String(format: "%.2f", drink.price!)
             break
         case OrderSection.SugarLevel.rawValue:
             generatePercentageButtons(OrderSection.SugarLevel, cell: cell)
@@ -192,8 +224,8 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
             break
         case OrderSection.Toppings.rawValue:
             if (indexPath.row < toppingItems.count) {
-                cell.textLabel?.text = toppingItems[indexPath.row]
-                cell.detailTextLabel?.text = toppingPrices[indexPath.row]
+                cell.textLabel?.text = toppingItems[indexPath.row].name
+                cell.detailTextLabel?.text = "$" + String(format: "%.2f", toppingItems[indexPath.row].price!)
             } else {
                 cell.textLabel?.text = "None"
                 cell.detailTextLabel?.text = "$0.00"
@@ -273,15 +305,25 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func selectedSubmitButton(sender: UIButton!) {
-        var order = Order()
+        let order = Order()
+        order.price = 0.0
         let tableSelections = tableView.indexPathsForSelectedRows
         if (tableSelections != nil && selectedSugarLevel != nil && selectedIceLevel != nil) {
             for indexPath in tableSelections! {
                     if indexPath.section == OrderSection.TeaType.rawValue {
-                        order.teaType = menuItems[indexPath.row]
+                        let drink: Drink
+                        if searchController.active && searchController.searchBar.text != "" {
+                            drink = filteredDrinks[indexPath.row]
+                        } else {
+                            drink = menuItems[indexPath.row]
+                        }
+                        order.teaType = drink.name!
+                        order.price = order.price + drink.price!
                     } else if indexPath.section == OrderSection.Toppings.rawValue {
                         if (indexPath.row < toppingItems.count) {
-                            order.toppings.append(toppingItems[indexPath.row])
+                            order.toppings.append(toppingItems[indexPath.row].name!)
+                            order.price = order.price + toppingItems[indexPath.row].price!
+
                         } else {
                             order.toppings.append("None")
                         }
@@ -289,9 +331,15 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             order.sugarLevel = selectedSugarLevel!.titleLabel!.text!
             order.iceLevel = selectedIceLevel!.titleLabel!.text!
-            
-            let confirmationViewController = OrderConfirmationViewController(order: order, room: room, user: user, confirmButton: true)
-            self.navigationController?.pushViewController(confirmationViewController, animated: true)
+            if (self.roomId == "") {
+                let confirmationViewController = OrderConfirmationViewController(order: order, room: room, user: user, confirmButton: true)
+                self.navigationController?.pushViewController(confirmationViewController, animated: true)
+            }
+            else {
+                let confirmationViewController = OrderConfirmationViewController(order: order, roomId: roomId, user: user, confirmButton: true)
+                self.navigationController?.pushViewController(confirmationViewController, animated: true)
+            }
+
         } else {
             let alertView:UIAlertView = UIAlertView()
             alertView.title = "Order Incomplete!"
@@ -302,5 +350,48 @@ class OrderFormViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    func categoryMatcher(drinkCategory: String, scope: String) -> Bool {
+        // ["Milk Tea", "Fruity", "Yakult", "Slushies"]
+        if (scope == "Milk Tea") {
+            return drinkCategory == "Tea & Milk Tea" || drinkCategory == "Whipped Cream" || drinkCategory == "Tea Latte" || drinkCategory == "Chocolate" || drinkCategory == "Fresh Milk"
+        }
+    
+        if (scope == "Fruity") {
+            return drinkCategory == "Fresh Fruit" || drinkCategory == "Mixed Juice"
+        }
+        
+        if (scope == "Yakult") {
+            return drinkCategory == "Yakult"
+        }
+        
+        if (scope == "Slushies") {
+            return drinkCategory == "Slush & Smoothie"
+        }
+        return true
+    }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredDrinks = menuItems.filter { drink in
+            let categoryMatch = (scope == "All") || categoryMatcher(drink.category!, scope: scope)
+            return categoryMatch && drink.name!.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        tableView.reloadData()
+    }
+    
 }
 
+
+
+extension OrderFormViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+    }
+}
+
+extension OrderFormViewController: UISearchBarDelegate {
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }
+}

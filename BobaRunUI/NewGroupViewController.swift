@@ -121,7 +121,33 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func selectedSubmitButton(sender: UIButton!) {
         // TODO: send new group to backend
-        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        BobaRunAPI.bobaRunSharedInstance.createGroup(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
+            print ("creating base group")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("error")
+                }
+                else {
+                    if let results = json["result"].string {
+                        // results holds the new Group ID
+                        let friends_to_add = self.tableView.indexPathsForSelectedRows
+                        for friend in friends_to_add! {
+                            BobaRunAPI.bobaRunSharedInstance.createNewGroupMember(results, username: self.friendsList[friend.row].username!) { (json: JSON) in
+                                if let creation_error = json["error"].string {
+                                    if creation_error == "true" {
+                                        print ("error")
+                                    }
+                                    else {
+                                        print (self.friendsList[friend.row].username! + "successfully added")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     

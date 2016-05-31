@@ -11,7 +11,18 @@ import UIKit
 class RoomSelectionViewController: UIViewController {
     var createRoomButton : UIButton!
     var joinRoomButton : UIButton!
+    
+    var user = User()
 
+    init(user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required  init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,13 +54,14 @@ class RoomSelectionViewController: UIViewController {
     }
     
     func selectedCreateButton(sender: UIButton!) {
-        let newRoomViewController = CreateRoomViewController()
+        // TODO
+        let newRoomViewController = CreateRoomViewController(user: user)
         newRoomViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(newRoomViewController, animated: true)
     }
     
     func selectedJoinButton(sender: UIButton!) {
-        let joinRoomViewController = JoinRoomViewController()
+        let joinRoomViewController = JoinRoomViewController(user: user)
         joinRoomViewController.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(joinRoomViewController, animated: true)
     }

@@ -12,6 +12,7 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
     var order: Order!
     var room: Room!
     var user: User!
+    var roomId: String!
     var button : Bool = false
     var tableView : UITableView!
     let formViewCellReuseIdentifier = "formViewCellReuseIdentifier"
@@ -21,6 +22,15 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
     init(order: Order, room: Room, user: User, confirmButton: Bool) {
         self.order = order
         self.room = room
+        self.roomId = room.roomID
+        self.user = user
+        self.button = confirmButton
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(order: Order, roomId: String, user: User, confirmButton: Bool) {
+        self.order = order
+        self.roomId = roomId
         self.user = user
         self.button = confirmButton
         super.init(nibName: nil, bundle: nil)
@@ -58,7 +68,7 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -87,6 +97,9 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
                 }
             }
             break
+        case OrderSection.Price.rawValue:
+            cell.textLabel!.text = "Price:"
+            cell.detailTextLabel!.text = "$" + String(format: "%.2f", order.price)
         default:
             cell.textLabel!.text = "Other"
         }
@@ -118,7 +131,10 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
         // TODO: add to master page
         let order_string = constructOrderString(order)
         print (order_string)
-        BobaRunAPI.bobaRunSharedInstance.addMemberToRoom(self.room.roomID!, memberId: "\(self.user.id!)", drink: order_string, price: 3.5) { (json: JSON) in
+        if (self.roomId == "") {
+            self.roomId = self.room.roomID!
+        }
+        BobaRunAPI.bobaRunSharedInstance.addMemberToRoom(self.roomId!, memberId: "\(self.user.id!)", drink: order_string, price: order.price) { (json: JSON) in
             print ("saving drink")
             if let creation_error = json["error"].string {
                 if creation_error == "true" {
@@ -126,7 +142,15 @@ class OrderConfirmationViewController: UIViewController, UITableViewDelegate, UI
                 }
             }
         }
-        
+        dispatch_async(dispatch_get_main_queue(),{
+            let alertView:UIAlertView = UIAlertView()
+            alertView.title = "Success!"
+            alertView.message = "Your drink has successfully been sent to \(self.room.roomName!)."
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+        })
+
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }

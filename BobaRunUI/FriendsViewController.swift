@@ -99,7 +99,13 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let profileViewController = ProfileViewController(user: friends[indexPath.row])
+        let friend: User
+        if searchController.active && searchController.searchBar.text != "" {
+            friend = filteredFriends[indexPath.row]
+        } else {
+            friend = friends[indexPath.row]
+        }
+        let profileViewController = ProfileViewController(user: friend)
         // profileViewController.user = friends[indexPath.row]
         self.navigationController?.pushViewController(profileViewController, animated: true)
     }
@@ -117,6 +123,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         newFriendViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(newFriendViewController, animated: true)
     }
+    
 }
 
 extension FriendsViewController: UISearchResultsUpdating {

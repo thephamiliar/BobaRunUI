@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A015F7F47DAE94E5B5E500E /* Pods_BobaRunUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7C6A1FCA5323C77E89D1424 /* Pods_BobaRunUI.framework */; };
+		2EB66BD2417185402453A3DE /* Pods_BobaRunUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48617280B0B10444D54CF3E9 /* Pods_BobaRunUITests.framework */; };
 		2F0AEC361CDAB6B700A2F79C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC351CDAB6B700A2F79C /* AppDelegate.swift */; };
 		2F0AEC381CDAB6B700A2F79C /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC371CDAB6B700A2F79C /* HomePageViewController.swift */; };
 		2F0AEC3A1CDAB6B700A2F79C /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AEC391CDAB6B700A2F79C /* FriendsViewController.swift */; };
@@ -39,9 +41,11 @@
 		2F95C1591CEBD4A200C27911 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C1581CEBD4A200C27911 /* LoginViewController.swift */; };
 		2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */; };
 		2F95C15D1CEC0B4200C27911 /* OrderViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95C15C1CEC0B4200C27911 /* OrderViewTableViewCell.swift */; };
+		83617F971CF978D00038872F /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83617F961CF978D00038872F /* YelpClient.swift */; };
 		838CDA761CE58571000EBE71 /* BobaRunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838CDA751CE58571000EBE71 /* BobaRunAPI.swift */; };
 		838CDA781CE585A1000EBE71 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */; };
 		8398B8751CED3A2000C028EE /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8398B8741CED3A2000C028EE /* Drink.swift */; };
+		83BA1E081CF98712004F601D /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BA1E071CF98712004F601D /* Business.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,37 +56,10 @@
 			remoteGlobalIDString = 2F0AEC2F1CDAB6B700A2F79C;
 			remoteInfo = BobaRunUI;
 		};
-		8398B9341CED413500C028EE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8398B8E21CED413500C028EE /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D78B846ACBA0CF38988E861301D09F55;
-			remoteInfo = AFNetworking;
-		};
-		8398B9361CED413500C028EE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8398B8E21CED413500C028EE /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 82C898F4516314EB8E2C75E8921CC95A;
-			remoteInfo = BDBOAuth1Manager;
-		};
-		8398B9381CED413500C028EE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8398B8E21CED413500C028EE /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C855E584EDA68EFC9BD09BB0E0B4AA39;
-			remoteInfo = Pods;
-		};
-		8398B93A1CED413500C028EE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8398B8E21CED413500C028EE /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E803ECCC72CD38DC08C734DF6C96D96;
-			remoteInfo = SwiftyJSON;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F8E21AF67D975A2FF2AF215 /* Pods-BobaRunUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BobaRunUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BobaRunUITests/Pods-BobaRunUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2F0AEC301CDAB6B700A2F79C /* BobaRunUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BobaRunUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0AEC341CDAB6B700A2F79C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F0AEC351CDAB6B700A2F79C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,10 +96,16 @@
 		2F95C1581CEBD4A200C27911 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2F95C15A1CEBD4B600C27911 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		2F95C15C1CEC0B4200C27911 /* OrderViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewTableViewCell.swift; sourceTree = "<group>"; };
+		48617280B0B10444D54CF3E9 /* Pods_BobaRunUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BobaRunUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83617F961CF978D00038872F /* YelpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 		838CDA751CE58571000EBE71 /* BobaRunAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BobaRunAPI.swift; sourceTree = "<group>"; };
 		838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		8398B8741CED3A2000C028EE /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
-		8398B8E21CED413500C028EE /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
+		83BA1E071CF98712004F601D /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
+		A8E3956771CE62422F771FBC /* Pods-BobaRunUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BobaRunUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-BobaRunUI/Pods-BobaRunUI.release.xcconfig"; sourceTree = "<group>"; };
+		E114E737B03C6AD43C803A97 /* Pods-BobaRunUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BobaRunUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BobaRunUI/Pods-BobaRunUI.debug.xcconfig"; sourceTree = "<group>"; };
+		E7C6A1FCA5323C77E89D1424 /* Pods_BobaRunUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BobaRunUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA3517564E4B73887AE159AB /* Pods-BobaRunUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BobaRunUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BobaRunUITests/Pods-BobaRunUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A015F7F47DAE94E5B5E500E /* Pods_BobaRunUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EB66BD2417185402453A3DE /* Pods_BobaRunUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,11 +131,12 @@
 		2F0AEC271CDAB6B700A2F79C = {
 			isa = PBXGroup;
 			children = (
-				8398B8E21CED413500C028EE /* Pods.xcodeproj */,
 				838CDA6C1CE3F874000EBE71 /* BobaRunBackend */,
 				2F0AEC321CDAB6B700A2F79C /* BobaRunUI */,
 				2F0AEC4A1CDAB6B700A2F79C /* BobaRunUITests */,
 				2F0AEC311CDAB6B700A2F79C /* Products */,
+				91BE02A12B6F8A8B3CE1E006 /* Pods */,
+				6B21A6C07E9F45B9FF18DCFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -268,25 +254,36 @@
 			name = Orders;
 			sourceTree = "<group>";
 		};
+		6B21A6C07E9F45B9FF18DCFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7C6A1FCA5323C77E89D1424 /* Pods_BobaRunUI.framework */,
+				48617280B0B10444D54CF3E9 /* Pods_BobaRunUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		838CDA6C1CE3F874000EBE71 /* BobaRunBackend */ = {
 			isa = PBXGroup;
 			children = (
 				838CDA751CE58571000EBE71 /* BobaRunAPI.swift */,
 				838CDA771CE585A1000EBE71 /* SwiftyJSON.swift */,
+				83617F961CF978D00038872F /* YelpClient.swift */,
+				83BA1E071CF98712004F601D /* Business.swift */,
 			);
 			name = BobaRunBackend;
 			path = BobaRunUI;
 			sourceTree = "<group>";
 		};
-		8398B8E31CED413500C028EE /* Products */ = {
+		91BE02A12B6F8A8B3CE1E006 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8398B9351CED413500C028EE /* AFNetworking.framework */,
-				8398B9371CED413500C028EE /* BDBOAuth1Manager.framework */,
-				8398B9391CED413500C028EE /* Pods.framework */,
-				8398B93B1CED413500C028EE /* SwiftyJSON.framework */,
+				E114E737B03C6AD43C803A97 /* Pods-BobaRunUI.debug.xcconfig */,
+				A8E3956771CE62422F771FBC /* Pods-BobaRunUI.release.xcconfig */,
+				FA3517564E4B73887AE159AB /* Pods-BobaRunUITests.debug.xcconfig */,
+				0F8E21AF67D975A2FF2AF215 /* Pods-BobaRunUITests.release.xcconfig */,
 			);
-			name = Products;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,9 +293,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F0AEC511CDAB6B700A2F79C /* Build configuration list for PBXNativeTarget "BobaRunUI" */;
 			buildPhases = (
+				1ED8F2721DBC540EAC2A4C4D /* 📦 Check Pods Manifest.lock */,
 				2F0AEC2C1CDAB6B700A2F79C /* Sources */,
 				2F0AEC2D1CDAB6B700A2F79C /* Frameworks */,
 				2F0AEC2E1CDAB6B700A2F79C /* Resources */,
+				B254F245556ED643927FE1DB /* 📦 Embed Pods Frameworks */,
+				85B392D244702A10CAFC6466 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -313,9 +313,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F0AEC541CDAB6B700A2F79C /* Build configuration list for PBXNativeTarget "BobaRunUITests" */;
 			buildPhases = (
+				9C0B1E94BD5F3BC62962FCA6 /* 📦 Check Pods Manifest.lock */,
 				2F0AEC431CDAB6B700A2F79C /* Sources */,
 				2F0AEC441CDAB6B700A2F79C /* Frameworks */,
 				2F0AEC451CDAB6B700A2F79C /* Resources */,
+				CE4AFC7EAF72B3C59A27395F /* 📦 Embed Pods Frameworks */,
+				29DB0F3042B4F86937E08659 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -359,12 +362,6 @@
 			mainGroup = 2F0AEC271CDAB6B700A2F79C;
 			productRefGroup = 2F0AEC311CDAB6B700A2F79C /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 8398B8E31CED413500C028EE /* Products */;
-					ProjectRef = 8398B8E21CED413500C028EE /* Pods.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				2F0AEC2F1CDAB6B700A2F79C /* BobaRunUI */,
@@ -372,37 +369,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		8398B9351CED413500C028EE /* AFNetworking.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = AFNetworking.framework;
-			remoteRef = 8398B9341CED413500C028EE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8398B9371CED413500C028EE /* BDBOAuth1Manager.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BDBOAuth1Manager.framework;
-			remoteRef = 8398B9361CED413500C028EE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8398B9391CED413500C028EE /* Pods.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Pods.framework;
-			remoteRef = 8398B9381CED413500C028EE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8398B93B1CED413500C028EE /* SwiftyJSON.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyJSON.framework;
-			remoteRef = 8398B93A1CED413500C028EE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2F0AEC2E1CDAB6B700A2F79C /* Resources */ = {
@@ -424,6 +390,99 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1ED8F2721DBC540EAC2A4C4D /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		29DB0F3042B4F86937E08659 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BobaRunUITests/Pods-BobaRunUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85B392D244702A10CAFC6466 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BobaRunUI/Pods-BobaRunUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C0B1E94BD5F3BC62962FCA6 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B254F245556ED643927FE1DB /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BobaRunUI/Pods-BobaRunUI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE4AFC7EAF72B3C59A27395F /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BobaRunUITests/Pods-BobaRunUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2F0AEC2C1CDAB6B700A2F79C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -432,6 +491,7 @@
 				2F95C1591CEBD4A200C27911 /* LoginViewController.swift in Sources */,
 				2F0AEC741CE3F47000A2F79C /* PercentageButton.swift in Sources */,
 				2F6E70631CF7C87E00906A0D /* RoomSelectionViewController.swift in Sources */,
+				83BA1E081CF98712004F601D /* Business.swift in Sources */,
 				2F0AEC3A1CDAB6B700A2F79C /* FriendsViewController.swift in Sources */,
 				2F0AEC6A1CE2C92100A2F79C /* User.swift in Sources */,
 				838CDA781CE585A1000EBE71 /* SwiftyJSON.swift in Sources */,
@@ -439,6 +499,7 @@
 				2F0AEC5C1CDAC22500A2F79C /* NewRoomViewController.swift in Sources */,
 				2F6E70691CF7CE1100906A0D /* JoinRoomViewController.swift in Sources */,
 				2F95C14F1CEAC3F000C27911 /* GroupsViewController.swift in Sources */,
+				83617F971CF978D00038872F /* YelpClient.swift in Sources */,
 				2F6E706D1CF8E14C00906A0D /* NewFriendViewController.swift in Sources */,
 				2F95C1571CEB13B500C27911 /* NewGroupViewController.swift in Sources */,
 				2F95C15B1CEBD4B600C27911 /* SignupViewController.swift in Sources */,
@@ -587,6 +648,7 @@
 		};
 		2F0AEC521CDAB6B700A2F79C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E114E737B03C6AD43C803A97 /* Pods-BobaRunUI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -596,11 +658,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "BobaRun.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_INCLUDE_PATHS = "";
 			};
 			name = Debug;
 		};
 		2F0AEC531CDAB6B700A2F79C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8E3956771CE62422F771FBC /* Pods-BobaRunUI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -610,11 +674,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "BobaRun.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_INCLUDE_PATHS = "";
 			};
 			name = Release;
 		};
 		2F0AEC551CDAB6B700A2F79C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA3517564E4B73887AE159AB /* Pods-BobaRunUITests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -635,6 +701,7 @@
 		};
 		2F0AEC561CDAB6B700A2F79C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F8E21AF67D975A2FF2AF215 /* Pods-BobaRunUITests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

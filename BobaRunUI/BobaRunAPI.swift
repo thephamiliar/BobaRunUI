@@ -14,7 +14,7 @@ typealias ServiceResponse = (JSON, NSError?) -> Void
 class BobaRunAPI: NSObject {
     
     let baseUrl = "https://boba-run.herokuapp.com/"
-    //let baseUrl = "http://localhost:5000/"
+    // let baseUrl = "http://localhost:5000/"
     
     class var bobaRunSharedInstance : BobaRunAPI {
         struct Static {
@@ -68,11 +68,11 @@ class BobaRunAPI: NSObject {
         createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
-    func createUser(username: String, password: String, onCompletion: (JSON) -> Void) {
+    func createUser(username: String, password: String, firstName: String, lastName: String, phoneNumber: String, onCompletion: (JSON) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)user/create")!)
         request.HTTPMethod = "POST"
-        let postString = "username=" + username + "&password=" + password
+        let postString = "username=" + username + "&password=" + password + "&first_name=" + firstName + "&last_name=" + lastName + "&phone_number=" + phoneNumber
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         createHTTPPostRequest(request, onCompletion: onCompletion)
@@ -127,7 +127,7 @@ class BobaRunAPI: NSObject {
     }
     
     func addFriend(username: String, friendName: String, onCompletion: (JSON) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)friend/show/id")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)friend/create/username")!)
         request.HTTPMethod = "POST"
         let postString = "username=" + username + "&friend_username=" + friendName
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
@@ -135,8 +135,8 @@ class BobaRunAPI: NSObject {
         createHTTPPostRequest(request, onCompletion: onCompletion)
     }
     
-    func addFriendUsing(id: String, friendId: String, onCompletion: (JSON) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)friend/show/id")!)
+    func addFriendUsingId(id: String, friendId: String, onCompletion: (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)friend/create/id")!)
         request.HTTPMethod = "POST"
         let postString = "id=" + id + "&friend_id=" + friendId
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
@@ -188,6 +188,24 @@ class BobaRunAPI: NSObject {
         request.HTTPMethod = "POST"
         let p = String(format:"%.2f", price)
         let postString = "room_id=" + roomId + "&member_id=" + memberId + "&drink=" + drink + "&price=" + p
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+    
+    func markOrderAsPurchased (orderId: String, onCompletion : (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room_member/edit/drink_purchased/set_true")!)
+        request.HTTPMethod = "POST"
+        let postString = "id=" + orderId
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        createHTTPPostRequest(request, onCompletion: onCompletion)
+    }
+    
+    func markOrderAsPaid (orderId: String, onCompletion : (JSON) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(baseUrl)room_member/edit/runner_paid/set_true")!)
+        request.HTTPMethod = "POST"
+        let postString = "id=" + orderId
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         createHTTPPostRequest(request, onCompletion: onCompletion)

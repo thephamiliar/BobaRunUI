@@ -25,8 +25,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(animated: Bool) {
         // Do any additional setup after loading the view, typically from a nib.
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-
-        if (self.user.id == nil) {
+        if (user.id == nil) {
         BobaRunAPI.bobaRunSharedInstance.getUser(prefs.valueForKey("USERNAME") as! String) { (json: JSON) in
             print ("getting user info")
             if let creation_error = json["error"].string {
@@ -97,7 +96,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             var image = (user.image != nil) ? user.image : UIImage(named: "faithfulness")
             image = resizeImage(image!, newWidth: CGFloat(150))
             let imageView = UIImageView(image: image)
-//            imageView.image = imageWithImage(image!, scaledToSize: CGSize(width: 20, height: 20))
             view.frame = CGRectMake(0, 0, self.view.frame.width, CGFloat(200))
         
             imageView.frame = CGRectMake((self.view.frame.size.width/2) - (image!.size.width/2), 50, image!.size.width, image!.size.height)
@@ -118,6 +116,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return 2
     }
     
+    func formatPhoneNumber(phoneNumber: String) -> String {
+        if (phoneNumber.characters.count < 10) {
+            return phoneNumber
+        }
+        var number = "(" + phoneNumber.substringWithRange(Range<String.Index>(start: phoneNumber.startIndex, end: phoneNumber.startIndex.advancedBy(3))) + ") "
+        number = number + phoneNumber.substringWithRange(Range<String.Index>(start: phoneNumber.startIndex.advancedBy(3), end: phoneNumber.startIndex.advancedBy(6))) + "-"
+        number = number + phoneNumber.substringWithRange(Range<String.Index>(start: phoneNumber.startIndex.advancedBy(6), end: phoneNumber.endIndex))
+        return number
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: userViewCellReuseIdentifier)
         
@@ -128,7 +136,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.imageView!.image = user.image
             } else {
                 cell.textLabel!.text = "Phone Number"
-                cell.detailTextLabel!.text = user.email
+                cell.detailTextLabel!.text = user.phoneNumber == nil ? "" : formatPhoneNumber(user.phoneNumber!)
                 cell.imageView!.image = user.image
             }
         } else {
@@ -153,8 +161,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // TODO: change password option
-        
-
         // TODO: LOGOUT
         if (indexPath.section == 1 && indexPath.row == 1) {
             let appDomain = NSBundle.mainBundle().bundleIdentifier

@@ -94,6 +94,18 @@ class PayOrderViewController: UIViewController, UITableViewDelegate, UITableView
     
     func selectedPayButton(sender: UIButton!) {
         // TODO: backend set order to "paid"
+        BobaRunAPI.bobaRunSharedInstance.markOrderAsPaid("\(self.order.id)!") { (json: JSON) in
+            print ("paying for drink")
+            if let creation_error = json["error"].string {
+                if creation_error == "true" {
+                    print ("could not set drink paid to true for this order")
+                }
+                else {
+                    print ("successfully paid for drink")
+                }
+            }
+        }
+        
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }
